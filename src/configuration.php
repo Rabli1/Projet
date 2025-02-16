@@ -3,7 +3,7 @@
 const ROUTES = [
 
     '/' => 'index.php',
-    '/index.php' => 'index.php',
+    '/index.php' => 'index.php', //deux index pour le moment
 
 ];
 

@@ -46,12 +46,3 @@ $dbParams = [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 ];
-
-// Création de l'instance et récupération de la connexion
-try {
-    $db = Database::getInstance($dbConfig, $dbParams);
-    $pdo = $db->getPDO();
-    echo "Connected to MySQL successfully!";
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
