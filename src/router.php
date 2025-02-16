@@ -11,7 +11,7 @@ function urlPath() : string {
     return $path;
 
 }
-function route(string $route, array $params = null) : void 
+function route(string $route, ?array $params = null) : void 
 {
     $routeValid = false;
 
