@@ -107,3 +107,24 @@
     }
 
   }
+
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+}
+.table {
+    width: auto;
+    text-align: center;
+}
+.img-thumbnail {
+    padding: 10px;
+}
+img {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: auto;
+}
