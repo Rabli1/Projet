@@ -10,11 +10,8 @@ require 'partials/header.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Knapsack</title>
 </head>
-<body>
-    <p>fwbnfoewbnfoboboe</p>
-</body>
 <main>
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
