@@ -28,7 +28,6 @@ require 'partials/header.php';
                                     <div class="price">10.99 $</div>
                                     <div class="caption">
                                         <h4>Gaben</h4>
-                                        <p>Veiny ah dih</p>
                                         <form method="POST">
                                             <input type="hidden" name="idItem" value="1">
                                             <input type="hidden" name="name" value="Sample Sushi">
