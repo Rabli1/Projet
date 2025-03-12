@@ -38,7 +38,7 @@ $dbConfig = [
     "hostname" => "70.29.200.42",
     "username" => "Justin",
     "password" => "1234",
-    "database" => "mywebsite"
+    "database" => "knapsack"
 ];
 
 // Paramètres PDO
