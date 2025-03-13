@@ -14,4 +14,7 @@ if (!isAuthenticated()) {
     header('Location: /login.php');
     exit();
 }
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 require 'views/panier.php';

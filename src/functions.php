@@ -47,3 +47,15 @@ function isAdministrator() : bool
     sessionStart();
     return !empty($_SESSION['user']) && $_SESSION['user']['role'] == '1';
 }
+
+function addToCart() {
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $id = (int)$_POST['id']; 
+
+    if (!in_array($id, $_SESSION['cart'])) {
+        $_SESSION['cart'][] = $id; 
+    }
+}
