@@ -14,7 +14,7 @@ require 'partials/header.php';
 </head>
 <main>
     <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
-        <div>
+        <div class="table-container" style="width: 80%; display: block; margin: auto;">
             <input type="checkbox" id="filtre1" name="filtre1">
             <label for="filtre1">Filtre 1</label>
             <input type="checkbox" id="filtre2" name="filtre2">
