@@ -14,3 +14,4 @@ if (!isAuthenticated()) {
     header('Location: /login.php');
     exit();
 }
+require 'views/panier.php';
