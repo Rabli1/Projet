@@ -1,5 +1,6 @@
 <?php 
 require_once 'src/class/Database.php';
+require_once 'src/functions.php';
 
 $db = Database::getInstance($dbConfig, $dbParams);
 $pdo = $db -> getPDO();
@@ -13,5 +14,8 @@ if (!isAuthenticated()) {
     ];
     header('Location: /login.php');
     exit();
+}
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
 }
 require 'views/panier.php';

@@ -3,8 +3,10 @@
 const ROUTES = [
 
     '/' => 'index.php',
-    '/index.php' => 'index.php', //deux index pour le moment
+    '/index' => 'index.php', //deux index pour le moment
     '/panier' => 'panier.php',
+    '/connexion' => 'login.php',
+    '/register' => 'register.php',
 ];
 
 const DB_PARAMS = [

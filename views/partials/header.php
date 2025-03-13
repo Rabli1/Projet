@@ -12,28 +12,30 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
+                <!-- Panier d'achat -->
+                <?php /*if(isAuthenticated())*/ { ?>
+                <div class="cart-wrapper me-3">
+                    <a class="btn btn-outline-light position-relative" href="/panier" title="Panier d'achat">
+                    <i class="bi bi-bag"></i> <!-- Icone du panier -->
+                        <?php if (!empty($_SESSION['panier']['nbTotItem'])) { ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo $_SESSION['panier']['nbTotItem']; ?>
+                            </span>
+                        <?php } ?>
+                    </a>
+                </div>
+                <?php } ?>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <?php if (isAuthenticated() && !isAdministrator()) { ?>
-                        <li><a class="nav-link" href="/ajouter">Ajouter une publicité</a></li>
-                        <li><a class="nav-link" href="/gerer-pub">Gérer mes publicités</a></li>
+                        <li><a class="nav-link" href="/ajouter">Inventaire</a></li>
+                        <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
                     <?php } ?>
                     <?php if (isAuthenticated() && isAdministrator()) { ?>
-                        <li><a class="nav-link" href="/gerer-client">Gérer les clients</a></li>
+                        <li><a class="nav-link" href="/gerer-client">Gérer les utilisateurs</a></li>
                     <?php } ?>
                 </ul>
 
                 <div class="d-flex align-items-center">
-                    <!-- Panier d'achat -->
-                    <div class="cart-wrapper me-3">
-                        <a class="btn btn-outline-light position-relative" href="/panier" title="Panier d'achat">
-                        <i class="bi bi-bag"></i> <!-- Icone du panier -->
-                            <?php if (!empty($_SESSION['panier']['nbTotItem'])) { ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?php echo $_SESSION['panier']['nbTotItem']; ?>
-                                </span>
-                            <?php } ?>
-                        </a>
-                    </div>
 
                     <!-- Connexion / Création de compte -->
                     <?php if (!isAuthenticated()) { ?>
