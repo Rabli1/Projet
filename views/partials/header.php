@@ -27,11 +27,11 @@
                 <?php } ?>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <?php if (isAuthenticated() && !isAdministrator()) { ?>
-                        <li><a class="nav-link" href="/ajouter">Ajouter une publicité</a></li>
-                        <li><a class="nav-link" href="/gerer-pub">Gérer mes publicités</a></li>
+                        <li><a class="nav-link" href="/ajouter">Inventaire</a></li>
+                        <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
                     <?php } ?>
                     <?php if (isAuthenticated() && isAdministrator()) { ?>
-                        <li><a class="nav-link" href="/gerer-client">Gérer les clients</a></li>
+                        <li><a class="nav-link" href="/gerer-client">Gérer les utilisateurs</a></li>
                     <?php } ?>
                 </ul>
 
