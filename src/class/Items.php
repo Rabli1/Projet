@@ -1,4 +1,18 @@
 <?php
+
+/*
+Table: items
+Columns:
+idItem int AI PK 
+nomItem varchar(45) 
+qteStock int 
+typeItem char(1) 
+prixItem int 
+poidsItem int 
+utilité int 
+photo varchar(100) 
+flagDispo tinyint default 1
+*/
 class Items
 {
     private int $idItem;

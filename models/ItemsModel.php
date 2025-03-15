@@ -33,7 +33,7 @@ class ItemsModel
                         $row['typeItem'], 
                         $row['prixItem'],
                         $row['poidsItem'],
-                        $row['utilite'],
+                        $row['utilité'],
                         $row['photo'],
                         $row['flagDispo']
                         );

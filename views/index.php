@@ -33,19 +33,20 @@ require 'partials/header.php';
             <div class="table-container" style="width: 80%; display: block; margin: auto;"> <!-- doit mettre styles marche pas si on met dans la classe wtf-->
                 <table class="table">
                     <tr>
-                        <?php for ($i = 0; $i < 10; $i++) { ?>
+                        <?php $nbParLigne = 1;
+                        foreach ($items as $index => $item) { ?>
                             <td>
                                 <div class="img-thumbnail">
-                                    <img src="https://sm.ign.com/ign_nordic/news/u/us-senator/us-senator-writes-to-valve-boss-gabe-newell-demanding-crackd_zq2z.jpg" class="img-fluid">
-                                    <div class="price">10.99 $</div>
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
+                                    <h4><?=$item->getNomItem()?></h4>
+                                    <div class="price"><?=$item->getPrixItem()?> Capsules</div>
                                     <div class="caption">
-                                        <h4>Gaben</h4>
+                                        <p><?=$item->getPoidsItem()?> lbs</p>
                                         <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
-                                            <input type="hidden" name="idItem" value="1">
-                                            <input type="hidden" name="name" value="Sample Sushi">
-                                            <input type="hidden" name="description" value="Delicious sushi description.">
-                                            <input type="hidden" name="prixItem" value="10.99">
-                                            <input type="hidden" name="image" value="sample.jpg">
+                                            <input type="hidden" name="idItem" value="<?=$item->getIdItem()?>">
+                                            <input type="hidden" name="name" value="<?=$item->getNomItem()?>">
+                                            <input type="hidden" name="prixItem" value="<?=$item->getPrixItem()?>">
+                                            <input type="hidden" name="image" value="<?=$item->getPhoto()?>">
                                             <button type="submit" class="btn btn-order add-to-cart" name="ajouter">
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>
@@ -53,7 +54,13 @@ require 'partials/header.php';
                                     </div>
                                 </div>
                             </td>
-                            <?php if (($i + 1) % 3 == 0) { echo "</tr><tr>"; } ?>
+                            <?php if ($nbParLigne % 3 == 0) { 
+                                echo "</tr><tr>"; 
+                                $nbParLigne = 1;
+                            }
+                            else {
+                                $nbParLigne++;
+                            } ?>
                         <?php } ?>
                     </tr>
                 </table>
