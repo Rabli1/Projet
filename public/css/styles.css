@@ -128,3 +128,8 @@ img {
     display: block;
     margin: auto;
 }
+.center-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
