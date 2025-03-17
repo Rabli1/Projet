@@ -133,3 +133,7 @@ img {
   flex-direction: column;
   align-items: center;
 }
+.checkbox-container {
+  display: inline-block;
+  margin-right: 10px;
+}
