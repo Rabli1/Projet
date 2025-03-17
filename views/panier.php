@@ -22,7 +22,7 @@ require 'partials/header.php';
 <main class="container mt-5">
     <?php if (!empty($cartItems)) { ?>
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Item</th>
