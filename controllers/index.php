@@ -40,5 +40,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $items = $itemsModel->selectAllItems();
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+    $itemId = (int)$_POST['idItem'];
+    addToCart($itemId, $itemsModel);
 
+    header('Location: /panier');
+    exit();
+}
 require 'views/index.php';

@@ -48,15 +48,19 @@ function isAdministrator() : bool
     return !empty($_SESSION['user']) && $_SESSION['user']['role'] == '1';
 }
 
-function addToCart() {
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
+function addToCart(int $id, ItemsModel $itemsModel) {
+    $item = $itemsModel->selectById($id);
 
-    $id = (int)$_POST['id']; 
+    if ($item !== null) {
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
 
-    if (!in_array($id, $_SESSION['cart'])) {
-        $_SESSION['cart'][] = $id; 
+        if (!array_key_exists($id, $_SESSION['cart'])) {
+            $_SESSION['cart'][$id] = 1;
+        } else {
+            $_SESSION['cart'][$id]++;
+        }
     }
 }
 
