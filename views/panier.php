@@ -32,24 +32,24 @@ require 'partials/header.php';
 </head>
 <body>
 <main class="container mt-5">
-    <h2>Items in your cart:</h2>
     <?php if (!empty($cartItems)) { ?>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Actions</th>
+                        <th>Item</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Poids</th>
+                        <th>Quantité</th>
+                        <th>Retirer</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
                     $totalPrice = 0;
                     foreach ($cartItems as $item) { 
-                        $totalPrice += $item->getPrixItem() * $item->getQuantity();
+                        $totalPrice += $item->getPrixItem() * $item->getQuantite();
                     ?>
                         <tr>
                             <td><img src="public/img/<?= $item->getPhoto() ?>" class="img-fluid" alt="<?= $item->getNomItem() ?>" style="max-width: 20%"></td>
@@ -61,16 +61,23 @@ require 'partials/header.php';
                                 </div>
                             </td>
                             <td>
+                                <div price-container>
+                                <?= $item->getPoidsItem() ?> 
+                                <img src="public/img/weight.webp" alt="lbs" style="max-width: 12%">
+                                </div>
+                            </td>
+                            <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id" value="<?= $item->getIdItem() ?>">
                                     <label>Quantité:</label>
-                                    <select name="quantity" class="form-select w-50" onchange="updateQuantity(this.form)">
+                                    <select name="quantite" class="select-quantite" onchange="updateQuantity(this.form)">
                                         <?php for ($i = 1; $i <= $item->getQteStock(); $i++): ?>
-                                            <option value="<?= $i ?>" <?= $i == $item->getQuantity() ? 'selected' : '' ?>>
+                                            <option value="<?= $i ?>" <?= $i == $item->getQuantite() ? 'selected' : '' ?>>
                                                 <?= $i ?>
                                             </option>
                                         <?php endfor; ?>
                                     </select>
+                                
                             </td>
                             <td>
                                     <div class="mt-2">

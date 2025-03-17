@@ -33,7 +33,7 @@ class ItemsModel
                         $row['typeItem'], 
                         $row['prixItem'],
                         $row['poidsItem'],
-                        $row['utilité'],
+                        $row['utilite'] ?? 0,
                         $row['photo'],
                         $row['flagDispo']
                         );
@@ -51,5 +51,26 @@ class ItemsModel
             
         }
 
+    }
+    public function selectById(int $id): ?Items {
+        $stmt = $this->pdo->prepare('SELECT * FROM items WHERE idItem = :id');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Items(
+                $row['idItem'],
+                $row['nomItem'],
+                $row['qteStock'],
+                $row['typeItem'],
+                $row['prixItem'],
+                $row['poidsItem'],
+                $row['utilite'] ?? 0,
+                $row['photo'],
+                $row['flagDispo']
+            );
+        }
+
+        return null;
     }
 }

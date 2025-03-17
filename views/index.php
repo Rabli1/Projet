@@ -51,7 +51,6 @@ require 'partials/header.php';
                                             <input type="hidden" name="image" value="<?=$item->getPhoto()?>">
                                             <input type="hidden" name="typeItem" value="<?=$item->getTypeItem()?>">
                                             <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
-
                                             <button type="submit" class="btn btn-order add-to-cart" name="add_to_cart">
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>

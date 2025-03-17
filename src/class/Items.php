@@ -26,18 +26,17 @@ class Items
     private int $flagDispo;
     private $quantite;
 
-    public function __construct(int $idItem, string $nomItem, int $qteStock, string $typeItem, int $prixItem, int $poidsItem, int $utilite, string $photo, int $flagDispo) {
+    public function __construct($idItem, $nomItem, $qteStock, $typeItem, $prixItem, $poidsItem, $utilite, $photo, $flagDispo) {
         $this->idItem = $idItem;
         $this->nomItem = $nomItem;
         $this->qteStock = $qteStock;
         $this->typeItem = $typeItem;
         $this->prixItem = $prixItem;
         $this->poidsItem = $poidsItem;
-        $this->utilite = $utilite;
+        $this->utilite = $utilite ?? 0;
         $this->photo = $photo;
         $this->flagDispo = $flagDispo;
         $this->quantite = 0;
-        
     }
 
     // Getters

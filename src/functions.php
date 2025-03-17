@@ -47,16 +47,19 @@ function isAdministrator() : bool
     sessionStart();
     return !empty($_SESSION['user']) && $_SESSION['user']['role'] == '1';
 }
+function addToCart(int $id, ItemsModel $itemsModel) {
+    $item = $itemsModel->selectById($id);
 
-function addToCart() {
-    if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = [];
-    }
+    if ($item !== null) {
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
 
-    $id = (int)$_POST['id']; 
-
-    if (!in_array($id, $_SESSION['cart'])) {
-        $_SESSION['cart'][] = $id; 
+        if (!array_key_exists($id, $_SESSION['cart'])) {
+            $_SESSION['cart'][$id] = 1;
+        } else {
+            $_SESSION['cart'][$id]++;
+        }
     }
 }
 

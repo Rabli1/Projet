@@ -25,17 +25,17 @@ if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!empty($_POST['id']) && !empty($_POST['quantity'])) {
+    if (!empty($_POST['id']) && !empty($_POST['quantite'])) {
         $id = intval($_POST['id']);
-        $quantity = intval($_POST['quantity']);
+        $quantite = intval($_POST['quantite']);
 
         $item = $itemsModel->selectById($id);
-        if ($item && $quantity <= $item->getQteStock()) {
+        if ($item && $quantite <= $item->getQteStock()) {
             $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($cartId) use ($id) {
                 return $cartId !== $id; 
             });
 
-            for ($i = 0; $i < $quantity; $i++) {
+            for ($i = 0; $i < $quantite; $i++) {
                 $_SESSION['cart'][] = $id;
             }
         }
@@ -48,18 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $cartItems = [];
 if (!empty($_SESSION['cart'])) {
     $quantities = array_count_values($_SESSION['cart']);
-
-    foreach ($quantities as $id => $quantity) {
+    foreach ($quantities as $id => $quantite) {
         $item = $itemsModel->selectById($id);
         if ($item) {
-            $item->setQuantity($quantity); // Use the setter method
+            $item->setQuantite($quantite);
             $cartItems[] = $item;
         }
     }
 }
 
 $subTotal = array_reduce($cartItems, function ($total, $item) {
-    return $total + $item->getPrixItem() * $item->getQuantity(); // Use the getter method
+    return $total + $item->getPrixItem() * $item->getQuantite();
 }, 0);
 
 require 'views/panier.php';
