@@ -1,8 +1,8 @@
 <?php
 
-require_once 'src/class/Items.php';
+require_once 'src/class/Nourritures.php';
 
-class ItemsModel
+class NourrituresModels
 {
 
     // La propriété pourrait être déclarée hors constructeur
@@ -11,12 +11,12 @@ class ItemsModel
     // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
     
-    public function selectAllItems() : null|array {
+    public function selectAllNourritures() : null|array {
 
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT * FROM items');
+            $stm = $this->pdo->prepare('SELECT * FROM nourritures');
 
             $stm->execute();
 
@@ -26,16 +26,12 @@ class ItemsModel
 
                 foreach ($data as $row) {
 
-                    $items[] = new Items(
-                        $row['idItem'], 
-                        $row['nomItem'], 
-                        $row['qteStock'], 
-                        $row['typeItem'], 
-                        $row['prixItem'],
-                        $row['poidsItem'],
-                        $row['utilité'],
-                        $row['photo'],
-                        $row['flagDispo']
+                    $items[] = new Nourritures(
+                        $row['idItem'],
+                        $row['apportCalorique'],
+                        $row['composantNutritif'],
+                        $row['mineralPrincipal'],
+                        $row['ptsVie']
                         );
                 }
                 

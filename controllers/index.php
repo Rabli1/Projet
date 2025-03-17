@@ -9,7 +9,7 @@ try {
     $db = Database::getInstance($dbConfig, $dbParams);
     $pdo = $db->getPDO();
     $itemsModel = new ItemsModel($pdo);
-    $items = $itemsModel->selectAll();
+    $items = $itemsModel->selectAllItems();
     echo "Connected to MySQL successfully!";
 
 } catch (PDOException $e) {
