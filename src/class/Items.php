@@ -24,6 +24,7 @@ class Items
     private int $utilite;
     private string $photo;
     private int $flagDispo;
+    public int $quantite;
 
     // Constructor property promotion
     public function __construct(int $idItem, string $nomItem, int $qteStock, string $typeItem, int $prixItem, int $poidsItem, int $utilite, string $photo, int $flagDispo) {
@@ -36,6 +37,7 @@ class Items
         $this->utilite = $utilite;
         $this->photo = $photo;
         $this->flagDispo = $flagDispo;
+        $this->quantite = 0;
     }
 
     // Getters
@@ -74,6 +76,9 @@ class Items
     public function getFlagDispo(): int {
         return $this->flagDispo;
     }
+    public function getQuantite(): int {
+        return $this->quantite;
+    }
 
     // Setters
     public function setIdItem(int $idItem): void {
@@ -110,5 +115,8 @@ class Items
 
     public function setFlagDispo(int $flagDispo): void {
         $this->flagDispo = $flagDispo;
+    }
+    public function setQuantite(int $quantite): void {
+        $this->quantite = $quantite;
     }
 }
