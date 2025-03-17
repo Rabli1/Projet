@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(!empty($selectedTypes)) {
         $items = $itemsModel->selectByTypes($selectedTypes);
     } else {
-        $items = $itemsModel->selectAll();
+        $items = $itemsModel->selectAllItems();
     }
 }
 
