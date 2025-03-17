@@ -109,11 +109,9 @@
   }
 
   .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    padding: 20px;
+    width: 80%;
+     display: block; 
+     margin: auto;
 }
 .table {
     width: auto;
@@ -127,4 +125,36 @@ img {
     height: auto;
     display: block;
     margin: auto;
+}
+
+.img-thumbnail {
+  position: relative;
+  padding-top: 15%;
+}
+.price {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+.quantity {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+.weight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.center-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

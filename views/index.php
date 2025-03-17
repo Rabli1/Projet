@@ -2,7 +2,6 @@
 
 require 'partials/head.php';
 require 'partials/header.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ require 'partials/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knapsack</title>
-</head>
+]</head>
 <main>
     <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
         <div class="table-container" style="width: 80%; display: block; margin: auto;">
@@ -24,29 +23,35 @@ require 'partials/header.php';
             <input type="checkbox" id="filtre4" name="filtre4">
             <label for="filtre4">Filtre 4</label>
         </div>
-        <input type="text"id="search" name="search" placeholder="Rechercher un item"><br>
+        <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
         <button type="submit" class="btn btn-primary">Rechercher</button>
     </form>
 
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
-            <div class="table-container" style="width: 80%; display: block; margin: auto;"> <!-- doit mettre styles marche pas si on met dans la classe wtf-->
+            <div class="table-container">
                 <table class="table">
                     <tr>
                         <?php $nbParLigne = 1;
                         foreach ($items as $index => $item) { ?>
                             <td>
                                 <div class="img-thumbnail">
+                                    <div class="price"><?=$item->getPrixItem()?> Capsules</div>
+                                    <div class="quantity"><?=$item->getQteStock()?> en stock</div>
                                     <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <h4><?=$item->getNomItem()?></h4>
-                                    <div class="price"><?=$item->getPrixItem()?> Capsules</div>
+                                    <div><?=getTypeItemName($item->getTypeItem())?></div>
+                                    <div>Utilité : <?=$item->getUtilite()?></div>
                                     <div class="caption">
-                                        <p><?=$item->getPoidsItem()?> lbs</p>
+                                        <div class="weight"><?=$item->getPoidsItem()?> lbs</div>
                                         <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
                                             <input type="hidden" name="idItem" value="<?=$item->getIdItem()?>">
                                             <input type="hidden" name="name" value="<?=$item->getNomItem()?>">
                                             <input type="hidden" name="prixItem" value="<?=$item->getPrixItem()?>">
                                             <input type="hidden" name="image" value="<?=$item->getPhoto()?>">
+                                            <input type="hidden" name="typeItem" value="<?=$item->getTypeItem()?>">
+                                            <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
+
                                             <button type="submit" class="btn btn-order add-to-cart" name="ajouter">
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>

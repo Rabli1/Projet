@@ -59,3 +59,20 @@ function addToCart() {
         $_SESSION['cart'][] = $id; 
     }
 }
+
+function getTypeItemName($typeItem) {
+    switch ($typeItem) {
+        case 'r':
+            return 'Armure';
+        case 'a':
+            return 'Arme';
+        case 'm':
+            return 'Médicament';
+        case 'n':
+            return 'Nourriture';
+        case 'u':
+            return 'Munition';
+        default:
+            return 'Inconnu';
+    }
+}
