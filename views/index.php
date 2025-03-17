@@ -10,7 +10,7 @@ require 'partials/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knapsack</title>
-]</head>
+</head>
 <main>
     <form method="POST" class="center-form"><!-- interfere peut etre avec l'autre post watchout vro-->
         <div class="checkbox-container">

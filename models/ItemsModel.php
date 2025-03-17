@@ -11,7 +11,7 @@ class ItemsModel
     // Ici la propriété $pdo est déclarée dans le constructeur directement
     public function __construct(private PDO $pdo) {}
     
-    public function selectAll() : null|array {
+    public function selectAllItems() : null|array {
 
         try{
 

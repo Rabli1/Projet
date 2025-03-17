@@ -73,6 +73,6 @@ function getTypeItemName($typeItem) {
         case 'u':
             return 'Munition';
         default:
-            return 'Inconnu';
+            return 'Ressource';
     }
 }
