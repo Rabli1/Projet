@@ -12,8 +12,8 @@ require 'partials/header.php';
     <title>Knapsack</title>
 ]</head>
 <main>
-    <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
-        <div class="table-container" style="width: 80%; display: block; margin: auto;">
+    <form method="POST" class="center-form"><!-- interfere peut etre avec l'autre post watchout vro-->
+        <div class="checkbox-container">
             <input type="checkbox" id="filtre1" name="filtre1">
             <label for="filtre1">Filtre 1</label>
             <input type="checkbox" id="filtre2" name="filtre2">
