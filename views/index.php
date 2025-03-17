@@ -32,20 +32,20 @@ require 'partials/header.php';
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
             <div class="table-container">
-                <table class="table">
-                    <tr>
+                <table class="table" style="width: 100%;">
+                    <tr >
                         <?php $nbParLigne = 1;
                         foreach ($items as $index => $item) { ?>
-                            <td>
+                            <td >
                                 <div class="img-thumbnail">
-                                    <div class="price"><?=$item->getPrixItem()?> Capsules</div>
+                                    <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity"><?=$item->getQteStock()?> en stock</div>
-                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid" style="max-width: 10em;">
                                     <h4><?=$item->getNomItem()?></h4>
                                     <div><?=getTypeItemName($item->getTypeItem())?></div>
                                     <div>Utilité : <?=$item->getUtilite()?></div>
                                     <div class="caption">
-                                        <div class="weight"><?=$item->getPoidsItem()?> lbs</div>
+                                        <div class="weight price-container"><?=$item->getPoidsItem()?> <img src="public/img/weight.webp" alt="lbs" class="price-container"></div>
                                         <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
                                             <input type="hidden" name="idItem" value="<?=$item->getIdItem()?>">
                                             <input type="hidden" name="name" value="<?=$item->getNomItem()?>">

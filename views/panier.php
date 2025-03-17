@@ -81,7 +81,7 @@ require 'partials/header.php';
             <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
         </div>
     <?php } else { ?>
-        <p>Your cart is empty.</p>
+        <p>Le panier est vide.</p>
     <?php } ?>
 </main>
 
