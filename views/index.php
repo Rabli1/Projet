@@ -14,14 +14,16 @@ require 'partials/header.php';
 <main>
     <form method="POST" class="center-form"><!-- interfere peut etre avec l'autre post watchout vro-->
         <div class="checkbox-container">
-            <input type="checkbox" id="filtre1" name="filtre1">
-            <label for="filtre1">Filtre 1</label>
-            <input type="checkbox" id="filtre2" name="filtre2">
-            <label for="filtre2">Filtre 2</label>
-            <input type="checkbox" id="filtre3" name="filtre3">
-            <label for="filtre3">Filtre 3</label>
-            <input type="checkbox" id="filtre4" name="filtre4">
-            <label for="filtre4">Filtre 4</label>
+        <input type="checkbox" id="arme" name="arme">
+            <label for="arme">Armes</label>
+            <input type="checkbox" id="munition" name="munition">
+            <label for="munition">Munitions</label>
+            <input type="checkbox" id="armure" name="armure">
+            <label for="armure">Armures</label>
+            <input type="checkbox" id="medicament" name="medicament">
+            <label for="medicament">Médicaments</label>
+            <input type="checkbox" id="nourriture" name="nourriture">
+            <label for="nourriture">Nourritures</label>
         </div>
         <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
         <button type="submit" class="btn btn-primary">Rechercher</button>
