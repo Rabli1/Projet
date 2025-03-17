@@ -11,19 +11,7 @@ require 'partials/header.php';
     <title>Panier</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/styles.css">
-    <style>
-        .price-container {
-            display: flex;
-            align-items: center;
-        }
-        .price-container img {
-            margin-left: 5px;
-            display: inline-block;
-            vertical-align: middle;
-            max-width: 12%;
-            max-height: 10%;
-        }
-    </style>
+
     <script>
         function updateQuantity(form) {
             form.submit();
@@ -61,15 +49,14 @@ require 'partials/header.php';
                                 </div>
                             </td>
                             <td>
-                                <div price-container>
+                                <div class="price-container">
                                 <?= $item->getPoidsItem() ?> 
-                                <img src="public/img/weight.webp" alt="lbs" style="max-width: 12%">
+                                <img src="public/img/weight.webp" alt="lbs" style="max-width: 16px">
                                 </div>
                             </td>
                             <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id" value="<?= $item->getIdItem() ?>">
-                                    <label>Quantité:</label>
                                     <select name="quantite" class="select-quantite" onchange="updateQuantity(this.form)">
                                         <?php for ($i = 1; $i <= $item->getQteStock(); $i++): ?>
                                             <option value="<?= $i ?>" <?= $i == $item->getQuantite() ? 'selected' : '' ?>>

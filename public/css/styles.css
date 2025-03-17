@@ -159,14 +159,15 @@ img {
 }
 .select-quantite{
   width: 100%;
-  min-width: 15ch;
-  max-width: 30ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.25rem;
   cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+.price-container {
+  display: flex;
+  align-items: center;
+}
+.price-container img {
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 16px;
 }
