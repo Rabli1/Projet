@@ -126,8 +126,6 @@ img {
     display: block;
     margin: auto;
 }
-<<<<<<< HEAD
-
 .img-thumbnail {
   position: relative;
   padding-top: 15%;
@@ -154,17 +152,8 @@ img {
   font-weight: bold;
 }
 
-=======
->>>>>>> d85eb987d53ddb17836543a16c71f0ae15372ad3
 .center-form {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-<<<<<<< HEAD
-=======
-.checkbox-container {
-  display: inline-block;
-  margin-right: 10px;
-}
->>>>>>> d85eb987d53ddb17836543a16c71f0ae15372ad3
