@@ -2,7 +2,6 @@
 require 'src/class/Database.php';
 require 'models/ItemsModel.php';
 
-
 sessionStart();
 
 try {

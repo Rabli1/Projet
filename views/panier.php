@@ -1,77 +1,97 @@
-<?php require 'partials/head.php'; ?>
-<?php require 'partials/header.php'; ?>
+<?php
+require 'partials/head.php';
+require 'partials/header.php';
+?>
 
-<main>
-    <div class="container-fluid row align-items-start">
-        <div class="col-8">
-            <div class="container row admin">
-                <h1><strong>Panier d'achats</strong></h1>
-                <div class="mb-3">
-                    <!-- Bouton Accueil -->
-                    <a href="/" class="btn btn-primary">Accueil</a>
-                </div>
-                <hr>
-                <?php if (!empty($cartItems)): ?>
-                    <?php foreach ($cartItems as $item): ?>
-                        <div class="row align-items-center mb-3">
-                            <!-- Image de l'article -->
-                            <div class="col-4">
-                                <img src="public/uploads/<?= htmlspecialchars($item['image']) ?>"
-                                    alt="<?= htmlspecialchars($item['name']) ?>" class="cart-detail-image img-fluid">
-                            </div>
-
-                            <!-- Détails de l'article -->
-                            <div class="col-5">
-                                <h4><?= htmlspecialchars($item['name']) ?></h4>
-                                <p><?= htmlspecialchars($item['description']) ?></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+    <style>
+        .price-container {
+            display: flex;
+            align-items: center;
+        }
+        .price-container img {
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 12%;
+            max-height: 10%;
+        }
+    </style>
+    <script>
+        function updateQuantity(form) {
+            form.submit();
+        }
+    </script>
+</head>
+<body>
+<main class="container mt-5">
+    <h2>Items in your cart:</h2>
+    <?php if (!empty($cartItems)) { ?>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $totalPrice = 0;
+                    foreach ($cartItems as $item) { 
+                        $totalPrice += $item->getPrixItem() * $item->getQuantity();
+                    ?>
+                        <tr>
+                            <td><img src="public/img/<?= $item->getPhoto() ?>" class="img-fluid" alt="<?= $item->getNomItem() ?>" style="max-width: 20%"></td>
+                            <td><?= $item->getNomItem() ?></td>
+                            <td>
+                                <div class="price-container">
+                                    <?= $item->getPrixItem() ?>
+                                    <img src="public/img/caps.png" alt="caps">
+                                </div>
+                            </td>
+                            <td>
                                 <form method="POST" action="">
-                                    <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                                    <input type="hidden" name="id" value="<?= $item->getIdItem() ?>">
                                     <label>Quantité:</label>
-                                    <select name="quantity" class="form-select w-50">
-                                        <?php for ($i = 1; $i <= 10; $i++): ?>
-                                            <option value="<?= $i ?>" <?= $i == $item['quantity'] ? 'selected' : '' ?>>
+                                    <select name="quantity" class="form-select w-50" onchange="updateQuantity(this.form)">
+                                        <?php for ($i = 1; $i <= $item->getQteStock(); $i++): ?>
+                                            <option value="<?= $i ?>" <?= $i == $item->getQuantity() ? 'selected' : '' ?>>
                                                 <?= $i ?>
                                             </option>
                                         <?php endfor; ?>
                                     </select>
+                            </td>
+                            <td>
                                     <div class="mt-2">
-                                        <button type="submit" name="update_quantity"
-                                            class="btn btn-outline-secondary">MAJ</button>
-                                        <button type="submit" name="remove_item"
-                                            class="btn btn-outline-danger">Supprimer</button>
+                                        <button type="submit" name="remove_item" class="btn btn-outline-danger">Supprimer</button>
                                     </div>
                                 </form>
-                            </div>
-
-                            <!-- Prix unitaire -->
-                            <div class="col-3 text-right">
-                                <h5><?= number_format($item['price'], 2) ?> $</h5>
-                            </div>
-                        </div>
-                        <hr>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <p>Votre panier est vide.</p>
-                <?php endif; ?>
-            </div>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
         </div>
-
-        <!-- Résumé de la commande -->
-        <div class="col-4">
-            <div class="row admin">
-                <h3>Résumé de la commande</h3>
-                <hr>
-                <h4>Sous-total (<span id="sub-total-items-count">
-                        <?= array_reduce($cartItems, function ($total, $item) {
-                            return $total + $item['quantity'];
-                        }, 0) ?>
-                    </span> items):
-                    <strong><span id="sub-total-amount-formatted"><?= number_format($subTotal, 2) ?> $</span></strong>
-                </h4>
-                <a href="/checkout" class="btn cart-proceed-to-checkout">Passer à la caisse</a>
-            </div>
+        <div class="price-container mt-3">
+            <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
         </div>
-    </div>
+    <?php } else { ?>
+        <p>Your cart is empty.</p>
+    <?php } ?>
 </main>
 
 <?php require 'partials/footer.php'; ?>
+
+</body>
+</html>
