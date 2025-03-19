@@ -16,7 +16,7 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     $selectedTypes = [];
     if(isset($_POST['arme'])) {
         $selectedTypes[] = 'a';
@@ -34,8 +34,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $selectedTypes[] = 'n';
     }
 
-    if(!empty($selectedTypes)) {
-        $items = $itemsModel->selectByTypes($selectedTypes);
+    if (!empty($_POST['search'])) {
+        $items = $itemsModel->selectItemsByName($_POST['search']);
+    } elseif(!empty($selectedTypes)) {
+        $items = $itemsModel->selectItemsByTypes($selectedTypes);
     } else {
         $items = $itemsModel->selectAllItems();
     }

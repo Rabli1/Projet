@@ -53,7 +53,7 @@ class ItemsModel
 
     }
 
-    public function selectByTypes($types) {
+    public function selectItemsByTypes($types) {
         try{
             $typesToGet = implode(',', array_fill(0, count($types), '?'));
             $stm = $this->pdo->prepare("SELECT * FROM items WHERE typeItem IN ($typesToGet)");
@@ -112,5 +112,46 @@ class ItemsModel
         }
 
         return null;
+    }
+
+    public function selectItemsByName(string $nomItem) {
+        try{
+
+            // $this->pdo-> car $pdo est une propriété de l'objet
+            $stm = $this->pdo->prepare("SELECT * FROM items where nomItem like :nomItem");
+
+            $stm->execute(['nomItem' => '%' . $nomItem . '%']);
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($data)) {
+
+                foreach ($data as $row) {
+
+                    $items[] = new Items(
+                        $row['idItem'], 
+                        $row['nomItem'], 
+                        $row['qteStock'], 
+                        $row['typeItem'], 
+                        $row['prixItem'],
+                        $row['poidsItem'],
+                        $row['utilité'],
+                        $row['photo'],
+                        $row['flagDispo']
+                        );
+                }
+                
+                return $items;
+
+            }
+            
+            return null;
+            
+        } catch (PDOException $e) {
+    
+            throw new PDOException($e->getMessage(), $e->getCode());
+            
+        }
+
     }
 }
