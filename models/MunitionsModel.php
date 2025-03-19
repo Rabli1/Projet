@@ -2,7 +2,7 @@
 
 require_once 'src/class/Munitions.php';
 
-class MunitionsModels
+class MunitionsModel
 {
 
     // La propriété pourrait être déclarée hors constructeur
@@ -44,5 +44,19 @@ class MunitionsModels
             
         }
 
+    }
+
+    public function selectById(int $id): ?Munitions {
+        $stmt = $this->pdo->prepare('SELECT * FROM munitions WHERE idItem = :id');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Munitions(
+                $row['idItem'],
+                $row['calibre']
+            );
+        }
+        return null;
     }
 }

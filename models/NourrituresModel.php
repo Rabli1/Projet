@@ -2,7 +2,7 @@
 
 require_once 'src/class/Nourritures.php';
 
-class NourrituresModels
+class NourrituresModel
 {
 
     // La propriété pourrait être déclarée hors constructeur
@@ -47,5 +47,22 @@ class NourrituresModels
             
         }
 
+    }
+
+    public function selectById(int $id): ?Nourritures {
+        $stmt = $this->pdo->prepare('SELECT * FROM nourritures WHERE idItem = :id');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Nourritures(
+                $row['idItem'],
+                $row['apportCalorique'],
+                $row['composantNutritif'],
+                $row['mineralPrincipal'],
+                $row['ptsVie']
+            );
+        }
+        return null;
     }
 }

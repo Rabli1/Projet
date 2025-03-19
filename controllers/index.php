@@ -1,6 +1,11 @@
 <?php
 require 'src/class/Database.php';
 require 'models/ItemsModel.php';
+require 'models/ArmesModel.php';
+require 'models/MunitionsModel.php';
+require 'models/ArmuresModel.php';
+require 'models/MédicamentModel.php';
+require 'models/NourrituresModel.php';
 
 
 sessionStart();
@@ -9,6 +14,11 @@ try {
     $db = Database::getInstance($dbConfig, $dbParams);
     $pdo = $db->getPDO();
     $itemsModel = new ItemsModel($pdo);
+    $armesModel = new ArmesModel($pdo);
+    $munitionsModel = new MunitionsModel($pdo);
+    $armuresModel = new ArmuresModel($pdo);
+    $medicamentsModel = new MédicamentsModel($pdo);
+    $nourrituresModel = new NourrituresModel($pdo);
     $items = $itemsModel->selectAllItems();
     echo "Connected to MySQL successfully!";
 
