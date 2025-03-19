@@ -7,6 +7,7 @@ const ROUTES = [
     '/panier' => 'panier.php',
     '/connexion' => 'login.php',
     '/register' => 'register.php',
+    '/createAccount' => 'createAccount.php',
 ];
 
 const DB_PARAMS = [

@@ -5,8 +5,7 @@ class JoueursModel
 {
     public function __construct(private PDO $pdo) {}
 
-    public function getAllJoueurs()
-    {
+    public function getAllJoueurs(){
         try{
             $stm = $this->pdo->prepare('SELECT * FROM joueurs');
             $stm->execute();
@@ -34,8 +33,7 @@ class JoueursModel
         }
     }
 
-    public function getJoueurById($id)
-    {
+    public function getJoueurById($id){
         try {
             // Update the query to use the correct column name
             $stm = $this->pdo->prepare('SELECT * FROM joueurs WHERE idJoueurs = :id');
@@ -62,10 +60,16 @@ class JoueursModel
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
 
-        }
-        public function updateCaps($joueurId, $newCaps) {
-            $sql = "UPDATE joueurs SET montantCaps = :newCaps WHERE idJoueur = :joueurId";
-            $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute(['newCaps' => $newCaps, 'joueurId' => $joueurId]);
-        }
+    }
+    public function updateCaps($joueurId, $newCaps) {
+        $sql = "UPDATE joueurs SET montantCaps = :newCaps WHERE idJoueur = :joueurId";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['newCaps' => $newCaps, 'joueurId' => $joueurId]);
+    }
+    public function addNewJoueur($prenom, $nom, $alias, $motDePasse){
+        $sql = "INSERT INTO joueurs (prenom, nom, alias, motDePasse) VALUES (:prenom, :nom, :alias, :motDePasse)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['prenom' => $prenom, 'nom' => $nom, 'alias' => $alias, 'motDePasse' => $motDePasse]);
+    }
+
 }

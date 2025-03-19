@@ -39,7 +39,7 @@
 
                     <!-- Connexion / Création de compte -->
                     <?php if (!isAuthenticated()) { ?>
-                        <a class="btn btn-primary me-2" role="button" href="/user-creation">Créer un compte</a>
+                        <a class="btn btn-primary me-2" role="button" href="/createAccount">Créer un compte</a>
                         <a class="btn btn-primary" role="button" href="/connexion">Connexion</a>
                     <?php } else { ?>
                         <a class="btn btn-primary" role="button" href="/deconnexion">Déconnexion</a>
