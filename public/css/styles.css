@@ -171,3 +171,34 @@ img {
   vertical-align: middle;
   max-width: 16px;
 }
+.img-thumbnail {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.img-thumbnail img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 15%;
+}
+
+.img-thumbnail h4 {
+  text-align: center;
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.img-thumbnail .caption {
+  text-align: center;
+}

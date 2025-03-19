@@ -50,7 +50,7 @@ require 'partials/header.php';
                             </td>
                             <td>
                                 <div class="price-container">
-                                <?= $item->getPoidsItem() ?> 
+                                <?= $item->getPoidsItem() ?> lbs
                                 <img src="public/img/weight.webp" alt="lbs" style="max-width: 16px">
                                 </div>
                             </td>

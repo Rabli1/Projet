@@ -42,12 +42,12 @@ require 'partials/header.php';
                                 <div class="img-thumbnail">
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity"><?=$item->getQteStock()?> en stock</div>
-                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid" style="max-width: 10em;">
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <h4><?=$item->getNomItem()?></h4>
                                     <div><?=getTypeItemName($item->getTypeItem())?></div>
                                     <div>Utilité : <?=$item->getUtilite()?></div>
                                     <div class="caption">
-                                        <div class="weight price-container"><?=$item->getPoidsItem()?> <img src="public/img/weight.webp" alt="lbs" class="price-container"></div>
+                                        <div class="weight price-container"><?=$item->getPoidsItem()?> lbs<img src="public/img/weight.webp" alt="lbs" class="price-container" style="max-width: 16px"></div>
                                         <?php
                                         switch ($item->getTypeItem()) {
                                             case 'r':
