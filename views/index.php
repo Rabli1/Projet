@@ -28,7 +28,7 @@ require 'partials/header.php';
             <label for="nourriture">Nourritures</label>
         </div>
         <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
     </form>
 
     <div class="tab-content">
