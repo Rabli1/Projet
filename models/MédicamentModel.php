@@ -48,4 +48,21 @@ class MédicamentsModel
         }
 
     }
+
+    public function selectById(int $id): ?Médicaments {
+        $stmt = $this->pdo->prepare('SELECT * FROM médicaments WHERE idItem = :id');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Médicaments(
+                $row['idItem'],
+                $row['duréeEffet'],
+                $row['effetIndésirable'],
+                $row['ptsVie'],
+                $row['effet']
+            );
+        }
+        return null;
+    }
 }

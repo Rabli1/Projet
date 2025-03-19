@@ -2,6 +2,7 @@
 
 require 'partials/head.php';
 require 'partials/header.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -10,11 +11,12 @@ require 'partials/header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Knapsack</title>
+    <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <main>
-    <form method="POST" class="center-form"><!-- interfere peut etre avec l'autre post watchout vro-->
+    <form method="POST" class="center-form">
         <div class="checkbox-container">
-        <input type="checkbox" id="arme" name="arme">
+            <input type="checkbox" id="arme" name="arme">
             <label for="arme">Armes</label>
             <input type="checkbox" id="munition" name="munition">
             <label for="munition">Munitions</label>
@@ -26,17 +28,17 @@ require 'partials/header.php';
             <label for="nourriture">Nourritures</label>
         </div>
         <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
     </form>
 
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
             <div class="table-container">
                 <table class="table" style="width: 100%;">
-                    <tr >
+                    <tr>
                         <?php $nbParLigne = 1;
                         foreach ($items as $index => $item) { ?>
-                            <td >
+                            <td>
                                 <div class="img-thumbnail">
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity"><?=$item->getQteStock()?> en stock</div>
@@ -46,7 +48,51 @@ require 'partials/header.php';
                                     <div>Utilité : <?=$item->getUtilite()?></div>
                                     <div class="caption">
                                         <div class="weight price-container"><?=$item->getPoidsItem()?> <img src="public/img/weight.webp" alt="lbs" class="price-container"></div>
-                                        <form method="POST"><!-- interfere peut etre avec l'autre post watchout vro-->
+                                        <?php
+                                        switch ($item->getTypeItem()) {
+                                            case 'r':
+                                                $armure = $armuresModel->selectById($item->getIdItem());
+                                                if ($armure) {
+                                                    echo "<div>Matière : " . $armure->getMatière() . "</div>";
+                                                    echo "<div>Taille : " . $armure->getTaille() . "</div>";
+                                                }
+                                                break;
+                                            case 'a':
+                                                $arme = $armesModel->selectById($item->getIdItem());
+                                                if ($arme) {
+                                                    echo "<div>Efficacité : " . $arme->getEfficacité() . "</div>";
+                                                    echo "<div>Type : " . $arme->getTypeArmes() . "</div>";
+                                                    echo "<div>Description : " . $arme->getDescription() . "</div>";
+                                                    echo "<div>Calibre : " . $arme->getCalibre() . "</div>";
+                                                }
+                                                break;
+                                            case 'm':
+                                                $medicament = $medicamentsModel->selectById($item->getIdItem());
+                                                if ($medicament) {
+                                                    echo "<div>Durée Effet : " . $medicament->getDuréeEffet() . "</div>";
+                                                    echo "<div>Effet Indésirable : " . $medicament->getEffetIndésirable() . "</div>";
+                                                    echo "<div>Points de Vie : " . $medicament->getPtsVie() . "</div>";
+                                                    echo "<div>Effet : " . $medicament->getEffet() . "</div>";
+                                                }
+                                                break;
+                                            case 'n':
+                                                $nourriture = $nourrituresModel->selectById($item->getIdItem());
+                                                if ($nourriture) {
+                                                    echo "<div>Apport Calorique : " . $nourriture->getApportCalorique() . "</div>";
+                                                    echo "<div>Composant Nutritif : " . $nourriture->getComposantNutritif() . "</div>";
+                                                    echo "<div>Minéral Principal : " . $nourriture->getMineralPrincipal() . "</div>";
+                                                    echo "<div>Points de Vie : " . $nourriture->getPtsVie() . "</div>";
+                                                }
+                                                break;
+                                            case 'u':
+                                                $munition = $munitionsModel->selectById($item->getIdItem());
+                                                if ($munition) {
+                                                    echo "<div>Calibre : " . $munition->getCalibre() . "</div>";
+                                                }
+                                                break;
+                                        }
+                                        ?>
+                                        <form method="POST">
                                             <input type="hidden" name="idItem" value="<?=$item->getIdItem()?>">
                                             <input type="hidden" name="name" value="<?=$item->getNomItem()?>">
                                             <input type="hidden" name="prixItem" value="<?=$item->getPrixItem()?>">

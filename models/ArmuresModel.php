@@ -2,7 +2,7 @@
 
 require_once 'src/class/Armures.php';
 
-class ArmuresModels
+class ArmuresModel
 {
 
     // La propriété pourrait être déclarée hors constructeur
@@ -45,5 +45,20 @@ class ArmuresModels
             
         }
 
+    }
+
+    public function selectById(int $id): ?Armures {
+        $stmt = $this->pdo->prepare('SELECT * FROM armures WHERE idItem = :id');
+        $stmt->execute(['id' => $id]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Armures(
+                $row['idItem'],
+                $row['matière'],
+                $row['taille']
+            );
+        }
+        return null;
     }
 }
