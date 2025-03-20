@@ -338,7 +338,7 @@ footer img {
   max-width: 300px;
   display: block;
   margin: 0 auto;
-  padding-top: 15%;
+  padding-top: 5%;
 }
 
 .img-thumbnail h4 {
@@ -393,4 +393,12 @@ footer img {
 .select-quantite {
   width: 100%;
   cursor: pointer;
+}
+
+.img-thumbnail .btn-order {
+  background-color: lightgrey;
+}
+
+.reduce-size {
+  font-size: 0.87em;
 }

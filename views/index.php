@@ -42,10 +42,11 @@ require 'partials/header.php';
                                 <div class="img-thumbnail">
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity"><?=$item->getQteStock()?> en stock</div>
-                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <h4><?=$item->getNomItem()?></h4>
-                                    <div><?=getTypeItemName($item->getTypeItem())?></div>
-                                    <div>Utilité : <?=$item->getUtilite()?></div>
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
+                                    <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>
+                                    <br>
+                                    <div><strong>Utilité : </strong> <?=$item->getUtilite()?></div>
                                     <div class="caption">
                                         <div class="weight price-container"><?=$item->getPoidsItem()?> lbs<img src="public/img/weight.webp" alt="lbs" class="price-container" style="max-width: 16px"></div>
                                         <?php
@@ -53,41 +54,41 @@ require 'partials/header.php';
                                             case 'r':
                                                 $armure = $armuresModel->selectById($item->getIdItem());
                                                 if ($armure) {
-                                                    echo "<div>Matière : " . $armure->getMatière() . "</div>";
-                                                    echo "<div>Taille : " . $armure->getTaille() . "</div>";
+                                                    echo "<div><strong>Matière :</strong> " . $armure->getMatière() . "</div>";
+                                                    echo "<div><strong>Taille :</strong> " . $armure->getTaille() . "</div>";
                                                 }
                                                 break;
                                             case 'a':
                                                 $arme = $armesModel->selectById($item->getIdItem());
                                                 if ($arme) {
-                                                    echo "<div>Efficacité : " . $arme->getEfficacité() . "</div>";
-                                                    echo "<div>Type : " . $arme->getTypeArmes() . "</div>";
-                                                    echo "<div>Description : " . $arme->getDescription() . "</div>";
-                                                    echo "<div>Calibre : " . $arme->getCalibre() . "</div>";
+                                                    echo "<div><strong>Efficacité :</strong> " . $arme->getEfficacité() . "</div>";
+                                                    echo "<div><strong>Type :</strong> " . $arme->getTypeArmes() . "</div>";
+                                                    echo "<div class='reduce-size'><strong>Description :</strong> " . $arme->getDescription() . "</div>";
+                                                    echo "<div><strong>Calibre :</strong> " . $arme->getCalibre() . "</div>";
                                                 }
                                                 break;
                                             case 'm':
                                                 $medicament = $medicamentsModel->selectById($item->getIdItem());
                                                 if ($medicament) {
-                                                    echo "<div>Durée Effet : " . $medicament->getDuréeEffet() . "</div>";
-                                                    echo "<div>Effet Indésirable : " . $medicament->getEffetIndésirable() . "</div>";
-                                                    echo "<div>Points de Vie : " . $medicament->getPtsVie() . "</div>";
-                                                    echo "<div>Effet : " . $medicament->getEffet() . "</div>";
+                                                    echo "<div><strong>Durée Effet :</strong> " . $medicament->getDuréeEffet() . "</div>";
+                                                    echo "<div class='reduce-size'><strong>Effet Indésirable :</strong> " . $medicament->getEffetIndésirable() . "</div>";
+                                                    echo "<div><strong>Points de Vie :</strong> " . $medicament->getPtsVie() . "</div>";
+                                                    echo "<div class='reduce-size'><strong>Effet :</strong> " . $medicament->getEffet() . "</div>";
                                                 }
                                                 break;
                                             case 'n':
                                                 $nourriture = $nourrituresModel->selectById($item->getIdItem());
                                                 if ($nourriture) {
-                                                    echo "<div>Apport Calorique : " . $nourriture->getApportCalorique() . "</div>";
-                                                    echo "<div>Composant Nutritif : " . $nourriture->getComposantNutritif() . "</div>";
-                                                    echo "<div>Minéral Principal : " . $nourriture->getMineralPrincipal() . "</div>";
-                                                    echo "<div>Points de Vie : " . $nourriture->getPtsVie() . "</div>";
+                                                    echo "<div><strong>Apport Calorique :</strong> " . $nourriture->getApportCalorique() . "</div>";
+                                                    echo "<div><strong>Composant Nutritif :</strong> " . $nourriture->getComposantNutritif() . "</div>";
+                                                    echo "<div><strong>Minéral Principal :</strong> " . $nourriture->getMineralPrincipal() . "</div>";
+                                                    echo "<div><strong>Points de Vie :</strong> " . $nourriture->getPtsVie() . "</div>";
                                                 }
                                                 break;
                                             case 'u':
                                                 $munition = $munitionsModel->selectById($item->getIdItem());
                                                 if ($munition) {
-                                                    echo "<div>Calibre : " . $munition->getCalibre() . "</div>";
+                                                    echo "<div><strong>Calibre :</strong> " . $munition->getCalibre() . "</div>";
                                                 }
                                                 break;
                                         }
@@ -99,7 +100,8 @@ require 'partials/header.php';
                                             <input type="hidden" name="image" value="<?=$item->getPhoto()?>">
                                             <input type="hidden" name="typeItem" value="<?=$item->getTypeItem()?>">
                                             <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
-
+                                            <br>
+                                            <br>
                                             <button type="submit" class="btn btn-order add-to-cart" name="add_to_cart">
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>
