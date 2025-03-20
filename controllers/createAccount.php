@@ -2,6 +2,7 @@
 require 'models/JoueursModel.php';
 require 'src/class/Database.php';
 
+$errorMotDePasse = false;
 
 try {
     $db = Database::getInstance($dbConfig, $dbParams);
@@ -12,9 +13,15 @@ try {
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if($_POST['motDePasse'] === $_POST['motDePasseConfirmation']) {
-        $joueursModel->addNewJoueur($_POST['firstName'], $_POST['lastName'],
-         $_POST['username'], $_POST['motDePasse']);
+    $username = $_POST['username'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+
+    if($_POST['password'] === $_POST['passwordConfirm']) {
+        $joueursModel->addNewJoueur($firstName, $lastName,
+         $username, $_POST['password']);
+    } else {
+        $errorMotDePasse = true;
     }
 }
 
