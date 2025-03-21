@@ -13,12 +13,12 @@ class JoueursModel
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $joueurs[] = new Joueurs(
-                        $row['id'], 
+                        $row['idJoueurs'], 
                         $row['alias'], 
                         $row['nom'], 
                         $row['prenom'], 
                         $row['montantCaps'], 
-                        $row['dexterite'], 
+                        $row['dextérité'], 
                         $row['pointDeVie'], 
                         $row['poidsMaxTransport'], 
                         $row['motDePasse'], 
