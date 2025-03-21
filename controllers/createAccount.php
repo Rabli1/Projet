@@ -3,6 +3,7 @@ require 'models/JoueursModel.php';
 require 'src/class/Database.php';
 
 $errorMotDePasse = false;
+$errorUsernameExists = false;
 
 try {
     $db = Database::getInstance($dbConfig, $dbParams);
@@ -17,11 +18,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
 
-    if($_POST['password'] === $_POST['passwordConfirm']) {
-        $joueursModel->addNewJoueur($firstName, $lastName,
-         $username, $_POST['password']);
+    if ($joueursModel->getJoueurByAlias($username)) {
+        $errorUsernameExists = true;
     } else {
-        $errorMotDePasse = true;
+        if($_POST['password'] === $_POST['passwordConfirm'] ) {
+            $joueursModel->addNewJoueur($firstName, $lastName,
+            $username, password_hash($_POST['password'], PASSWORD_DEFAULT));
+            header('Location: connexion?success=1');
+            exit();
+        } else {
+            $errorMotDePasse = true;
+        }
     }
 }
 

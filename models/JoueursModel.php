@@ -35,7 +35,6 @@ class JoueursModel
 
     public function getJoueurById($id){
         try {
-            // Update the query to use the correct column name
             $stm = $this->pdo->prepare('SELECT * FROM joueurs WHERE idJoueurs = :id');
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->execute();
@@ -61,6 +60,12 @@ class JoueursModel
         }
 
     }
+    public function getJoueurByAlias($alias) {
+        $stmt = $this->pdo->prepare('SELECT * FROM joueurs WHERE alias = :alias');
+        $stmt->execute(['alias' => $alias]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function updateCaps($joueurId, $newCaps) {
         $sql = "UPDATE joueurs SET montantCaps = :newCaps WHERE idJoueur = :joueurId";
         $stmt = $this->pdo->prepare($sql);

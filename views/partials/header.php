@@ -13,7 +13,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <!-- Panier d'achat -->
-                <?php /*if(isAuthenticated())*/ { ?>
+                <?php if(isAuthenticated()) { ?>
                 <div class="cart-wrapper me-3">
                     <a class="btn btn-outline-light position-relative" href="/panier" title="Panier d'achat">
                     <i class="bi bi-bag"></i> <!-- Icone du panier -->

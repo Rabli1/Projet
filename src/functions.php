@@ -38,7 +38,7 @@ function sessionStart() : void
 function isAuthenticated() : bool
 {
     sessionStart();
-    return !empty($_SESSION['user']);
+    return !empty($_SESSION['username']);
 
 }
 

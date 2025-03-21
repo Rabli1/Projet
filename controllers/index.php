@@ -26,6 +26,8 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
+var_dump($_SESSION);
+
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     $selectedTypes = [];
     if(isset($_POST['arme'])) {

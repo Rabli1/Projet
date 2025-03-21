@@ -33,9 +33,15 @@
                             <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" required>
                         </div>
                         <?php if ($errorMotDePasse){ ?>
-                        <div class="alert alert-danger" role="alert">
-                            Les mots de passe ne correspondent pas.
-                        </div><?php } ?>
+                            <div class="alert alert-danger" role="alert">
+                                Les mots de passe ne correspondent pas.
+                            </div>
+                        <?php } ?>
+                        <?php if ($errorUsernameExists){ ?>
+                            <div class="alert alert-danger" role="alert">
+                                Le nom de joueur existe déjà.
+                            </div>
+                        <?php }?>
                         <button type="submit" class="btn btn-primary">Confirmer</button>
                     </div>
                 </form>
