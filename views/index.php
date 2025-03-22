@@ -34,6 +34,17 @@ require 'partials/header.php';
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
             <div class="table-container">
+            <?php if (!empty($error_message)): ?>
+                    <script>
+                        alert("<?= addslashes($error_message) ?>");
+                    </script>
+                <?php endif; ?>
+
+                <?php if (!empty($success_message)): ?>
+                    <script>
+                        alert("<?= addslashes($success_message) ?>");
+                    </script>
+                <?php endif; ?>
                 <table class="table" style="width: 100%;">
                     <tr>
                         <?php $nbParLigne = 1;
@@ -102,9 +113,12 @@ require 'partials/header.php';
                                             <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
                                             <br>
                                             <br>
-                                            <button type="submit" class="btn btn-order add-to-cart" name="add_to_cart">
+                                            <button type="submit" class="btn btn-order add-to-cart" name="add_to_cart" 
+                                                <?= !isAuthenticated() ? 'disabled' : '' ?>>
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>
+                                            <?php if (!isAuthenticated()): ?>
+                                            <?php endif; ?>
                                         </form>
                                     </div>
                                 </div>

@@ -48,19 +48,25 @@ function isAdministrator() : bool
     return !empty($_SESSION['user']) && $_SESSION['user']['role'] == '1';
 }
 
-function addToCart(int $id, ItemsModel $itemsModel) {
-    $item = $itemsModel->selectById($id);
+function addToCart($itemId, $itemsModel) {
+    sessionStart();
 
-    if ($item !== null) {
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = [];
-        }
+    if (!isAuthenticated()) {
+        $_SESSION['error_message'] = "Vous devez être connecté pour ajouter des items au panier.";
+        return;
+    }
 
-        if (!array_key_exists($id, $_SESSION['cart'])) {
-            $_SESSION['cart'][$id] = 1;
-        } else {
-            $_SESSION['cart'][$id]++;
-        }
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+
+    $item = $itemsModel->selectById($itemId);
+    if ($item) {
+        $_SESSION['cart'][] = $itemId;
+
+        $_SESSION['success_message'] = "L'objet '{$item->getNomItem()}' a été ajouté au panier.";
+    } else {
+        error_log("Invalid item ID: $itemId");
     }
 }
 

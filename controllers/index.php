@@ -26,7 +26,7 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     $selectedTypes = [];
@@ -58,7 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $itemId = (int)$_POST['idItem'];
     addToCart($itemId, $itemsModel);
 
-    header('Location: /panier');
+    header('Location: ' . $_SERVER['REQUEST_URI']);
     exit();
 }
+
+if (isset($_SESSION['error_message'])) {
+    echo "<script>alert('{$_SESSION['error_message']}');</script>";
+    unset($_SESSION['error_message']);
+}
+
+if (isset($_SESSION['success_message'])) {
+    echo "<script>alert('{$_SESSION['success_message']}');</script>";
+    unset($_SESSION['success_message']);
+}
+
 require 'views/index.php';
