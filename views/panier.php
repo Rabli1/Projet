@@ -20,6 +20,13 @@ require 'partials/header.php';
 </head>
 <body>
 <main class="container mt-5">
+    <?php if (isset($nomJoueur)): ?>
+        <h2>Bienvenue, <?= htmlspecialchars($nomJoueur) ?> !</h2>
+        <h4>Poids restant dans votre inventaire : <?= max(0, $poidsRestant) ?> lbs</h4>
+        <h4>Montant de caps : <?= $montantCaps ?> <img src="public/img/caps.png" alt="caps" style="max-width: 16px"></h4>
+        <h4>Dextérité actuelle : <?= $joueur['dextérité'] ?></h4>
+    <?php endif; ?>
+
     <?php if (!empty($cartItems)) { ?>
         <div class="table-responsive">
             <table class="table table-bordered" style="width: 100%;">
@@ -36,8 +43,10 @@ require 'partials/header.php';
                 <tbody>
                     <?php 
                     $totalPrice = 0;
+                    $totalWeight = 0;
                     foreach ($cartItems as $item) { 
                         $totalPrice += $item->getPrixItem() * $item->getQuantite();
+                        $totalWeight += $item->getPoidsItem() * $item->getQuantite();
                     ?>
                         <tr>
                             <td><img src="public/img/<?= $item->getPhoto() ?>" class="img-fluid" alt="<?= $item->getNomItem() ?>" style="max-width: 20%"></td>
@@ -79,6 +88,13 @@ require 'partials/header.php';
         </div>
         <div class="price-container mt-3">
             <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
+            <h3>Poids total: <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
+            <form method="POST" action="">
+                <button type="submit" name="buy_items" class="btn btn-success">Acheter</button>
+                <?php if ($poidsRestant < 0): ?>
+                    <p class="text-warning mt-2">Attention : Vous perdrez <?= $dexterityPenalty ?> points de dextérité en raison du poids excédentaire.</p>
+                <?php endif; ?>
+            </form>
         </div>
     <?php } else { ?>
         <p>Le panier est vide.</p>

@@ -154,4 +154,13 @@ class ItemsModel
         }
 
     }
+    public function updateItemStock($itemId, $quantityPurchased) {
+        $sql = "UPDATE items SET qteStock = qteStock - :quantityPurchased WHERE idItem = :itemId AND qteStock >= :quantityPurchased";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'quantityPurchased' => $quantityPurchased,
+            'itemId' => $itemId
+        ]);
+        return $stmt->rowCount() > 0;
+    }
 }

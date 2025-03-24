@@ -13,12 +13,12 @@ class JoueursModel
             if (!empty($data)) {
                 foreach ($data as $row) {
                     $joueurs[] = new Joueurs(
-                        $row['id'], 
+                        $row['idJoueurs'], 
                         $row['alias'], 
                         $row['nom'], 
                         $row['prenom'], 
                         $row['montantCaps'], 
-                        $row['dexterite'], 
+                        $row['dextérité'], 
                         $row['pointDeVie'], 
                         $row['poidsMaxTransport'], 
                         $row['motDePasse'], 
@@ -35,7 +35,6 @@ class JoueursModel
 
     public function getJoueurById($id){
         try {
-            // Update the query to use the correct column name
             $stm = $this->pdo->prepare('SELECT * FROM joueurs WHERE idJoueurs = :id');
             $stm->bindParam(':id', $id, PDO::PARAM_INT);
             $stm->execute();
@@ -61,10 +60,21 @@ class JoueursModel
         }
 
     }
+    public function getJoueurByAlias($alias) {
+        $stmt = $this->pdo->prepare('SELECT * FROM joueurs WHERE alias = :alias');
+        $stmt->execute(['alias' => $alias]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function updateCaps($joueurId, $newCaps) {
-        $sql = "UPDATE joueurs SET montantCaps = :newCaps WHERE idJoueur = :joueurId";
+        $sql = "UPDATE joueurs SET montantCaps = :newCaps WHERE idJoueurs = :joueurId";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['newCaps' => $newCaps, 'joueurId' => $joueurId]);
+    }
+    public function updateDexterity($joueurId, $newDexterity) {
+        $sql = "UPDATE joueurs SET dextérité = :newDexterity WHERE idJoueurs = :joueurId";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['newDexterity' => $newDexterity, 'joueurId' => $joueurId]);
     }
     public function addNewJoueur($prenom, $nom, $alias, $motDePasse){
         $sql = "INSERT INTO joueurs (prenom, nom, alias, motDePasse) VALUES (:prenom, :nom, :alias, :motDePasse)";

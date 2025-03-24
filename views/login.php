@@ -11,16 +11,26 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
             <h2 class="text-center mt-5">Login</h2>
-                <form action="authenticate.php" method="post">
+            <?php if (!empty($successMessage)){ ?>
+                    <div class="alert alert-success" role="alert">
+                        <?php echo $successMessage; ?>
+                    </div>
+                <?php } ?>
+                <form method="post">
                     <div class="form-group">
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">Nom d'utilisateur</label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
+                        <?php if ($errorLogin){ ?>
+                            <div class="alert alert-danger" role="alert">
+                                Mot de passe ou nom de joueur incorrect.
+                            </div>
+                        <?php } ?>
                         <button type="submit" class="btn btn-primary">Connexion</button>
                     </div>
                 </form>
