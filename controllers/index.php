@@ -20,8 +20,6 @@ try {
     $medicamentsModel = new MédicamentsModel($pdo);
     $nourrituresModel = new NourrituresModel($pdo);
     $items = $itemsModel->selectAllItems();
-    echo "Connected to MySQL successfully!";
-
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
