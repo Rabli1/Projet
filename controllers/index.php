@@ -45,10 +45,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     if(isset($_POST['nourriture'])) {
         $selectedTypes[] = 'n';
     }
+    if(isset($_POST['ressource'])) {
+        $selectedTypes[] = ' ';
+    }
 
-    if (!empty($_POST['search'])) {
+    if (!empty($_POST['search']) && empty($selectedTypes)) {
         $items = $itemsModel->selectItemsByName($_POST['search']);
-    } elseif(!empty($selectedTypes)) {
+    } elseif(!empty($_POST['search']) && !empty($selectedTypes)) {
+        $items = $itemsModel->selectByNameAndTypes($selectedTypes, $_POST['search']);
+    } elseif(empty($_POST['search']) && !empty($selectedTypes)) {
         $items = $itemsModel->selectItemsByTypes($selectedTypes);
     } else {
         $items = $itemsModel->selectAllItems();

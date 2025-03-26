@@ -26,6 +26,8 @@ require 'partials/header.php';
             <label for="medicament">Médicaments</label>
             <input type="checkbox" id="nourriture" name="nourriture">
             <label for="nourriture">Nourritures</label>
+            <input type="checkbox" id="ressource" name="ressource">
+            <label for="ressource">Ressources</label>
         </div>
         <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
         <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
