@@ -22,8 +22,8 @@ if (isAuthenticated()) {
 
     $dexterityPenalty = 0;
     if ($poidsRestant < 0) {
-        $excessWeight = abs($poidsRestant); // Poids excédentaire
-        $dexterityPenalty = ceil($excessWeight / 3); // Réduction de la dextérité (1 lb pour 3 points)
+        $excessWeight = abs($poidsRestant);
+        $dexterityPenalty = ceil($excessWeight / 3);
     }
 
     $nomJoueur = $joueur['alias'];
@@ -36,7 +36,7 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-$playerId = $_SESSION['joueur_id'];
+$playerId = $_SESSION['joueurs_id'];
 $joueur = $joueursModel->getJoueurById($playerId);
 
 if (!$joueur) {
