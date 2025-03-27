@@ -13,7 +13,6 @@ class BackpackModel
         $stmt->bindParam(':playerId', $playerId, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
         return $result['poidsTotal'] ?? 0;
     }
     public function addItemToBackpack($playerId, $itemId, $quantity) {

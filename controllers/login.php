@@ -28,6 +28,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($joueur && password_verify($password, $joueur['motDePasse'])) {
         sessionStart();
         $_SESSION['username'] = $username;
+        $_SESSION['joueurs_id'] = $joueur['idJoueurs'];
         redirect('index');
     } else {
         $errorLogin = true;
