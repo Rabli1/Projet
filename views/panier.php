@@ -11,12 +11,6 @@ require 'partials/header.php';
     <title>Panier</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/styles.css">
-
-    <script>
-        function updateQuantity(form) {
-            form.submit();
-        }
-    </script>
 </head>
 <body>
 <main class="container mt-5">
@@ -44,9 +38,12 @@ require 'partials/header.php';
                     <?php 
                     $totalPrice = 0;
                     $totalWeight = 0;
+                    $totalItems = 0;
                     foreach ($cartItems as $item) { 
                         $totalPrice += $item->getPrixItem() * $item->getQuantite();
                         $totalWeight += $item->getPoidsItem() * $item->getQuantite();
+                        $totalItems += $item->getQuantite();
+                    
                     ?>
                         <tr>
                             <td><img src="public/img/<?= $item->getPhoto() ?>" class="img-fluid" alt="<?= $item->getNomItem() ?>" style="max-width: 20%"></td>
@@ -66,13 +63,14 @@ require 'partials/header.php';
                             <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="id" value="<?= $item->getIdItem() ?>">
-                                    <select name="quantite" class="select-quantite" onchange="updateQuantity(this.form)">
+                                    <select name="quantite" class="select-quantite" onchange="this.form.submit()">
                                         <?php for ($i = 1; $i <= $item->getQteStock(); $i++): ?>
                                             <option value="<?= $i ?>" <?= $i == $item->getQuantite() ? 'selected' : '' ?>>
                                                 <?= $i ?>
                                             </option>
                                         <?php endfor; ?>
                                     </select>
+                                </form>
                             </td>
                             <td>
                                     <div class="mt-2">
@@ -87,6 +85,7 @@ require 'partials/header.php';
         </div>
         <div class="price-container mt-3">
     <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
+    <h3>Nombre total d'items: <?= $totalItems ?></h3>
     <h3>Poids total: <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
     <form method="POST" action="">
         <button type="submit" name="buy_items" class="btn btn-success">Acheter</button>
@@ -94,7 +93,7 @@ require 'partials/header.php';
         <div class="mt-3">
             <?php if ($joueur->getMontantCaps() < $totalPrice): ?>
                 <div class="alert alert-danger" role="alert">
-                    Attention : Vous n'avez pas assez de caps pour acheter ces objets. Vous avez <?= $joueur->getMontantCaps() ?> caps, mais le total est de <?= $totalPrice ?> caps.
+                    Attention : Vous n'avez pas assez de caps pour acheter ces items. Vous avez <?= $joueur->getMontantCaps() ?> caps, mais le total est de <?= $totalPrice ?> caps.
                 </div>
             <?php endif; ?>
             <?php if ($totalWeight > $remainingWeight): ?>

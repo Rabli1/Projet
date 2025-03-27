@@ -33,6 +33,24 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
+if (isset($_POST['quantite']) && !empty($_POST['id'])) {
+    $id = intval($_POST['id']);
+    $quantite = intval($_POST['quantite']);
+
+    if (isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($cartId) use ($id) {
+            return $cartId !== $id;
+        });
+
+        for ($i = 0; $i < $quantite; $i++) {
+            $_SESSION['cart'][] = $id;
+        }
+    }
+
+    header('Location: ' . $_SERVER['REQUEST_URI']);
+    exit;
+}
+
 if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
     $id = intval($_POST['id']);
 
