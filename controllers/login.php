@@ -19,16 +19,16 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
 
 //var_dump($joueursModel->getAllJoueurs());
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $joueur = $joueursModel->getJoueurByAlias($username);
 
-    if ($joueur && password_verify($password, $joueur['motDePasse'])) {
+    if ($joueur && password_verify($password, $joueur->getMotDePasse())) {
         sessionStart();
         $_SESSION['username'] = $username;
-        $_SESSION['joueurs_id'] = $joueur['idJoueurs'];
+        $_SESSION['joueurs_id'] = $joueur->getIdJoueur();
         redirect('index');
     } else {
         $errorLogin = true;
