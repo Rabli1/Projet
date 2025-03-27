@@ -154,6 +154,40 @@ class ItemsModel
         }
 
     }
+
+    public function selectByNameAndTypes(array $types, ?string $nomItem): ?array {
+        try {
+            $typesToGet = implode(',', array_fill(0, count($types), '?'));
+            $stm = $this->pdo->prepare("SELECT * FROM items WHERE typeItem IN ($typesToGet) AND nomItem like ?");
+            $params = array_merge($types, ['%' . $nomItem . '%']);
+            $stm->execute($params);
+
+            $data = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+            if (!empty($data)) {
+
+                foreach ($data as $row) {
+
+                    $items[] = new Items(
+                        $row['idItem'], 
+                        $row['nomItem'], 
+                        $row['qteStock'], 
+                        $row['typeItem'], 
+                        $row['prixItem'],
+                        $row['poidsItem'],
+                        $row['utilité'],
+                        $row['photo'],
+                        $row['flagDispo']
+                        );
+                }        
+                return $items;
+            }
+            return null;
+
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
     public function updateItemStock($itemId, $quantityPurchased) {
         $sql = "UPDATE items SET qteStock = qteStock - :quantityPurchased WHERE idItem = :itemId AND qteStock >= :quantityPurchased";
         $stmt = $this->pdo->prepare($sql);
