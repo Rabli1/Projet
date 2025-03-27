@@ -14,6 +14,19 @@ require 'partials/header.php';
 </head>
 <body>
 <main class="container mt-5">
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="alert alert-success">
+        <?= $_SESSION['success_message']; ?>
+    </div>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error_message'])): ?>
+    <div class="alert alert-danger">
+        <?= $_SESSION['error_message']; ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+<?php endif; ?>
     <?php if (isset($nomJoueur)): ?>
         <h2>Bienvenue, <?= htmlspecialchars($nomJoueur) ?> !</h2>
         <h4>Poids restant dans votre inventaire : <?= max(0, $remainingWeight) ?> lbs</h4>

@@ -104,4 +104,37 @@ if (isset($_POST['clear_cart'])) {
     exit;
 }
 
+if (isset($_POST['buy_items'])) {
+    if ($joueur->getMontantCaps() >= $totalPrice) {
+        if ($totalWeight > $remainingWeight) {
+            $excessWeight = $totalWeight - $remainingWeight;
+            $dexterityPenalty = $excessWeight * 3;
+
+            $newDexterity = max(0, $joueur->getDexterite() - $dexterityPenalty);
+            $joueursModel->updateDexterity($joueur->getIdJoueur(), $newDexterity);
+        }
+
+        $newCaps = $joueur->getMontantCaps() - $totalPrice;
+        $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
+
+        foreach ($cartItems as $item) {
+            $itemId = $item->getIdItem();
+            $quantityPurchased = $item->getQuantite();
+
+            $itemsModel->updateItemStock($itemId, $quantityPurchased);
+
+            $backpackModel->addItemToBackpack($joueur->getIdJoueur(), $itemId, $quantityPurchased);
+        }
+
+        $_SESSION['cart'] = [];
+
+        $_SESSION['success_message'] = "Achat effectué avec succès !";
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    } else {
+        $_SESSION['error_message'] = "Vous n'avez pas assez de caps pour effectuer cet achat.";
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
 require 'views/panier.php';
