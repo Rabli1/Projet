@@ -63,7 +63,24 @@ class JoueursModel
     public function getJoueurByAlias($alias) {
         $stmt = $this->pdo->prepare('SELECT * FROM joueurs WHERE alias = :alias');
         $stmt->execute(['alias' => $alias]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($data) {
+            return new Joueurs(
+                $data['idJoueurs'],
+                $data['alias'],
+                $data['nom'],
+                $data['prenom'],
+                $data['montantCaps'],
+                $data['dextérité'],
+                $data['pointDeVie'],
+                $data['poidsMaxTransport'],
+                $data['motDePasse'],
+                $data['estAdmin']
+            );
+        }
+    
+        return null;
     }
 
     public function updateCaps($joueurId, $newCaps) {

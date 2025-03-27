@@ -86,24 +86,25 @@ require 'partials/header.php';
             </table>
         </div>
         <div class="price-container mt-3">
-            <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
-            <h3>Poids total: <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
-            <form method="POST" action="">
-                <button type="submit" name="buy_items" class="btn btn-success">Acheter</button>
-                <div class="mt-3">
-                    <?php if ($joueur->getMontantCaps() < $totalPrice): ?>
-                        <div class="alert alert-danger" role="alert">
-                            Attention : Vous n'avez pas assez de caps pour acheter ces objets. Vous avez <?= $joueur->getMontantCaps() ?> caps, mais le total est de <?= $totalPrice ?> caps.
-                        </div>
-                    <?php endif; ?>
-                    <?php if ($poidsRestant < $totalWeight): ?>
-                        <div class="alert alert-warning" role="alert">
-                            Attention : Vous perdrez <?= $dexterityPenalty ?> points de dextérité en raison du poids excédentaire.
-                        </div>
-                    <?php endif; ?>
+    <h3>Total: <?= $totalPrice ?> <img src="public/img/caps.png" alt="caps" class="img-fluid" style="max-width: 9%"></h3>
+    <h3>Poids total: <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
+    <form method="POST" action="">
+        <button type="submit" name="buy_items" class="btn btn-success">Acheter</button>
+        <button type="submit" name="clear_cart" class="btn btn-danger">Supprimer le panier</button>
+        <div class="mt-3">
+            <?php if ($joueur->getMontantCaps() < $totalPrice): ?>
+                <div class="alert alert-danger" role="alert">
+                    Attention : Vous n'avez pas assez de caps pour acheter ces objets. Vous avez <?= $joueur->getMontantCaps() ?> caps, mais le total est de <?= $totalPrice ?> caps.
                 </div>
-            </form>
+            <?php endif; ?>
+            <?php if ($totalWeight > $remainingWeight): ?>
+                <div class="alert alert-warning" role="alert">
+                    Attention : Vous perdrez <?= $dexterityPenalty ?> points de dextérité en raison du poids excédentaire.
+                </div>
+            <?php endif; ?>
         </div>
+    </form>
+</div>
     <?php } else { ?>
         <p>Le panier est vide.</p>
     <?php } ?>

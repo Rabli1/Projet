@@ -24,8 +24,6 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-//var_dump($_SESSION);
-
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     $selectedTypes = [];
     if(isset($_POST['arme'])) {
@@ -56,23 +54,35 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     } else {
         $items = $itemsModel->selectAllItems();
     }
+} else {
+    $items = $itemsModel->selectAllItems();
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-    $itemId = (int)$_POST['idItem'];
-    addToCart($itemId, $itemsModel);
+
+$filteredItems = [];
+foreach ($items as $item) {
+    if ($item->getQteStock() > 0) {
+        $filteredItems[] = $item;
+    }
+}
+$items = $filteredItems;
+
+if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
+    $idItem = intval($_POST['idItem']);
+
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+    $_SESSION['cart'][] = $idItem;
+
+    $item = $itemsModel->selectById($idItem);
+    if ($item) {
+        $_SESSION['success_message'] = $item->getNomItem() . " a été ajouté au panier !";
+    } else {
+        $_SESSION['success_message'] = "L'objet a été ajouté au panier !";
+    }
 
     header('Location: ' . $_SERVER['REQUEST_URI']);
-    exit();
-}
-
-if (isset($_SESSION['error_message'])) {
-    echo "<script>alert('{$_SESSION['error_message']}');</script>";
-    unset($_SESSION['error_message']);
-}
-
-if (isset($_SESSION['success_message'])) {
-    echo "<script>alert('{$_SESSION['success_message']}');</script>";
-    unset($_SESSION['success_message']);
+    exit;
 }
 
 require 'views/index.php';

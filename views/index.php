@@ -14,6 +14,12 @@ require 'partials/header.php';
     <link rel="stylesheet" href="public/css/styles.css">
 </head>
 <main>
+<?php if (!empty($_SESSION['success_message'])): ?>
+        <div class="alert alert-success" role="alert">
+            <?= htmlspecialchars($_SESSION['success_message']) ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
     <form method="POST" class="center-form">
         <div class="checkbox-container">
             <input type="checkbox" id="arme" name="arme">
@@ -36,17 +42,7 @@ require 'partials/header.php';
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
             <div class="table-container">
-            <?php if (!empty($error_message)): ?>
-                    <script>
-                        alert("<?= addslashes($error_message) ?>");
-                    </script>
-                <?php endif; ?>
 
-                <?php if (!empty($success_message)): ?>
-                    <script>
-                        alert("<?= addslashes($success_message) ?>");
-                    </script>
-                <?php endif; ?>
                 <table class="table" style="width: 100%;">
                     <tr>
                         <?php $nbParLigne = 1;
