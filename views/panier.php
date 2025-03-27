@@ -73,9 +73,9 @@ require 'partials/header.php';
                                 </form>
                             </td>
                             <td>
-                                    <div class="mt-2">
-                                        <button type="submit" name="remove_item" class="btn btn-outline-danger">Supprimer</button>
-                                    </div>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="id" value="<?= $item->getIdItem() ?>">
+                                    <button type="submit" name="remove_item" class="btn btn-outline-danger">Supprimer</button>
                                 </form>
                             </td>
                         </tr>
