@@ -38,7 +38,7 @@
                 <div class="d-flex align-items-center">
                     <!-- Affichage du nom d'utilisateur -->
                     <?php if (isAuthenticated()) { ?>
-                        <span class="navbar-account me-3">
+                        <span class="navbar-text me-3">
                             <?php echo $_SESSION['username']; ?> 
                         </span>
                     <?php } ?>
