@@ -402,3 +402,8 @@ footer img {
 .reduce-size {
   font-size: 0.87em;
 }
+
+.test{
+  font-size: larger;
+  color: white;
+}

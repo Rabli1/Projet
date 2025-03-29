@@ -42,7 +42,7 @@
                         <a class="btn btn-primary me-2" role="button" href="/createAccount">Créer un compte</a>
                         <a class="btn btn-primary" role="button" href="/connexion">Connexion</a>
                     <?php } else { ?>
-                        <i><?php echo $_SESSION['username'] ?></i>
+                        <i class="test"><?php echo $_SESSION['username'] ?></i>
                         <a class="btn btn-primary" role="button" href="/deconnexion">Déconnexion</a>
                     <?php } ?>
                 </div>
