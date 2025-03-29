@@ -36,13 +36,41 @@
                 </ul>
 
                 <div class="d-flex align-items-center">
+                    <!-- Affichage du nom d'utilisateur -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <?php echo htmlspecialchars($_SESSION['username']); ?> !
+                        </span>
+                    <?php } ?>
+                    <!-- Affichage du montant de caps -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <i class="fas fa-coins"></i> <!-- Icone des caps -->
+                            <?php echo htmlspecialchars($joueur->getMontantCaps()); ?> caps
+                        </span>
+                    <?php } ?>
+                    <!-- Affichage du poids total du sac à dos -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <i class="fas fa-weight"></i> <!-- Icone du poids -->
+                            <?php echo htmlspecialchars($poidsTotalBackpack); ?> kg
+                        </span>
+                    <?php } ?>
+                    <!--Affichage de la dexterité du joueur -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <i class="fas fa-dumbbell"></i> <!-- Icone de la dexterité -->
+                            <?php echo htmlspecialchars($joueur->getDexterite()); ?> dex
+                        </span>
+                    <?php } ?>
+                </div>
 
+                <div class="d-flex align-items-center">
                     <!-- Connexion / Création de compte -->
                     <?php if (!isAuthenticated()) { ?>
                         <a class="btn btn-primary me-2" role="button" href="/createAccount">Créer un compte</a>
                         <a class="btn btn-primary" role="button" href="/connexion">Connexion</a>
                     <?php } else { ?>
-                        <i class="test"><?php echo $_SESSION['username'] ?></i>
                         <a class="btn btn-primary" role="button" href="/deconnexion">Déconnexion</a>
                     <?php } ?>
                 </div>
