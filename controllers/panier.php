@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once 'src/class/Database.php';
 require_once 'src/functions.php';
 require_once 'models/ItemsModel.php';
@@ -10,41 +10,49 @@ $pdo = $db->getPDO();
 $itemsModel = new ItemsModel($pdo);
 $backpackModel = new BackpackModel($pdo);
 $joueursModel = new JoueursModel($pdo);
-
 sessionStart();
+
 if (isAuthenticated()) {
     $username = $_SESSION['username'];
     $joueur = $joueursModel->getJoueurByAlias($username);
 
-    $poidsTotalBackpack = $backpackModel->selectBackpackById($joueur['idJoueurs']);
-
-    $poidsRestant = $joueur['poidsMaxTransport'] - $poidsTotalBackpack;
-
-    $dexterityPenalty = 0;
-    if ($poidsRestant < 0) {
-        $excessWeight = abs($poidsRestant);
-        $dexterityPenalty = ceil($excessWeight / 3);
+    if (!$joueur) {
+        header('Location: /connexion');
+        exit;
     }
 
-    $nomJoueur = $joueur['alias'];
-    $montantCaps = $joueur['montantCaps'];
+    $poidsTotalBackpack = $backpackModel->selectBackpackById($joueur->getIdJoueur());
+    $nomJoueur = $joueur->getAlias();
+    $montantCaps = $joueur->getMontantCaps();
 } else {
     header('Location: /connexion');
     exit;
 }
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-$playerId = $_SESSION['joueurs_id'];
-$joueur = $joueursModel->getJoueurById($playerId);
+if (isset($_POST['quantite']) && !empty($_POST['id'])) {
+    $id = intval($_POST['id']);
+    $quantite = intval($_POST['quantite']);
 
-if (!$joueur) {
-    die("Player not found.");
+    if (isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($cartId) use ($id) {
+            return $cartId !== $id;
+        });
+
+        for ($i = 0; $i < $quantite; $i++) {
+            $_SESSION['cart'][] = $id;
+        }
+    }
+
+    header('Location: ' . $_SERVER['REQUEST_URI']);
+    exit;
 }
 
 if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
-    $id = intval($_POST['id']); 
+    $id = intval($_POST['id']);
 
     $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($cartId) use ($id) {
         return $cartId !== $id;
@@ -52,10 +60,6 @@ if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
 
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['buy'])) {
-    buy($joueur, $itemsModel, $backpackModel);
 }
 
 $cartItems = [];
@@ -76,68 +80,61 @@ if (!empty($_SESSION['cart'])) {
 }
 
 $currentWeight = 0;
-$backpack = $backpackModel->selectBackpackById($joueur->getIdJoueur());
+$backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
 
-if (!empty($backpack)) {
+if (!empty($backpack) && is_array($backpack)) {
     foreach ($backpack as $item) {
-        $currentWeight += $item['poidsItem'] * $item['quantite'];
+        $currentWeight += $item['poidsItem'] * $item['qteItems'];
     }
 }
 
 $poidsMaxTransport = $joueur->getPoidsMaxTransport();
 $remainingWeight = $poidsMaxTransport - $currentWeight;
 
-require 'views/panier.php';
+$dexterityPenalty = 0;
+if ($totalWeight > $remainingWeight) {
+    $excessWeight = $totalWeight - $remainingWeight;
+    $dexterityPenalty = $excessWeight * 3;
+}
 
-function buy($joueur, $itemsModel, $backpackModel) {
-    global $pdo;
-
-    $totalWeight = 0;
-    $totalPrice = 0;
-
-    $cartItems = [];
-    $quantities = array_count_values($_SESSION['cart']);
-    foreach ($quantities as $id => $quantite) {
-        $item = $itemsModel->selectById($id);
-        if ($item) {
-            $item->setQuantite($quantite);
-            $cartItems[] = $item;
-            $totalWeight += $item->getPoidsItem() * $quantite;
-            $totalPrice += $item->getPrixItem() * $quantite;
-        }
-    }
-
-    $currentWeight = 0;
-    $backpack = $backpackModel->selectBackpackById($joueur->getIdJoueur());
-    if (!empty($backpack)) {
-        foreach ($backpack as $item) {
-            $currentWeight += $item['poidsItem'] * $item['quantite'];
-        }
-    }
-
-    $poidsMaxTransport = $joueur->getPoidsMaxTransport();
-
-    if ($joueur->getMontantCaps() < $totalPrice) {
-        echo "<script>alert('Vous n\'avez pas assez de caps pour acheter ces objets.');</script>";
-        return;
-    }
-
-    if ($currentWeight + $totalWeight > $poidsMaxTransport) {
-        $excessWeight = ($currentWeight + $totalWeight) - $poidsMaxTransport;
-        $dexterityPenalty = $excessWeight * 3;
-        echo "<script>alert('Vous allez perdre {$dexterityPenalty} dextérité si vous achetez ces objets.');</script>";
-    }
-
-    $joueursModel = new JoueursModel($pdo);
-    $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() - $totalPrice);
-
-    foreach ($cartItems as $item) {
-        $backpackModel->addItemToBackpack($joueur->getIdJoueur(), $item->getIdItem(), $item->getQuantite());
-    }
-
-    
-
+if (isset($_POST['clear_cart'])) {
     $_SESSION['cart'] = [];
+
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
+
+if (isset($_POST['buy_items'])) {
+    if ($joueur->getMontantCaps() >= $totalPrice) {
+        if ($totalWeight > $remainingWeight) {
+            $excessWeight = $totalWeight - $remainingWeight;
+            $dexterityPenalty = $excessWeight * 3;
+
+            $newDexterity = max(0, $joueur->getDexterite() - $dexterityPenalty);
+            $joueursModel->updateDexterity($joueur->getIdJoueur(), $newDexterity);
+        }
+
+        $newCaps = $joueur->getMontantCaps() - $totalPrice;
+        $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
+
+        foreach ($cartItems as $item) {
+            $itemId = $item->getIdItem();
+            $quantityPurchased = $item->getQuantite();
+
+            $itemsModel->updateItemStock($itemId, $quantityPurchased);
+
+            $backpackModel->addItemToBackpack($joueur->getIdJoueur(), $itemId, $quantityPurchased);
+        }
+
+        $_SESSION['cart'] = [];
+
+        $_SESSION['success_message'] = "Achat effectué avec succès !";
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    } else {
+        $_SESSION['error_message'] = "Vous n'avez pas assez de caps pour effectuer cet achat.";
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
+require 'views/panier.php';

@@ -17,10 +17,10 @@ if (isAuthenticated()) {
     $username = $_SESSION['username'];
     $joueur = $joueursModel->getJoueurByAlias($username);
 
-    $backpackItems = $backpackModel->getItemsInBackpack($joueur['idJoueurs']);
+    $backpackItems = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
 
-    $nomJoueur = $joueur['alias'];
-    $montantCaps = $joueur['montantCaps'];
+    $nomJoueur = $joueur->getAlias();
+    $montantCaps = $joueur->getMontantCaps();
 } else {
     header('Location: /connexion');
     exit;

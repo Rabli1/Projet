@@ -63,7 +63,24 @@ class JoueursModel
     public function getJoueurByAlias($alias) {
         $stmt = $this->pdo->prepare('SELECT * FROM joueurs WHERE alias = :alias');
         $stmt->execute(['alias' => $alias]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($data) {
+            return new Joueurs(
+                $data['idJoueurs'],
+                $data['alias'],
+                $data['nom'],
+                $data['prenom'],
+                $data['montantCaps'],
+                $data['dextérité'],
+                $data['pointDeVie'],
+                $data['poidsMaxTransport'],
+                $data['motDePasse'],
+                $data['estAdmin']
+            );
+        }
+    
+        return null;
     }
 
     public function updateCaps($joueurId, $newCaps) {
@@ -71,10 +88,12 @@ class JoueursModel
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['newCaps' => $newCaps, 'joueurId' => $joueurId]);
     }
-    public function updateDexterity($joueurId, $newDexterity) {
-        $sql = "UPDATE joueurs SET dextérité = :newDexterity WHERE idJoueurs = :joueurId";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute(['newDexterity' => $newDexterity, 'joueurId' => $joueurId]);
+    public function updateDexterity($playerId, $newDexterity) {
+        $query = "UPDATE joueurs SET dextérité = :newDexterity WHERE idJoueurs = :playerId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':newDexterity', $newDexterity, PDO::PARAM_INT);
+        $stmt->bindParam(':playerId', $playerId, PDO::PARAM_INT);
+        $stmt->execute();
     }
     public function addNewJoueur($prenom, $nom, $alias, $motDePasse){
         $sql = "INSERT INTO joueurs (prenom, nom, alias, motDePasse) VALUES (:prenom, :nom, :alias, :motDePasse)";
