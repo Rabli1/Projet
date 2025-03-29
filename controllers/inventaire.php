@@ -21,9 +21,6 @@ if (isAuthenticated()) {
 
     $nomJoueur = $joueur->getAlias();
     $montantCaps = $joueur->getMontantCaps();
-
-    $_SESSION['montantCaps'] = $montantCaps;
-
 } else {
     header('Location: /connexion');
     exit;
