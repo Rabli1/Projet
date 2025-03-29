@@ -49,20 +49,6 @@
                             <?php echo $_SESSION['montantCaps']; ?> caps
                         </span>
                     <?php } ?>
-                    <!-- Affichage du poids total du sac à dos -->
-                    <?php if (isAuthenticated()) { ?>
-                        <span class="navbar-text me-3">
-                            <i class="fas fa-weight"></i> <!-- Icone du poids -->
-                            <?php echo htmlspecialchars($poidsTotalBackpack); ?> kg
-                        </span>
-                    <?php } ?>
-                    <!--Affichage de la dexterité du joueur -->
-                    <?php if (isAuthenticated()) { ?>
-                        <span class="navbar-text me-3">
-                            <i class="fas fa-dumbbell"></i> <!-- Icone de la dexterité -->
-                            <?php echo htmlspecialchars($joueur->getDexterite()); ?> dex
-                        </span>
-                    <?php } ?>
                 </div>
 
                 <div class="d-flex align-items-center">
