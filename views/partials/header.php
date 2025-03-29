@@ -46,7 +46,7 @@
                     <?php if (isAuthenticated()) { ?>
                         <span class="navbar-text me-3">
                             <i class="fas fa-coins"></i> <!-- Icone des caps -->
-                            <?php echo htmlspecialchars($_SESSION['montantCaps']); ?> caps
+                            <?php echo $_SESSION['montantCaps']; ?> caps
                         </span>
                     <?php } ?>
                     <!-- Affichage du poids total du sac à dos -->
