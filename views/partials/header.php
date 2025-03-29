@@ -39,14 +39,14 @@
                     <!-- Affichage du nom d'utilisateur -->
                     <?php if (isAuthenticated()) { ?>
                         <span class="navbar-text me-3">
-                            <?php echo htmlspecialchars($_SESSION['username']); ?> !
+                            <?php echo $_SESSION['username']; ?> !
                         </span>
                     <?php } ?>
                     <!-- Affichage du montant de caps -->
                     <?php if (isAuthenticated()) { ?>
                         <span class="navbar-text me-3">
                             <i class="fas fa-coins"></i> <!-- Icone des caps -->
-                            <?= $joueur->getMontantCaps(); ?> caps
+                            <?php echo $_SESSION['montantCaps']; ?> caps
                         </span>
                     <?php } ?>
                     <!-- Affichage du poids total du sac à dos -->

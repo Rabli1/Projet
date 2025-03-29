@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         sessionStart();
         $_SESSION['username'] = $username;
         $_SESSION['joueurs_id'] = $joueur->getIdJoueur();
+        $_SESSION['montantCaps'] = $joueur->getMontantCaps();
         redirect('index');
     } else {
         $errorLogin = true;
