@@ -49,6 +49,13 @@
                             <?php echo $_SESSION['montantCaps']; ?> caps
                         </span>
                     <?php } ?>
+                    <!-- Affichage de la dextérité -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <i class="fas fa-dumbbell"></i> <!-- Icone de la dextérité -->
+                            <?php echo $_SESSION['dexterite']; ?> dextérité
+                        </span>
+                    <?php } ?>
                 </div>
 
                 <div class="d-flex align-items-center">
