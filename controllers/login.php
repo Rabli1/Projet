@@ -1,5 +1,6 @@
 <?php
 require 'models/JoueursModel.php';
+require 'models/BackpackModel.php';
 require 'src/class/Database.php';
 
 $errorLogin = false;
