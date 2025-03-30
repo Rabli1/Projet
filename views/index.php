@@ -66,7 +66,6 @@ require 'partials/header.php';
                                     <h4><?=$item->getNomItem()?></h4>
                                     <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>
-                                    <br>
                                     <div><strong>Utilité : </strong> <?=$item->getUtilite()?></div>
                                     <div class="caption">
                                         <div class="weight price-container"><?=$item->getPoidsItem()?> lbs<img src="public/img/weight.webp" alt="lbs" class="price-container" style="max-width: 16px"></div>
