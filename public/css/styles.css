@@ -117,7 +117,7 @@ footer img {
 .img-thumbnail {
   position: relative;
   width: 400px;
-  height: 600px;
+  min-height: 600px;
   overflow: hidden;
   margin: 10px;
   padding: 10px;
@@ -231,14 +231,19 @@ footer img {
 }
 
 .caption {
-  flex-grow: 1; /* Permet à la description de prendre l'espace disponible */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 150px;
 }
 
 .btn-order {
   margin-top: auto; /* Force le bouton à aller en bas */
   align-self: center; /* Centre le bouton horizontalement */
   width: 80%; /* Ajuste la largeur pour un meilleur affichage */
+}
+
+.btn-order {
+  margin-top: auto; /* Pousse le bouton vers le bas */
+  align-self: center; /* Centre le bouton horizontalement */
 }
