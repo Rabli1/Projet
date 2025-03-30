@@ -20,35 +20,34 @@ require 'partials/header.php';
         </div>
         <?php unset($_SESSION['success_message']); ?>
     <?php endif; ?>
-    <form method="POST" class="center-form">
+    <form method="POST" class="center-form" id="filterForm">
     <div class="checkbox-container">
-        <div>
-            <input type="checkbox" id="arme" name="arme">
+        <div class="checkbox-item">
+            <input type="checkbox" id="arme" name="arme" <?= isset($_POST['arme']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="arme">Armes</label>
         </div>
-        <div>
-            <input type="checkbox" id="munition" name="munition">
+        <div class="checkbox-item">
+            <input type="checkbox" id="munition" name="munition" <?= isset($_POST['munition']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="munition">Munitions</label>
         </div>
-        <div>
-            <input type="checkbox" id="armure" name="armure">
+        <div class="checkbox-item">
+            <input type="checkbox" id="armure" name="armure" <?= isset($_POST['armure']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="armure">Armures</label>
         </div>
-        <div>
-            <input type="checkbox" id="medicament" name="medicament">
+        <div class="checkbox-item">
+            <input type="checkbox" id="medicament" name="medicament" <?= isset($_POST['medicament']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="medicament">Médicaments</label>
         </div>
-        <div>
-            <input type="checkbox" id="nourriture" name="nourriture">
+        <div class="checkbox-item">
+            <input type="checkbox" id="nourriture" name="nourriture" <?= isset($_POST['nourriture']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="nourriture">Nourritures</label>
         </div>
-        <div>
-            <input type="checkbox" id="ressource" name="ressource">
+        <div class="checkbox-item">
+            <input type="checkbox" id="ressource" name="ressource" <?= isset($_POST['ressource']) ? 'checked' : '' ?> onchange="document.getElementById('filterForm').submit();">
             <label for="ressource">Ressources</label>
         </div>
     </div>
-    <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
-    <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
+    <input type="text" id="search" name="search" placeholder="Rechercher un item" value="<?= htmlspecialchars($_POST['search'] ?? '') ?>" onchange="document.getElementById('filterForm').submit();"> <br>
 </form>
 <?php if (!empty($items)): ?>
     <div class="tab-content">

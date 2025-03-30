@@ -24,48 +24,38 @@ try {
     die("Connection failed: " . $e->getMessage());
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedTypes = [];
-    if(isset($_POST['arme'])) {
+    if (isset($_POST['arme'])) {
         $selectedTypes[] = 'a';
     }
-    if(isset($_POST['munition'])) {
+    if (isset($_POST['munition'])) {
         $selectedTypes[] = 'u';
     }
-    if(isset($_POST['armure'])) {
+    if (isset($_POST['armure'])) {
         $selectedTypes[] = 'r';
     }
-    if(isset($_POST['medicament'])) {
+    if (isset($_POST['medicament'])) {
         $selectedTypes[] = 'm';
     }
-    if(isset($_POST['nourriture'])) {
+    if (isset($_POST['nourriture'])) {
         $selectedTypes[] = 'n';
     }
-    if(isset($_POST['ressource'])) {
+    if (isset($_POST['ressource'])) {
         $selectedTypes[] = ' ';
     }
 
     if (!empty($_POST['search']) && empty($selectedTypes)) {
         $items = $itemsModel->selectItemsByName($_POST['search']);
-    } elseif(!empty($_POST['search']) && !empty($selectedTypes)) {
+    } elseif (!empty($_POST['search']) && !empty($selectedTypes)) {
         $items = $itemsModel->selectByNameAndTypes($selectedTypes, $_POST['search']);
-    } elseif(empty($_POST['search']) && !empty($selectedTypes)) {
+    } elseif (empty($_POST['search']) && !empty($selectedTypes)) {
         $items = $itemsModel->selectItemsByTypes($selectedTypes);
     } else {
         $items = $itemsModel->selectAllItems();
     }
 } else {
     $items = $itemsModel->selectAllItems();
-}
-
-if (!empty($items)) {
-    $filteredItems = [];
-    foreach ($items as $item) {
-        if ($item->getQteStock() > 0) {
-            $filteredItems[] = $item;
-        }
-    }
-    $items = $filteredItems;
 }
 
 if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
