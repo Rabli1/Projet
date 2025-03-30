@@ -56,6 +56,13 @@
                             <?php echo $_SESSION['dexterite']; ?> dextérité
                         </span>
                     <?php } ?>
+                    <!-- Affichage du poids -->
+                    <?php if (isAuthenticated()) { ?>
+                        <span class="navbar-text me-3">
+                            <i class="fas fa-weight"></i> <!-- Icone du poids -->
+                            <?php echo $_SESSION['poids']; ?> poids
+                        </span>
+                    <?php } ?>
                 </div>
 
                 <div class="d-flex align-items-center">

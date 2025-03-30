@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['joueurs_id'] = $joueur->getIdJoueur();
         $_SESSION['montantCaps'] = $joueur->getMontantCaps();
         $_SESSION['dexterite'] = $joueur->getDexterite();
+        $_SESSION['poids'] = $joueur->getPoidsMaxTransport();
         redirect('index');
     } else {
         $errorLogin = true;
