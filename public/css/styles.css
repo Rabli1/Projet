@@ -227,14 +227,6 @@ footer img {
   width: 50%; /* Ajuste la largeur */
 }
 
-.img-thumbnail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%; /* Assure une hauteur uniforme */
-  min-height: 450px; /* Ajustez selon vos besoins */
-}
-
 .caption {
   flex-grow: 1; /* Permet à la description de prendre l'espace disponible */
   display: flex;
