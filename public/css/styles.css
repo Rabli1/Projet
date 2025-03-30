@@ -124,6 +124,9 @@ footer img {
   border: 1px solid #ddd;
   border-radius: 4px;
   background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .img-thumbnail img {
