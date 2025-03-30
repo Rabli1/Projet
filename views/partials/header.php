@@ -28,6 +28,7 @@
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <?php if (isAuthenticated() && !isAdministrator()) { ?>
                         <li><a class="nav-link" href="/inventaire">Inventaire</a></li>
+                        <li><?php echo var_dump($_SESSION['cart']['nbTotItem']);?></li>
                         <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
                     <?php } ?>
                     <?php if (isAuthenticated() && isAdministrator()) { ?>
