@@ -5,6 +5,20 @@ require 'src/class/Database.php';
 
 $errorLogin = false;
 $successMsg = '';
+
+try {
+    $db = Database::getInstance($dbConfig, $dbParams);
+    $pdo = $db->getPDO();
+    $joueursModel = new JoueursModel($pdo);
+    $backpackModel = new BackpackModel($pdo);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    $successMessage = 'Votre compte a été créé';
+}
+
 $currentWeight = 0;
 $backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
 
@@ -16,19 +30,6 @@ if (!empty($backpack) && is_array($backpack)) {
 
 $poidsMaxTransport = $joueur->getPoidsMaxTransport();
 $remainingWeight = $poidsMaxTransport - $currentWeight;
-
-try {
-    $db = Database::getInstance($dbConfig, $dbParams);
-    $pdo = $db->getPDO();
-    $joueursModel = new JoueursModel($pdo);
-} catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
-}
-
-if (isset($_GET['success']) && $_GET['success'] == 1) {
-    $successMessage = 'Votre compte a été créé';
-}
-
 //var_dump($joueursModel->getAllJoueurs());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
