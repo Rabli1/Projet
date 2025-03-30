@@ -19,9 +19,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $successMessage = 'Votre compte a été créé';
 }
 
-
-$poidsMaxTransport = $joueur->getPoidsMaxTransport();
-$remainingWeight = $poidsMaxTransport - $currentWeight;
 //var_dump($joueursModel->getAllJoueurs());
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $currentWeight += $item['poidsItem'] * $item['qteItems'];
         }
     }
+
+    $poidsMaxTransport = $joueur->getPoidsMaxTransport();
+    $remainingWeight = $poidsMaxTransport - $currentWeight;
 
     if ($joueur && password_verify($password, $joueur->getMotDePasse())) {
         sessionStart();
