@@ -4,6 +4,17 @@ require 'src/class/Database.php';
 
 $errorLogin = false;
 $successMsg = '';
+$currentWeight = 0;
+$backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
+
+if (!empty($backpack) && is_array($backpack)) {
+    foreach ($backpack as $item) {
+        $currentWeight += $item['poidsItem'] * $item['qteItems'];
+    }
+}
+
+$poidsMaxTransport = $joueur->getPoidsMaxTransport();
+$remainingWeight = $poidsMaxTransport - $currentWeight;
 
 try {
     $db = Database::getInstance($dbConfig, $dbParams);
@@ -31,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['joueurs_id'] = $joueur->getIdJoueur();
         $_SESSION['montantCaps'] = $joueur->getMontantCaps();
         $_SESSION['dexterite'] = $joueur->getDexterite();
-        $_SESSION['poids'] = $joueur->getPoidsMaxTransport();
+        $_SESSION['poids'] = $remainingWeight;
         redirect('index');
     } else {
         $errorLogin = true;
