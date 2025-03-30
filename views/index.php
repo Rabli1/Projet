@@ -52,7 +52,7 @@ require 'partials/header.php';
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity"><?=$item->getQteStock()?> en stock</div>
                                     <h4><?=$item->getNomItem()?></h4>
-                                    <img src="public/img/<?=$item->getPhoto()?>" class="imgIndex">
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>
                                     <br>
                                     <div><strong>Utilité : </strong> <?=$item->getUtilite()?></div>

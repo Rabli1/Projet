@@ -402,13 +402,3 @@ footer img {
 .reduce-size {
   font-size: 0.87em;
 }
-
-.imgIndex{
-  width: 100%;
-  height: auto;
-  max-height: 200px;
-  max-width: 200px;
-  display: block;
-  margin: 0 auto;
-  padding-top: 5%;
-}
