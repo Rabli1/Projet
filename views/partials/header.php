@@ -17,11 +17,9 @@
                     <div class="cart-wrapper me-3">
                         <a class="btn btn-outline-light position-relative" href="/panier" title="Panier d'achat">
                             <i class="bi bi-bag"></i> <!-- Icone du panier -->
-                            <?php if (!empty($_SESSION['cart']['nbTotItem']) && $_SESSION['cart']['nbTotItem'] > 0) { ?>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <?php echo $_SESSION['cart']['nbTotItem']; ?>
-                                </span>
-                            <?php } ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo count($_SESSION['cart']); ?>
+                            </span>
                         </a>
                     </div>
                 <?php } ?>
@@ -34,8 +32,6 @@
                         <li><a class="nav-link" href="/gerer-client">Gérer les utilisateurs</a></li>
                     <?php } ?>
                 </ul>
-
-                <?php echo var_dump($_SESSION['cart']['nbTotItem']);?>
 
                 <div class="d-flex align-items-center">
                     <?php if (isAuthenticated()) { ?>

@@ -31,7 +31,6 @@ if (isAuthenticated()) {
 
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
-    $_SESSION['cart']['nbTotItem'] = 0;
 }
 
 if (isset($_POST['quantite']) && !empty($_POST['id'])) {
@@ -48,8 +47,6 @@ if (isset($_POST['quantite']) && !empty($_POST['id'])) {
         }
     }
 
-    $_SESSION['cart']['nbTotItem'] = count($_SESSION['cart']);
-
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
@@ -60,8 +57,6 @@ if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
     $_SESSION['cart'] = array_filter($_SESSION['cart'], function ($cartId) use ($id) {
         return $cartId !== $id;
     });
-
-    $_SESSION['cart']['nbTotItem'] = count($_SESSION['cart']);
 
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
