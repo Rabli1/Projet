@@ -17,7 +17,7 @@
                     <div class="cart-wrapper me-3">
                         <a class="btn btn-outline-light position-relative" href="/panier" title="Panier d'achat">
                             <i class="bi bi-bag"></i> <!-- Icone du panier -->
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                                 <?php echo count($_SESSION['cart']); ?>
                             </span>
                         </a>
