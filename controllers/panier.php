@@ -130,7 +130,7 @@ if (isset($_POST['buy_items'])) {
 
         $_SESSION['success_message'] = "Achat effectué avec succès !";
         $_SESSION['montantCaps'] = $newCaps;
-        $_SESSION['poids'] = $remainingWeight;
+        $_SESSION['poids'] = $remainingWeight - $totalWeight;
         $_SESSION['dexterite'] = $newDexterity;
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit;
