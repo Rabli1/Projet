@@ -117,7 +117,7 @@ footer img {
 .img-thumbnail {
   position: relative;
   width: 400px;
-  min-height: 600px;
+  height: 700px;
   overflow: hidden;
   margin: 10px;
   padding: 10px;
