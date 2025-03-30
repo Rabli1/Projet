@@ -200,7 +200,8 @@ img {
 }*/
 
 .img-thumbnail .caption {
-  flex-grow: 1;/* Permet à la description de prendre l'espace disponible */
+  flex-grow: 1;
+  /* Permet à la description de prendre l'espace disponible */
   text-align: center;
 }
 
@@ -324,17 +325,26 @@ footer img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  /* Aligne les éléments de la carte */
+  align-items: center;
+  height: 400px;
+  /* Fixe une hauteur uniforme pour toutes les cartes */
+  width: 300px;
+  /* Fixe une largeur uniforme pour toutes les cartes */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  overflow: hidden;
 }
 
 .img-thumbnail img {
-  width: 100%;
-  height: auto;
-  max-height: 300px;
-  max-width: 300px;
-  display: block;
-  margin: 0 auto;
-  padding-top: 5%;
+  max-height: 150px;
+  /* Limite la hauteur des images */
+  width: auto;
+  margin-bottom: 10px;
 }
 
 .img-thumbnail h4 {
@@ -345,6 +355,7 @@ footer img {
 
 .img-thumbnail .caption {
   text-align: center;
+  flex-grow: 1;
 }
 
 .price-container {
@@ -365,21 +376,24 @@ footer img {
   position: absolute;
   padding: 5px;
   font-weight: bold;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
 }
 
 .price {
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
 }
 
 .quantity {
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
 }
 
 .weight {
-  bottom: 0;
-  right: 0;
+  bottom: 10px;
+  right: 10px;
 }
 
 .center-form {
@@ -395,9 +409,7 @@ footer img {
 
 .img-thumbnail .btn-order {
   margin-top: 10px;
-  /* Ajoute un espace au-dessus du bouton */
   align-self: center;
-  /* Centre le bouton horizontalement */
   background-color: #007bff;
   color: white;
   border: none;
@@ -412,22 +424,30 @@ footer img {
 
 .checkbox-container {
   display: flex;
-  flex-wrap: wrap; /* Permet aux cases de passer à la ligne si nécessaire */
-  justify-content: center; /* Centre les cases à cocher horizontalement */
-  gap: 15px; /* Ajoute de l'espace entre les cases */
-  margin-bottom: 20px; /* Ajoute un espace en dessous des cases */
+  flex-wrap: wrap;
+  /* Permet aux cases de passer à la ligne si nécessaire */
+  justify-content: center;
+  /* Centre les cases à cocher horizontalement */
+  gap: 15px;
+  /* Ajoute de l'espace entre les cases */
+  margin-bottom: 20px;
+  /* Ajoute un espace en dessous des cases */
 }
 
 .checkbox-container label {
   margin-left: 5px;
-  font-size: 1rem; /* Ajuste la taille du texte */
-  vertical-align: middle; /* Aligne le texte avec la case */
+  font-size: 1rem;
+  /* Ajuste la taille du texte */
+  vertical-align: middle;
+  /* Aligne le texte avec la case */
 }
 
 #search {
-  margin-top: 10px; /* Ajoute un espace au-dessus du champ de recherche */
+  margin-top: 10px;
+  /* Ajoute un espace au-dessus du champ de recherche */
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 20px;
-  width: 50%; /* Ajuste la largeur */
+  width: 50%;
+  /* Ajuste la largeur */
 }
