@@ -129,9 +129,9 @@ if (isset($_POST['buy_items'])) {
         $_SESSION['cart'] = [];
 
         $_SESSION['success_message'] = "Achat effectué avec succès !";
-        $_SESSION['montantCaps'] = $joueur->getMontantCaps();
+        $_SESSION['montantCaps'] = $newCaps;
         $_SESSION['poids'] = $remainingWeight;
-        $_SESSION['dexterite'] = $joueur->getDexterite();
+        $_SESSION['dexterite'] = $newDexterity;
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit;
     } else {
