@@ -101,4 +101,16 @@ class JoueursModel
         return $stmt->execute(['prenom' => $prenom, 'nom' => $nom, 'alias' => $alias, 'motDePasse' => $motDePasse]);
     }
 
+    public function userExist($identifier) {
+        try {
+            $sql = "SELECT COUNT(*) FROM joueurs WHERE alias = :identifier";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':identifier', $identifier, PDO::PARAM_STR);
+            $stmt->execute();
+            $count = $stmt->fetchColumn();
+            return $count > 0;
+        } catch (PDOException $e) {
+            throw new PDOException($e->getMessage(), (int)$e->getCode());
+        }
+    }
 }
