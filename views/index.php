@@ -110,6 +110,7 @@ require 'partials/header.php';
                                             <input type="hidden" name="typeItem" value="<?=$item->getTypeItem()?>">
                                             <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
                                             <br>
+                                            <br>
                                             <button type="submit" class="btn btn-order add-to-cart" name="add_to_cart" 
                                                 <?= !isAuthenticated() ? 'disabled' : '' ?>>
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
