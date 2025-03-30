@@ -21,23 +21,35 @@ require 'partials/header.php';
         <?php unset($_SESSION['success_message']); ?>
     <?php endif; ?>
     <form method="POST" class="center-form">
-        <div class="checkbox-container">
+    <div class="checkbox-container">
+        <div>
             <input type="checkbox" id="arme" name="arme">
             <label for="arme">Armes</label>
+        </div>
+        <div>
             <input type="checkbox" id="munition" name="munition">
             <label for="munition">Munitions</label>
+        </div>
+        <div>
             <input type="checkbox" id="armure" name="armure">
             <label for="armure">Armures</label>
+        </div>
+        <div>
             <input type="checkbox" id="medicament" name="medicament">
             <label for="medicament">Médicaments</label>
+        </div>
+        <div>
             <input type="checkbox" id="nourriture" name="nourriture">
             <label for="nourriture">Nourritures</label>
+        </div>
+        <div>
             <input type="checkbox" id="ressource" name="ressource">
             <label for="ressource">Ressources</label>
         </div>
-        <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
-        <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
-    </form>
+    </div>
+    <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
+    <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
+</form>
 
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
