@@ -196,7 +196,7 @@ footer img {
 .img-thumbnail .btn-order {
   margin-bottom: 30px; /* Ajoute un espace au-dessus du bouton */
   align-self: center; /* Centre le bouton horizontalement */
-  background-color: #007bff;
+  background-color: #fef265;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -246,4 +246,8 @@ footer img {
 .btn-order {
   margin-top: auto; /* Pousse le bouton vers le bas */
   align-self: center; /* Centre le bouton horizontalement */
+}
+
+.btn-primary{
+  background-color: #fef265;
 }
