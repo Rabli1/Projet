@@ -57,18 +57,19 @@
 }
 
 .btn-bd-primary {
-  --bd-violet-bg: #ffea00;
+  --bd-violet-bg: #712cf9;
   --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
   --bs-btn-font-weight: 600;
-  --bs-btn-color: #325886;
-  --bs-btn-bg: #ffea00;
-  --bs-btn-border-color: #ffea00;
-  --bs-btn-hover-color: #325886;
-  --bs-btn-hover-bg: #ffea00;
-  --bs-btn-hover-border-color: #ffea00;
-  --bs-btn-focus-shadow-rgb: #ffea00;
-  --bs-btn-active-color: #325886;
-  --bs-btn-active-bg: #ffea00;
+  --bs-btn-color: var(--bs-white);
+  --bs-btn-bg: var(--bd-violet-bg);
+  --bs-btn-border-color: var(--bd-violet-bg);
+  --bs-btn-hover-color: var(--bs-white);
+  --bs-btn-hover-bg: #6528e0;
+  --bs-btn-hover-border-color: #6528e0;
+  --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+  --bs-btn-active-color: var(--bs-btn-hover-color);
+  --bs-btn-active-bg: #5a23c8;
+  --bs-btn-active-border-color: #5a23c8;
 }
 
 .bd-mode-toggle {
@@ -195,8 +196,8 @@ footer img {
 .img-thumbnail .btn-order {
   margin-bottom: 30px; /* Ajoute un espace au-dessus du bouton */
   align-self: center; /* Centre le bouton horizontalement */
-  background-color: #fef265;
-  color: "#325886";
+  background-color: #007bff;
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 20px;
@@ -245,8 +246,4 @@ footer img {
 .btn-order {
   margin-top: auto; /* Pousse le bouton vers le bas */
   align-self: center; /* Centre le bouton horizontalement */
-}
-
-.btn-primary{
-  background-color: #fef265;
 }
