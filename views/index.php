@@ -50,7 +50,7 @@ require 'partials/header.php';
     <input type="text" id="search" name="search" placeholder="Rechercher un item"><br>
     <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
 </form>
-
+<?php if (!empty($items)): ?>
     <div class="tab-content">
         <div class='tab-pane active' id='tab1' role='tabpanel'>
             <div class="table-container">
@@ -145,6 +145,9 @@ require 'partials/header.php';
             </div>
         </div>
     </div>
+<?php else: ?>
+    <p style="text-align: center;">Aucun item disponible.</p>
+<?php endif; ?>
 </main>
 <?php require 'partials/footer.php'; ?>
 </html>

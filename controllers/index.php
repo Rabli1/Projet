@@ -58,13 +58,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search_button'])) {
     $items = $itemsModel->selectAllItems();
 }
 
-$filteredItems = [];
-foreach ($items as $item) {
-    if ($item->getQteStock() > 0) {
-        $filteredItems[] = $item;
+if (!empty($items)) {
+    $filteredItems = [];
+    foreach ($items as $item) {
+        if ($item->getQteStock() > 0) {
+            $filteredItems[] = $item;
+        }
     }
+    $items = $filteredItems;
 }
-$items = $filteredItems;
 
 if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
     $idItem = intval($_POST['idItem']);
