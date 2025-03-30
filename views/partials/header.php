@@ -19,7 +19,7 @@
                             <i class="bi bi-bag"></i> <!-- Icone du panier -->
                             <?php if (!empty($_SESSION['panier']['nbTotItem'])) { ?>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
-                                    <?php echo $_SESSION['cart']['nbTotItem']; ?>
+                                    <?php echo count($_SESSION['cart']);; ?>
                                 </span>
                             <?php } ?>
                         </a>
