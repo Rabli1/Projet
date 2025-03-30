@@ -19,14 +19,6 @@ if (isset($_GET['success']) && $_GET['success'] == 1) {
     $successMessage = 'Votre compte a été créé';
 }
 
-$currentWeight = 0;
-$backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
-
-if (!empty($backpack) && is_array($backpack)) {
-    foreach ($backpack as $item) {
-        $currentWeight += $item['poidsItem'] * $item['qteItems'];
-    }
-}
 
 $poidsMaxTransport = $joueur->getPoidsMaxTransport();
 $remainingWeight = $poidsMaxTransport - $currentWeight;
@@ -37,6 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     $joueur = $joueursModel->getJoueurByAlias($username);
+
+    $currentWeight = 0;
+    $backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
+
+    if (!empty($backpack) && is_array($backpack)) {
+        foreach ($backpack as $item) {
+            $currentWeight += $item['poidsItem'] * $item['qteItems'];
+        }
+    }
 
     if ($joueur && password_verify($password, $joueur->getMotDePasse())) {
         sessionStart();
