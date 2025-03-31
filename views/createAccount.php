@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2 class="text-center mt-5">Login</h2>
+                <h2 class="text-center mt-5">Création de compte</h2>
                 <form method="post">
                     <div class="form-group">
                             <label for="firstName">Prénom</label>
