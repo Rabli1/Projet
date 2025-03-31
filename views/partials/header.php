@@ -44,7 +44,7 @@
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-dumbbell"></i> <!-- Icone de la dextérité -->
-                            <?php echo $_SESSION['dexterite']; ?> dextérité
+                            <?php echo $_SESSION['dexterite']; ?> / 100 dextérité
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-weight"></i> <!-- Icone du poids -->
