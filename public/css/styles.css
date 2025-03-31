@@ -161,7 +161,9 @@ footer img {
   max-width: 16px;
 }
 
-.price, .quantity, .weight {
+.price,
+.quantity,
+.weight {
   position: absolute;
   padding: 5px;
   font-weight: bold;
@@ -194,8 +196,10 @@ footer img {
 }
 
 .img-thumbnail .btn-order {
-  margin-bottom: 30px; /* Ajoute un espace au-dessus du bouton */
-  align-self: center; /* Centre le bouton horizontalement */
+  margin-bottom: 30px;
+  /* Ajoute un espace au-dessus du bouton */
+  align-self: center;
+  /* Centre le bouton horizontalement */
   color: white;
   border: none;
   padding: 10px 20px;
@@ -209,24 +213,32 @@ footer img {
 
 .checkbox-container {
   display: flex;
-  flex-wrap: wrap; /* Permet aux cases de passer à la ligne si nécessaire */
-  justify-content: center; /* Centre les cases à cocher horizontalement */
-  gap: 15px; /* Ajoute de l'espace entre les cases */
-  margin-bottom: 20px; /* Ajoute un espace en dessous des cases */
+  flex-wrap: wrap;
+  /* Permet aux cases de passer à la ligne si nécessaire */
+  justify-content: center;
+  /* Centre les cases à cocher horizontalement */
+  gap: 15px;
+  /* Ajoute de l'espace entre les cases */
+  margin-bottom: 20px;
+  /* Ajoute un espace en dessous des cases */
 }
 
 .checkbox-container label {
   margin-left: 5px;
-  font-size: 1rem; /* Ajuste la taille du texte */
-  vertical-align: middle; /* Aligne le texte avec la case */
+  font-size: 1rem;
+  /* Ajuste la taille du texte */
+  vertical-align: middle;
+  /* Aligne le texte avec la case */
 }
 
 #search {
-  margin-top: 10px; /* Ajoute un espace au-dessus du champ de recherche */
+  margin-top: 10px;
+  /* Ajoute un espace au-dessus du champ de recherche */
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 20px;
-  width: 50%; /* Ajuste la largeur */
+  width: 50%;
+  /* Ajuste la largeur */
 }
 
 .caption {
@@ -237,22 +249,28 @@ footer img {
 }
 
 .btn-order {
-  margin-top: auto; /* Force le bouton à aller en bas */
-  align-self: center; /* Centre le bouton horizontalement */
-  width: 80%; /* Ajuste la largeur pour un meilleur affichage */
+  margin-top: auto;
+  /* Force le bouton à aller en bas */
+  align-self: center;
+  /* Centre le bouton horizontalement */
+  width: 80%;
+  /* Ajuste la largeur pour un meilleur affichage */
 }
 
 .btn-order {
-  margin-top: auto; /* Pousse le bouton vers le bas */
-  align-self: center; /* Centre le bouton horizontalement */
+  margin-top: auto;
+  /* Pousse le bouton vers le bas */
+  align-self: center;
+  /* Centre le bouton horizontalement */
 }
 
 .cart-wrapper .badge {
-  font-size: 0.75rem; /* Taille du texte dans la bulle */
-  padding: 0.4em 0.6em; /* Ajuste la taille de la bulle */
+  font-size: 0.6rem;/* Réduit la taille du texte */
+  padding: 0.2em 0.4em;/* Réduit l'espace intérieur */
+  transform: translate(50%, -50%); /* Ajuste la taille de la bulle */
 }
 
-.stockZero{
+.stockZero {
   color: red;
   font-weight: bold;
 }
