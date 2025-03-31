@@ -265,8 +265,8 @@ footer img {
 }
 
 .cart-wrapper .badge {
-  font-size: 0.6rem;/* Réduit la taille du texte */
-  padding: 0.2em 0.4em;/* Réduit l'espace intérieur */
+  font-size: 0.75rem;/* Réduit la taille du texte */
+  padding: 0.25em 0.5em;/* Réduit l'espace intérieur */
   transform: translate(50%, -50%); /* Ajuste la taille de la bulle */
 }
 
