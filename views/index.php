@@ -62,7 +62,7 @@ require 'partials/header.php';
                             <td>
                                 <div class="img-thumbnail">
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
-                                    <div class="quantity <?=$item->getQteStock() <= 0 ? 'bs-danger-text-emphasis' : ''?>"><?=$item->getQteStock()?> en stock</div>
+                                    <div class="quantity <?=$item->getQteStock() <= 0 ? 'stockZero' : ''?>"><?=$item->getQteStock()?> en stock</div>
                                     <h4><?=$item->getNomItem()?></h4>
                                     <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
                                     <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>

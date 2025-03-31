@@ -252,3 +252,8 @@ footer img {
   padding: 0.4em 0.6em; /* Ajuste la taille de la bulle */
   transform: translate(50%, -50%); /* Positionne la bulle au coin supérieur droit */
 }
+
+.stockZero{
+  color: red;
+  font-weight: bold;
+}
