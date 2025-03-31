@@ -16,7 +16,7 @@ class ItemsModel
         try{
 
             // $this->pdo-> car $pdo est une propriété de l'objet
-            $stm = $this->pdo->prepare('SELECT * FROM items');
+            $stm = $this->pdo->prepare('SELECT * FROM items ORDER BY prixItem DESC, poidsItem DESC');
 
             $stm->execute();
 
