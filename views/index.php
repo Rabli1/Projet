@@ -48,6 +48,7 @@ require 'partials/header.php';
         </div>
     </div>
     <input type="text" id="search" name="search" placeholder="Rechercher un item" value="<?= htmlspecialchars($_POST['search'] ?? '') ?>" onchange="document.getElementById('filterForm').submit();"> <br>
+    <button type="submit" class="btn btn-primary" name="search_button">Rechercher</button>
 </form>
 <?php if (!empty($items)): ?>
     <div class="tab-content">
