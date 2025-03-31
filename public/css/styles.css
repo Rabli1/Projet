@@ -250,7 +250,6 @@ footer img {
 .cart-wrapper .badge {
   font-size: 0.75rem; /* Taille du texte dans la bulle */
   padding: 0.4em 0.6em; /* Ajuste la taille de la bulle */
-  transform: translate(50%, -20%); /* Positionne la bulle au coin supérieur droit */
 }
 
 .stockZero{
