@@ -121,7 +121,7 @@ require 'partials/header.php';
                                             <input type="hidden" name="utilite" value="<?=$item->getUtilite()?>">
                                             <br>
                                             <br>
-                                            <button type="submit" class="btn btn-order add-to-cart <?=!isAuthenticated() || $item->getQteStock() <= 0 ? 'btn-danger' : ''?>" name="add_to_cart" 
+                                            <button type="submit" class="btn btn-order add-to-cart <?=!isAuthenticated() || $item->getQteStock() <= 0 ? 'btn-danger' : 'btn-primary'?>" name="add_to_cart" 
                                                 <?= !isAuthenticated() || $item->getQteStock() <= 0 ? 'disabled' : '' ?>>
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>
