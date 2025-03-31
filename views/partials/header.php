@@ -48,7 +48,7 @@
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-weight"></i> <!-- Icone du poids -->
-                            <?php echo $_SESSION['poids']; ?> poids
+                            <?php echo $_SESSION['poids']; ?> lbs / <?php echo $_SESSION['poidsMaxTransport']; ?> lbs
                         </span>
                     <?php } ?>
                 </div>

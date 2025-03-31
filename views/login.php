@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-            <h2 class="text-center mt-5">Login</h2>
+            <h2 class="text-center mt-5">Connexion</h2>
             <?php if (!empty($successMessage)){ ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $successMessage; ?>

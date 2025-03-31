@@ -37,7 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $poidsMaxTransport = $joueur->getPoidsMaxTransport();
-        $remainingWeight = $poidsMaxTransport - $currentWeight;
+
+        if($remainingWeight > 0)
+            $remainingWeight = $poidsMaxTransport - $currentWeight;
+
+        else
+            $remainingWeight = 0;
 
        sessionStart();
         $_SESSION['username'] = $username;
@@ -45,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['montantCaps'] = $joueur->getMontantCaps();
         $_SESSION['dexterite'] = $joueur->getDexterite();
         $_SESSION['poids'] = $remainingWeight;
+        $_SESSION['poidsMaxTransport'] = $joueur->getPoidsMaxTransport();
         redirect('index');
     } else {
         $errorLogin = true;
