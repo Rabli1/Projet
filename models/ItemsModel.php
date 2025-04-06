@@ -197,4 +197,47 @@ class ItemsModel
         ]);
         return $stmt->rowCount() > 0;
     }
+
+    public function deleteItem(int $idItem, string $typeItem): bool
+    {
+    try {
+        $this->pdo->beginTransaction();
+
+        switch ($typeItem) {
+                case 'm':
+                    $stmt = $this->pdo->prepare('DELETE FROM medicaments WHERE idItem = :idItem');
+                    break;
+                case 'n':
+                    $stmt = $this->pdo->prepare('DELETE FROM nourritures WHERE idItem = :idItem');
+                    break;
+                case 'a': 
+                    $stmt = $this->pdo->prepare('DELETE FROM armes WHERE idItem = :idItem');
+                break;
+                case 'r':
+                    $stmt = $this->pdo->prepare('DELETE FROM armures WHERE idItem = :idItem');
+                    break;
+                case 'u':
+                    $stmt = $this->pdo->prepare('DELETE FROM munitions WHERE idItem = :idItem');
+                    break;
+                case ' ': //Pour ressource on fait rien parce que pas de table ressource
+                    break;
+                default:
+                    throw new Exception('Type d\'item inconnu.');
+            }
+
+            $stmt->execute(['idItem' => $idItem]);
+
+
+            $stmt = $this->pdo->prepare('DELETE FROM items WHERE idItem = :idItem');
+            $stmt->execute(['idItem' => $idItem]);
+
+            $this->pdo->commit();
+            return true;
+        } 
+        
+        catch (Exception $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
 }
