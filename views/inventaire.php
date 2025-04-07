@@ -3,6 +3,21 @@ require 'partials/head.php';
 require 'partials/header.php';
 ?>
 
+<?php if (isset($_SESSION['success_message'])): ?>
+    <div class="alert alert-success">
+        <?= $_SESSION['success_message'] ?>
+    </div>
+    <?php unset($_SESSION['success_message']); ?>
+<?php endif; ?>
+
+<?php if (isset($_SESSION['error_message'])): ?>
+    <div class="alert alert-danger">
+        <?= $_SESSION['error_message'] ?>
+    </div>
+    <?php unset($_SESSION['error_message']); ?>
+<?php endif; ?>
+
+
 <main class="container mt-5">
     <?php if (isset($nomJoueur)): ?>
         <h2>Inventaire de <?= htmlspecialchars($nomJoueur) ?></h2>
@@ -22,30 +37,54 @@ require 'partials/header.php';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    $totalWeight = 0;
-                    foreach ($backpackItems as $item) { 
-                        $totalWeight += $item['poidsItem'] * $item['qteItems'];
-                    ?>
-                        <tr>
-                            <td><img src="public/img/<?= $item['photo'] ?>" class="img-fluid" alt="<?= $item['nomItem'] ?>" style="max-width: 20%"></td>
-                            <td><?= htmlspecialchars($item['nomItem']) ?></td>
-                            <td>
-                                <div class="price-container">
-                                    <?= $item['prixItem'] ?>
-                                    <img src="public/img/caps.png" alt="caps">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="price-container">
-                                    <?= $item['poidsItem'] ?> lbs
-                                    <img src="public/img/weight.webp" alt="lbs" style="max-width: 16px">
-                                </div>
-                            </td>
-                            <td><?= $item['qteItems'] ?></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
+    <?php 
+    $totalWeight = 0;
+    foreach ($backpackItems as $item) { 
+        $totalWeight += $item['poidsItem'] * $item['qteItems'];
+    ?>
+        <tr>
+            <td><img src="public/img/<?= $item['photo'] ?>" class="img-fluid" alt="<?= $item['nomItem'] ?>" style="max-width: 20%"></td>
+            <td><?= htmlspecialchars($item['nomItem']) ?></td>
+            <td>
+                <div class="price-container">
+                    <?= $item['prixItem'] ?>
+                    <img src="public/img/caps.png" alt="caps">
+                </div>
+            </td>
+            <td>
+                <div class="price-container">
+                    <?= $item['poidsItem'] ?> lbs
+                    <img src="public/img/weight.webp" alt="lbs" style="max-width: 16px">
+                </div>
+            </td>
+            <td><?= $item['qteItems'] ?></td>
+            <td>
+            <?php if ($item['typeItem'] === 'n'): ?>
+                    <form method="POST" action="inventaire">
+                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                        <button type="submit" name="manger" class="btn btn-success" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
+                            Manger
+                        </button>
+                    </form>
+                    <?php endif; ?>
+                    <?php if ($item['typeItem'] === 'm'): ?>
+                    <form method="POST" action="inventaire">
+                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                        <button type="submit" name="consomme" class="btn btn-success" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
+                            Consommer
+                        </button>
+                    </form>
+                    <?php endif; ?>
+                <form method="POST" action="">
+                    <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                    <button type="submit" name="sell_item" class="btn btn-danger" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
+                        Vendre
+                    </button>
+                </form>
+            </td>
+        </tr>
+    <?php } ?>
+</tbody>
             </table>
         </div>
         <div class="price-container mt-3">
