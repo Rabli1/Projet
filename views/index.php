@@ -1,7 +1,7 @@
 <?php
 
 require 'partials/head.php';
-require 'partials/header.php';
+require 'controllers/header.php';
 
 ?>
 

@@ -40,11 +40,11 @@
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-coins"></i> <!-- Icone des caps -->
-                            <?php echo $_SESSION['montantCaps']; ?> caps
+                            <?php echo $joueur->getMontantCaps(); ?> caps
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-dumbbell"></i> <!-- Icone de la dextérité -->
-                            <?php echo $_SESSION['dexterite']; ?> / 100 dextérité
+                            <?php echo $joueur->getDexterite(); ?> / 100 dextérité
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-weight"></i> <!-- Icone du poids -->

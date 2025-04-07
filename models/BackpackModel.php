@@ -15,6 +15,7 @@ class BackpackModel
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['poidsTotal'] ?? 0;
     }
+    
     public function addItemToBackpack($playerId, $itemId, $quantity) {
         $query = "INSERT INTO sacàdos (idJoueurs, idItem, qteItems, poidsTotal) 
                   VALUES (:playerId, :itemId, :quantity, (Select poidsItem from items where idItem = :itemId) * :quantity)
