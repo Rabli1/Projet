@@ -60,13 +60,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
     $idItem = intval($_POST['idItem']);
+    $item = $itemsModel->selectById($idItem);
 
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
-    $_SESSION['cart'][] = $idItem;
 
-    $item = $itemsModel->selectById($idItem);
+    foreach($_SESSION['cart'] as $itemsInCart) {
+        if ($itemsInCart == $idItem) {
+            if($item->getQuantite() > $item->getQteStock()) {
+                $item->setQuantite($item->getQuantite() + 1);
+                $_SESSION['cart'][] = $idItem;
+            }
+            else {
+                $_SESSION['error_message'] = "Limite de stock atteinte!";
+                header('Location: ' . $_SERVER['REQUEST_URI']);
+                exit;
+            }
+        }
+    }
+
+    if(!in_array($idItem, $_SESSION['cart'])) {
+        $_SESSION['cart'][] = $idItem;
+    }
+
     if ($item) {
         $_SESSION['success_message'] = $item->getNomItem() . " a été ajouté au panier !";
     } else {
@@ -76,5 +93,5 @@ if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
-
+var_dump($_SESSION);
 require 'views/index.php';
