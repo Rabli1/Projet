@@ -16,8 +16,8 @@ class BackpackModel
         return $result['poidsTotal'] ?? 0;
     }
     public function addItemToBackpack($playerId, $itemId, $quantity) {
-        $query = "INSERT INTO sacàdos (idJoueurs, idItem, qteItems) 
-                  VALUES (:playerId, :itemId, :quantity)
+        $query = "INSERT INTO sacàdos (idJoueurs, idItem, qteItems, poidsTotal) 
+                  VALUES (:playerId, :itemId, :quantity, (Select poidsItem from items where idItem = :itemId) * :quantity)
                   ON DUPLICATE KEY UPDATE qteItems = qteItems + :quantity";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([
