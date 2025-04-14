@@ -15,7 +15,17 @@ class BackpackModel
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['poidsTotal'] ?? 0;
     }
-    
+    public function getItemFromBackpack($playerId, $itemId) {
+        $query = "SELECT i.idItem, i.nomItem, i.prixItem, i.poidsItem, b.qteItems
+                FROM sacàdos b
+                JOIN items i ON b.idItem = i.idItem
+                WHERE b.idJoueurs = :playerId AND b.idItem = :itemId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':playerId', $playerId, PDO::PARAM_INT);
+        $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function addItemToBackpack($playerId, $itemId, $quantity) {
         $query = "INSERT INTO sacàdos (idJoueurs, idItem, qteItems, poidsTotal) 
                   VALUES (:playerId, :itemId, :quantity, (Select poidsItem from items where idItem = :itemId) * :quantity)
@@ -122,5 +132,25 @@ class BackpackModel
             throw $e;
         }
     }
-
+    public function updateItemQuantity($playerId, $itemId, $newQuantity) {
+        if ($newQuantity > 0) {
+            $query = "UPDATE sacàdos 
+                      SET qteItems = :newQuantity 
+                      WHERE idJoueurs = :playerId AND idItem = :itemId";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'newQuantity' => $newQuantity,
+                'playerId' => $playerId,
+                'itemId' => $itemId
+            ]);
+        } else {
+            $query = "DELETE FROM sacàdos 
+                      WHERE idJoueurs = :playerId AND idItem = :itemId";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'playerId' => $playerId,
+                'itemId' => $itemId
+            ]);
+        }
+    }
 }

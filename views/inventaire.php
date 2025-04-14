@@ -75,12 +75,17 @@ require 'partials/header.php';
                         </button>
                     </form>
                     <?php endif; ?>
-                <form method="POST" action="">
-                    <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
-                    <button type="submit" name="sell_item" class="btn btn-danger" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
-                        Vendre
-                    </button>
-                </form>
+                    <form method="POST" action="inventaire">
+                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                        <select name="quantite" class="select-quantite">
+                            <?php for ($i = 1; $i <= $item['qteItems']; $i++): ?>
+                                <option value="<?= $i ?>"><?= $i ?></option>
+                            <?php endfor; ?>
+                        </select>
+                        <button type="submit" name="sell_item" class="btn btn-danger" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
+                            Vendre
+                        </button>
+                    </form>
             </td>
         </tr>
     <?php } ?>

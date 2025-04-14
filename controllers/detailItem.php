@@ -19,8 +19,6 @@ try {
     $armuresModel = new ArmuresModel($pdo);
     $medicamentsModel = new MédicamentsModel($pdo);
     $nourrituresModel = new NourrituresModel($pdo);
-    $joueursModel = new JoueursModel($pdo);
-    $joueur = $joueursModel->getJoueurById($_SESSION['idJoueur']);
     $items = $itemsModel->selectAllItems();
 } catch (PDOException $e) {
     die("Erreur de connexion: " . $e->getMessage());
