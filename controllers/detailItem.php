@@ -7,6 +7,7 @@ require 'models/MunitionsModel.php';
 require 'models/ArmuresModel.php';
 require 'models/MédicamentModel.php';
 require 'models/NourrituresModel.php';
+
 sessionStart();
 $idItem = intval($_GET['id']);
 try {
