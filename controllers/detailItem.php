@@ -8,6 +8,7 @@ require 'models/ArmuresModel.php';
 require 'models/MédicamentModel.php';
 require 'models/NourrituresModel.php';
 
+sessionStart();
 $idItem = intval($_GET['id']);
 try {
     $db = Database::getInstance($dbConfig, $dbParams);

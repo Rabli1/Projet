@@ -11,6 +11,7 @@ const ROUTES = [
     '/deconnexion' => 'deconnexion.php',
     '/inventaire' => 'inventaire.php',
     '/detailItem' => 'detailItem.php',
+    '/admin' => 'adminPanel.php',
 ];
 
 const DB_PARAMS = [
