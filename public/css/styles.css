@@ -274,3 +274,32 @@ footer img {
   color: red;
   font-weight: bold;
 }
+
+.enigma-mode {
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-start; 
+  gap: 10px; 
+  padding: 10px; 
+}
+
+.enigma-mode a {
+  display: inline-block; 
+  text-align: center; 
+  width: 100%; 
+  font-size: 16px; 
+  border-radius: 5px; 
+}
+
+.enigma-mode a:hover {
+  background-color: #0056b3;
+}
+
+.container-enigma-mode {
+  display: flex; 
+  justify-content: center;
+  align-items: flex-start; 
+  gap: 100px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+}
