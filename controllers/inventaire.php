@@ -31,23 +31,26 @@ if (isAuthenticated()) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sell_item'])) {
-    $idItem = (int)$_POST['idItem'];
+if (isset($_POST['sell_item']) && !empty($_POST['idItem']) && !empty($_POST['quantite'])) {
+    $idItem = intval($_POST['idItem']);
+    $quantite = intval($_POST['quantite']);
 
-    try {
-        $item = $itemsModel->selectById($idItem);
-        if (!$item) {
-            throw new Exception("Item introuvable.");
-        }
+    $item = $backpackModel->getItemFromBackpack($joueur->getIdJoueur(), $idItem);
 
-        $backpackModel->sellItemFromBackpack($joueur->getIdJoueur(), $idItem, $item->getPrixItem());
+    if ($item && $item['qteItems'] >= $quantite) {
+        $totalPrice = $item['prixItem'] * $quantite * 0.6;
 
-        $_SESSION['success_message'] = "Item vendu avec succès ! Vous avez gagné " . ($item->getPrixItem() * 0.6) . " caps.";
-    } catch (Exception $e) {
-        $_SESSION['error_message'] = "Erreur lors de la vente de l'item : " . $e->getMessage();
+        $newQuantity = $item['qteItems'] - $quantite;
+        $backpackModel->updateItemQuantity($joueur->getIdJoueur(), $idItem, $newQuantity);
+
+        $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() + $totalPrice);
+
+        $_SESSION['success_message'] = "Vous avez vendu $quantite " . htmlspecialchars($item['nomItem']) . " pour $totalPrice caps.";
+    } else {
+        $_SESSION['error_message'] = "Erreur : Quantité invalide ou insuffisante.";
     }
 
-    header('Location: /inventaire');
+    header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
 
