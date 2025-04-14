@@ -11,5 +11,7 @@ sessionStart();
 $backpackModel = new BackpackModel($pdo);
 $joueursModel = new JoueursModel($pdo);
 
-$joueur = $joueursModel->getJoueurByAlias($_SESSION['username']);
+if(isset($_SESSION['username'])) {
+    $joueur = $joueursModel->getJoueurByAlias($_SESSION['username']);
+}
 require 'views/partials/header.php';
