@@ -21,7 +21,7 @@ try {
     $nourrituresModel = new NourrituresModel($pdo);
     $items = $itemsModel->selectAllItems();
 } catch (PDOException $e) {
-    die("Connection failed: " . $e->getMessage());
+    die("Erreur de connexion: " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -93,5 +93,4 @@ if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
-var_dump($_SESSION);
 require 'views/index.php';

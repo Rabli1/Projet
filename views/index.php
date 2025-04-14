@@ -5,15 +5,7 @@ require 'controllers/header.php';
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knapsack</title>
-    <link rel="stylesheet" href="public/css/styles.css">
-</head>
-<main>
+
 <?php if (!empty($_SESSION['success_message'])): ?>
         <div class="alert alert-success" role="alert">
             <?= htmlspecialchars($_SESSION['success_message']) ?>
@@ -63,8 +55,10 @@ require 'controllers/header.php';
                                     <div class="price price-container"><?=$item->getPrixItem()?><img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px"></div>
                                     <div class="quantity <?=$item->getQteStock() <= 0 ? 'stockZero' : ''?>"><?=$item->getQteStock()?> en stock</div>
                                     <h4><?=$item->getNomItem()?></h4>
-                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid">
-                                    <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>
+                                    <a href="detailItem?id=<?=$item->getIdItem()?>">
+                                    <img src="public/img/<?=$item->getPhoto()?>" class="img-fluid" alt="<?=$item->getNomItem()?>">
+                                    </a> 
+                                     <div><strong><?=getTypeItemName($item->getTypeItem())?></strong></div>
                                     <div><strong>Utilité : </strong> <?=$item->getUtilite()?></div>
                                     <div class="caption">
                                         <div class="weight price-container"><?=$item->getPoidsItem()?> lbs<img src="public/img/weight.webp" alt="lbs" class="price-container" style="max-width: 16px"></div>

@@ -10,6 +10,7 @@ const ROUTES = [
     '/createAccount' => 'createAccount.php',
     '/deconnexion' => 'deconnexion.php',
     '/inventaire' => 'inventaire.php',
+    '/detailItem' => 'detailItem.php',
 ];
 
 const DB_PARAMS = [
