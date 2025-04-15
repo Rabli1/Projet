@@ -279,6 +279,7 @@ footer img {
   display: flex; 
   flex-direction: column; 
   align-items: flex-start; 
+  width: 500px;
   gap: 10px; 
   padding: 10px; 
 }
@@ -302,4 +303,14 @@ footer img {
   gap: 100px; 
   border: 1px solid #ccc; 
   border-radius: 5px;
+}
+
+.enigma-gains {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  gap: 10px; 
+  padding: 10px; 
+  font-weight: bold;
 }
