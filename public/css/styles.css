@@ -310,7 +310,34 @@ footer img {
   flex-direction: column;
   justify-content: center; 
   align-items: center;
-  gap: 10px; 
-  padding: 10px; 
   font-weight: bold;
+}
+
+.enigma-bonus-center {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  width: 50%; 
+  margin: 0 auto; 
+  gap: 15px; 
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
+}
+
+.enigma-bonus-center label,
+.enigma-bonus-center select,
+.enigma-bonus-center input {
+  width: 100%; 
+  display: block; 
+}
+
+.enigma-question {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  font-weight: bold;
+  color: blue;
 }
