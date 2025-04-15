@@ -29,12 +29,4 @@ require 'partials/header.php';
     </div>
 </div>
 
-
-
-
-
-
-
-
-
 <?php require 'partials/footer.php'; ?>
