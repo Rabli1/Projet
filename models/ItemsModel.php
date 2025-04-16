@@ -105,7 +105,7 @@ class ItemsModel
                 $row['typeItem'],
                 $row['prixItem'],
                 $row['poidsItem'],
-                $row['utilite'] ?? 0,
+                $row['utilité'],
                 $row['photo'],
                 $row['flagDispo']
             );

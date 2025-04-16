@@ -12,6 +12,9 @@ const ROUTES = [
     '/inventaire' => 'inventaire.php',
     '/detailItem' => 'detailItem.php',
     '/admin' => 'adminPanel.php',
+    '/enigma' => 'enigma.php',
+    '/enigmaNormal' => 'enigmaNormal.php',
+    '/enigmaBonus' => 'enigmaBonus.php',
 ];
 
 const DB_PARAMS = [
