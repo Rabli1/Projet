@@ -26,6 +26,23 @@ if (isAuthenticated()) {
 
     $nomJoueur = $joueur->getAlias();
     $montantCaps = $joueur->getMontantCaps();
+
+    $totalWeight = 0;
+    foreach ($backpackItems as $item) { 
+        $totalWeight += $item['poidsItem'] * $item['qteItems'];
+    }
+    $_SESSION['montantCaps'] = $montantCaps;
+    if($joueur->getPoidsMaxTransport() - $totalWeight <= 0){
+        $_SESSION['dexterite'] = 100 - (($totalWeight - $joueur->getPoidsMaxTransport()) * 3);
+        $joueursModel->updateDexterity($joueur->getIdJoueur(), $_SESSION['dexterite']);
+        $_SESSION['poids'] = 0;
+    }
+    else {
+        $_SESSION['poids'] = $joueur->getPoidsMaxTransport() - $totalWeight;
+        $_SESSION['dexterite'] = 100;
+        $joueursModel->updateDexterity($joueur->getIdJoueur(), $_SESSION['dexterite']);
+    }
+
 } else {
     header('Location: /connexion');
     exit;
