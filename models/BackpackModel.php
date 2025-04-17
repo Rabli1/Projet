@@ -38,62 +38,68 @@ class BackpackModel
         ]);
     }
     public function getItemsInBackpack($playerId) {
-        $query = "SELECT i.idItem, i.nomItem, i.prixItem, i.poidsItem, i.photo, i.typeItem, b.qteItems
-                  FROM sacàdos b
-                  JOIN items i ON b.idItem = i.idItem
-                  WHERE b.idJoueurs = :playerId";
+        $query = "SELECT sacàdos.idItem, sacàdos.qteItems, items.nomItem, items.poidsItem, 
+                         items.prixItem, items.utilité, items.typeItem, items.photo
+                  FROM sacàdos
+                  JOIN items ON sacàdos.idItem = items.idItem
+                  WHERE sacàdos.idJoueurs = :playerId";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':playerId', $playerId, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt->execute(['playerId' => $playerId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function sellItemFromBackpack($playerId, $itemId, $itemPrice) {
-        try {
-            $this->pdo->beginTransaction();
-    
-            $query = "UPDATE sacàdos 
-                      SET qteItems = qteItems - 1 
-                      WHERE idJoueurs = :playerId AND idItem = :itemId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'playerId' => $playerId,
-                'itemId' => $itemId
-            ]);
-    
-            $query = "DELETE FROM sacàdos 
-                      WHERE idJoueurs = :playerId AND idItem = :itemId AND qteItems = 0";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'playerId' => $playerId,
-                'itemId' => $itemId
-            ]);
-    
-            $capsEarned = $itemPrice * 0.6;
-            $query = "UPDATE joueurs 
-                      SET montantCaps = montantCaps + :capsEarned 
-                      WHERE idJoueurs = :playerId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'capsEarned' => $capsEarned,
-                'playerId' => $playerId
-            ]);
-    
-            $query = "UPDATE items 
-                      SET qteStock = qteStock + 1 
-                      WHERE idItem = :itemId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'itemId' => $itemId
-            ]);
-    
-            $this->pdo->commit();
-            return true;
-        } catch (Exception $e) {
-            $this->pdo->rollBack();
-            throw $e;
-        }
+    public function sellItemFromBackpack($playerId, $itemId, $itemPrice, $quantity) {
+    try {
+        $this->pdo->beginTransaction();
+
+        // Réduire la quantité dans le sac à dos
+        $query = "UPDATE sacàdos 
+                  SET qteItems = qteItems - :quantity 
+                  WHERE idJoueurs = :playerId AND sacàdos.idItem = :itemId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'quantity' => $quantity,
+            'playerId' => $playerId,
+            'itemId' => $itemId
+        ]);
+
+        // Supprimer l'item si la quantité atteint 0
+        $query = "DELETE FROM sacàdos 
+                  WHERE sacàdos.idJoueurs = :playerId AND sacàdos.idItem = :itemId AND qteItems <= 0";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'playerId' => $playerId,
+            'itemId' => $itemId
+        ]);
+
+        // Ajouter les caps au joueur
+        $capsEarned = $itemPrice * 0.6 * $quantity;
+        $query = "UPDATE joueurs 
+                  SET montantCaps = montantCaps + :capsEarned 
+                  WHERE idJoueurs = :playerId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'capsEarned' => $capsEarned,
+            'playerId' => $playerId
+        ]);
+
+        // Augmenter le stock global de l'item
+        $query = "UPDATE items 
+                  SET qteStock = qteStock + :quantity 
+                  WHERE items.idItem = :itemId";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([
+            'quantity' => $quantity,
+            'itemId' => $itemId
+        ]);
+
+        $this->pdo->commit();
+        return true;
+    } catch (Exception $e) {
+        $this->pdo->rollBack();
+        throw $e;
     }
+}
 
     public function mangerNourriture($playerId, $itemId, $pointDeVie) {
         try {
@@ -130,27 +136,6 @@ class BackpackModel
         } catch (Exception $e) {
             $this->pdo->rollBack();
             throw $e;
-        }
-    }
-    public function updateItemQuantity($playerId, $itemId, $newQuantity) {
-        if ($newQuantity > 0) {
-            $query = "UPDATE sacàdos 
-                      SET qteItems = :newQuantity 
-                      WHERE idJoueurs = :playerId AND idItem = :itemId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'newQuantity' => $newQuantity,
-                'playerId' => $playerId,
-                'itemId' => $itemId
-            ]);
-        } else {
-            $query = "DELETE FROM sacàdos 
-                      WHERE idJoueurs = :playerId AND idItem = :itemId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-                'playerId' => $playerId,
-                'itemId' => $itemId
-            ]);
         }
     }
 }

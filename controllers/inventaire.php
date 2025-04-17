@@ -57,8 +57,7 @@ if (isset($_POST['sell_item']) && !empty($_POST['idItem']) && !empty($_POST['qua
     if ($item && $item['qteItems'] >= $quantite) {
         $totalPrice = $item['prixItem'] * $quantite * 0.6;
 
-        $newQuantity = $item['qteItems'] - $quantite;
-        $backpackModel->updateItemQuantity($joueur->getIdJoueur(), $idItem, $newQuantity);
+        $backpackModel->sellItemFromBackpack($joueur->getIdJoueur(), $idItem, $item['prixItem'], $quantite);
 
         $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() + $totalPrice);
 

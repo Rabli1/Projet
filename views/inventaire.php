@@ -34,6 +34,7 @@ require 'partials/header.php';
                         <th>Prix</th>
                         <th>Poids</th>
                         <th>Quantité</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,42 +60,49 @@ require 'partials/header.php';
             </td>
             <td><?= $item['qteItems'] ?></td>
             <td>
-            <?php if ($item['typeItem'] === 'n'): ?>
-                    <form method="POST" action="inventaire">
-                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
-                        <button type="submit" name="manger" class="btn btn-success" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
-                            Manger
-                        </button>
-                    </form>
-                    <?php endif; ?>
-                    <?php if ($item['typeItem'] === 'm'): ?>
-                    <form method="POST" action="inventaire">
-                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
-                        <button type="submit" name="consomme" class="btn btn-success" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
-                            Consommer
-                        </button>
-                    </form>
-                    <?php endif; ?>
-                    <form method="POST" action="inventaire">
-                        <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
-                        <select name="quantite" class="select-quantite">
-                            <?php for ($i = 1; $i <= $item['qteItems']; $i++): ?>
-                                <option value="<?= $i ?>"><?= $i ?></option>
-                            <?php endfor; ?>
-                        </select>
-                        <button type="submit" name="sell_item" class="btn btn-danger" <?= $item['qteItems'] <= 0 ? 'disabled' : '' ?>>
-                            Vendre
-                        </button>
-                    </form>
+                <?php if ($item['typeItem'] === 'n'): ?>
+                <form method="POST" action="inventaire" style="padding-bottom: 50%;>
+                    <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                    <button type="submit" name="manger" class="btn btn-success" 
+                        <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
+                        Manger
+                    </button>
+                </form>
+            <?php endif; ?>
+            <?php if ($item['typeItem'] === 'm'): ?>
+                <form method="POST" action="inventaire" style="padding-bottom: 50%;">
+                <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                <button type="submit" name="consomme" class="btn btn-success"
+                        <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
+                        Consommer
+                </button>
+                </form>
+            <?php endif; ?>
+            <form method="POST" action="inventaire" style="text-align: center;">
+                <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
+                <?php if (!($item['qteItems'] == 1 && $item['utilité'] == 1)): ?>
+                    <select name="quantite" class="select-quantite" style="margin-bottom: 5%;">
+                    <?php 
+                        $maxQuantite = $item['utilité'] == 1 ? $item['qteItems'] - 1 : $item['qteItems'];
+                        for ($i = 1; $i <= $maxQuantite; $i++): ?>
+                            <option value="<?= $i ?>"><?= $i ?></option>
+                        <?php endfor; ?>
+                    </select>
+                <?php endif; ?>
+                <button type="submit" name="sell_item" class="btn btn-danger" 
+                    <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
+                    Vendre
+                </button>
+            </form>
             </td>
         </tr>
-    <?php } ?>
-</tbody>
-            </table>
-        </div>
-        <div class="price-container mt-3">
-            <h3>Poids total : <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
-        </div>
+        <?php } ?>
+    </tbody>
+</table>
+</div>
+    <div class="price-container mt-3">
+    <h3>Poids total : <?= $totalWeight ?> lbs <img src="public/img/weight.webp" alt="lbs" class="img-fluid" style="max-width: 9%"></h3>
+    </div>
     <?php } else { ?>
         <p>Votre sac à dos est vide.</p>
     <?php } ?>
