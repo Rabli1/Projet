@@ -73,7 +73,6 @@ if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
                 $_SESSION['cart'][] = $idItem;
             }
             else {
-                $_SESSION['error_message'] = "Limite de stock atteinte!";
                 header('Location: ' . $_SERVER['REQUEST_URI']);
                 exit;
             }
