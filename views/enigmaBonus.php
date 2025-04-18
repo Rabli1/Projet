@@ -8,9 +8,6 @@ require 'partials/header.php';
     <br>
     <h2 class="enigma-gains">Enigma Mode Bonus</h2>
     <br>
-        <h3 class="enigma-question">La question</h3>
-        <br>
-        <br>
         <form method="post" > 
             <div class="enigma-bonus-center">
                 <label for="difficulty">Choisissez la difficulté :</label>
@@ -18,9 +15,16 @@ require 'partials/header.php';
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="difficile">Difficile</option>
-                </select>         
-            <input type="text" name="answer" placeholder="Réponse" required>
-            <input type="submit" value="Valider" class="btn btn-primary">
+                </select>                    
+                <input type="submit" name="getQuestion" value="Obtenir une question" class="btn btn-primary">
+            </div>
+            <br>
+            <br>
+            <h3 class="enigma-question">La question</h3>
+            <div class="enigma-bonus-center">
+                <label for="answer">Entrez votre réponse : </label>
+                <input type="text" name="answer" placeholder="Réponse">
+                <input type="submit" name="validate" value="Valider" class="btn btn-primary">
             </div>
         </form>
         <br>
