@@ -16,7 +16,7 @@ require 'partials/header.php';
                     <option value="moyen">Moyen</option>
                     <option value="difficile">Difficile</option>
                 </select>                    
-                <input type="submit" name="getQuestion" value="Obtenir une question" class="btn btn-primary">
+                <input type="submit" name="getQuestion" value="Obtenir une question" class="btn btn-primary" <?php if(!$activateGetQuestion) { echo 'disabled'; } ?>>
             </div>
             <br>
             <br>
@@ -24,7 +24,7 @@ require 'partials/header.php';
             <div class="enigma-bonus-center">
                 <label for="answer">Entrez votre réponse : </label>
                 <input type="text" name="answer" placeholder="Réponse">
-                <input type="submit" name="validate" value="Valider" class="btn btn-primary">
+                <input type="submit" name="validate" value="Valider" class="btn btn-primary" <?php if(!$activateValidate) { echo 'disabled'; } ?>>
             </div>
         </form>
         <br>
