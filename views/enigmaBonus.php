@@ -20,11 +20,21 @@ require 'partials/header.php';
             </div>
             <br>
             <br>
-            <h3 class="enigma-question">La question</h3>
+            <h3 class="enigma-question"><?php echo $question ?></h3>
             <div class="enigma-bonus-center">
                 <label for="answer">Entrez votre réponse : </label>
-                <input type="text" name="answer" placeholder="Réponse">
+                <input type="text" name="answer" id="answer" placeholder="Réponse">
                 <input type="submit" name="validate" value="Valider" class="btn btn-primary" <?php if(!$activateValidate) { echo 'disabled'; } ?>>
+                <?php if ($wrongAnswer){ ?>
+                        <div class="alert alert-danger" role="alert">
+                            Mot de passe ou nom de joueur incorrect.
+                        </div>
+                <?php } ?>
+                <?php if ($rightAnswer){ ?>
+                        <div class="alert alert-success" role="alert">
+                            Bravo ! Vous avez gagné <?php echo $recompense; ?> caps ! 
+                        </div>
+                <?php } ?>
             </div>
         </form>
         <br>
