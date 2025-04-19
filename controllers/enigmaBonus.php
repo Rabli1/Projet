@@ -6,13 +6,13 @@ require 'models/JoueursModel.php';
 
 
 $activateGetQuestion = true;
+$activateSelect = true;
 $activateValidate = false;
 $question = "";
-$difficulty = "";
-$recompense = 0;
+$bonusCaps = 0;
 $wrongAnswer = false;
 $rightAnswer = false;
-$recompense = 0;
+
 
 sessionStart();
 
@@ -30,55 +30,73 @@ try {
 }
 
 $joueur = $joueursModel->getJoueurByAlias($_SESSION['username']);
-$enigme=null;
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    switch ($_POST['difficulty']) {
-        case 'facile':
-            $difficulty = "f";
-            $recompense = 50;
-            break;
-        case 'moyen':
-            $difficulty = "m";
-            $recompense = 100;
-            break;
-        case 'difficile':
-            $difficulty = "d";
-            $recompense = 200;
-            break;
-    }
-
-
     if(isset($_POST['getQuestion'])){
+        switch ($_POST['difficulty']) {
+            case 'facile':
+                $_SESSION['difficulty'] = "f";
+                $_SESSION['recompense'] = 50;
+                break;
+            case 'moyen':
+                $_SESSION['difficulty'] = "m";
+                $_SESSION['recompense'] = 100;
+                break;
+            case 'difficile':
+                $_SESSION['difficulty'] = "d";
+                $_SESSION['recompense'] = 200;
+                break;
+        }
 
-        //$enigme = $enigmesModel->getRandomEnigmeByDifficulty($difficulty);
-        $enigme = $enigmesModel->getRandomEnigme();
+
+        $enigme = $enigmesModel->getRandomEnigmeByDifficulty($_SESSION['difficulty']);
+        //$enigme = $enigmesModel->getRandomEnigme();
 
         $question = $enigme->getDescription();
         $_SESSION['answer'] = $enigme->getReponse();
 
         $activateGetQuestion = false;
+        $activateSelect = false;
         $activateValidate = true;
+
         $rightAnswer = false;
         $wrongAnswer = false;
-
-        
     }
 
     if(isset($_POST['validate'])){
         if(strtoupper($_POST['answer']) == strtoupper($_SESSION['answer'])){
 
-            $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() + $recompense);
-            $_SESSION['montantCaps'] = $joueur->getMontantCaps();
+            if($_SESSION['difficulty'] == "d"){
+                if (!isset($_SESSION['goodAnswers'])) {
+                    $_SESSION['goodAnswers'] = 0;
+                }
+                $_SESSION['goodAnswers']++;
+            }
+
+            if(isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3){
+                $_SESSION['goodAnswers'] = 0;
+                $bonusCaps = 1000;
+            } else {
+                $bonusCaps = 0;
+            }
+
+            $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'] + $bonusCaps;
+            $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
+
+            $_SESSION['montantCaps'] = $newCaps;
+
             unset($_POST['answer']);
             unset($_SESSION['answer']);
             $rightAnswer = true;
         }else{
             $wrongAnswer = true;
+            $_SESSION['goodAnswers'] = 0;
         }
 
         $activateGetQuestion = true;
+        $activateSelect = true;
         $activateValidate = false;
     }
 }

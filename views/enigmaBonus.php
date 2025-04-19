@@ -8,13 +8,15 @@ require 'partials/header.php';
     <br>
     <h2 class="enigma-gains">Enigma Mode Bonus</h2>
     <br>
-        <form method="post" > 
+    <h4 class="enigma-gains">Nombre de bonnes réponses consécutive : <?php echo isset($_SESSION['goodAnswers']) ? $_SESSION['goodAnswers'] : 0; ?></h4>  
+    <br>
+        <form method="post" action="enigmaBonus"> 
             <div class="enigma-bonus-center">
                 <label for="difficulty">Choisissez la difficulté :</label>
-                <select name="difficulty" id="difficulty" required>
-                    <option value="facile">Facile</option>
-                    <option value="moyen">Moyen</option>
-                    <option value="difficile">Difficile</option>
+                <select name="difficulty" id="difficulty" value="<?php echo $_SESSION['difficulty'] ?>" required <?php if(!$activateSelect) { echo 'disabled'; } ?>>
+                    <option value="facile" <?php echo (isset($_SESSION['difficulty']) && $_SESSION['difficulty'] === 'f') ? 'selected' : ''; ?>>Facile</option>
+                    <option value="moyen" <?php echo (isset($_SESSION['difficulty']) && $_SESSION['difficulty'] === 'm') ? 'selected' : ''; ?>>Moyen</option>
+                    <option value="difficile" <?php echo (isset($_SESSION['difficulty']) && $_SESSION['difficulty'] === 'd') ? 'selected' : ''; ?>>Difficile</option>
                 </select>                    
                 <input type="submit" name="getQuestion" value="Obtenir une question" class="btn btn-primary" <?php if(!$activateGetQuestion) { echo 'disabled'; } ?>>
             </div>
@@ -32,7 +34,14 @@ require 'partials/header.php';
                 <?php } ?>
                 <?php if ($rightAnswer){ ?>
                         <div class="alert alert-success" role="alert">
-                            Bravo ! Vous avez gagné <?php echo $recompense; ?> caps ! 
+                            Bravo ! Vous avez gagné 
+                            <?php 
+                                if (isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] == 0) { 
+                                    echo "1200 caps !"; 
+                                } else { 
+                                    echo $_SESSION['recompense'] . " caps !"; 
+                                } 
+                            ?>                        
                         </div>
                 <?php } ?>
             </div>
