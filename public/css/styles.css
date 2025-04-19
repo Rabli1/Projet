@@ -339,5 +339,6 @@ footer img {
   justify-content: center; 
   align-items: center;
   font-weight: bold;
+  width: 50%; 
   color: blue;
 }

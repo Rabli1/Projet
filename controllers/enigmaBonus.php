@@ -52,7 +52,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         $enigme = $enigmesModel->getRandomEnigmeByDifficulty($_SESSION['difficulty']);
-        //$enigme = $enigmesModel->getRandomEnigme();
 
         $question = $enigme->getDescription();
         $_SESSION['answer'] = $enigme->getReponse();

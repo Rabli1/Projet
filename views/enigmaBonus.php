@@ -29,7 +29,7 @@ require 'partials/header.php';
                 <input type="submit" name="validate" value="Valider" class="btn btn-primary" <?php if(!$activateValidate) { echo 'disabled'; } ?>>
                 <?php if ($wrongAnswer){ ?>
                         <div class="alert alert-danger" role="alert">
-                            Mot de passe ou nom de joueur incorrect.
+                            Mauvaise réponse !
                         </div>
                 <?php } ?>
                 <?php if ($rightAnswer){ ?>

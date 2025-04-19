@@ -8,23 +8,32 @@ require 'partials/header.php';
     <br>
     <h2 class="enigma-gains">Enigma Mode Normal</h2>
     <br>
-    <div>
-        <h3 class="enigma-gains">Veuillez choisir votre mode de jeu</h3>
-        <br>
-        <br>
-        <div class="container-enigma-mode">          
-            <div class="enigma-mode">
-                <br>
-                <a href="/enigmaNormal" class="btn btn-primary">Normal</a>
-                <p>Dans ce mode, la question et la difficulté est aléatoire.</p>
+        <form method="post" action="enigmaNormal"> 
+            <div class="enigma-bonus-center">                
+                <input type="submit" name="getQuestion" value="Obtenir une question" class="btn btn-primary" <?php if(!$activateGetQuestion) { echo 'disabled'; } ?>>
             </div>
-            <div class="enigma-mode">
-                <br>
-                <a href="/enigmaBonus" class="btn btn-primary">Bonus</a>
-                <p>Dans ce mode, la question est aléatoire, mais la difficulté est votre choix.</p>
-                <p>Si vous répondez à 3 questions difficiles de suites un bonus de 1000 caps vous est accordé.</p>
+            <br>
+            <br>
+            <h3 class="enigma-question"><?php echo $question ?></h3>
+            <div class="enigma-bonus-center">
+                <label for="answer">Entrez votre réponse : </label>
+                <input type="text" name="answer" id="answer" placeholder="Réponse">
+                <input type="submit" name="validate" value="Valider" class="btn btn-primary" <?php if(!$activateValidate) { echo 'disabled'; } ?>>
+                <?php if ($wrongAnswer){ ?>
+                        <div class="alert alert-danger" role="alert">
+                            Mauvaise réponse !
+                        </div>
+                <?php } ?>
+                <?php if ($rightAnswer){ ?>
+                        <div class="alert alert-success" role="alert">
+                            Bravo ! Vous avez gagné 
+                            <?php 
+                                echo $_SESSION['recompense'] . " caps !";
+                            ?>                        
+                        </div>
+                <?php } ?>
             </div>
-        </div>
+        </form>
         <br>
         <div class="enigma-gains">
             <h3>Récompenses</h3>
