@@ -341,3 +341,41 @@ footer img {
   font-weight: bold;
   color: blue;
 }
+
+.players-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.player-card {
+  flex: 0 0 calc(33.333% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.player-card h4 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.player-card p {
+  margin: 5px 0;
+  font-size: 1em;
+  justify-self: flex-start;
+}
+
+.player-card .btn {
+  margin-top: 10px;
+}
+
+.player-card .btn:disabled {
+  background-color: red;
+  color: black;
+  cursor: not-allowed;
+}

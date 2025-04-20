@@ -11,9 +11,10 @@ class Joueurs {
     private $poidsMaxTransport;
     private $motDePasse;
     private $estAdmin;
+    private $ajoutCapsCount;
 
     // Constructor
-    public function __construct($idJoueurs, $alias, $nom, $prenom, $montantCaps, $dexterite, $pointDeVie, $poidsMaxTransport, $motDePasse, $estAdmin) {
+    public function __construct($idJoueurs, $alias, $nom, $prenom, $montantCaps, $dexterite, $pointDeVie, $poidsMaxTransport, $motDePasse, $estAdmin, $ajoutCapsCount) {
         $this->idJoueurs = $idJoueurs;
         $this->alias = $alias;
         $this->nom = $nom;
@@ -24,6 +25,7 @@ class Joueurs {
         $this->poidsMaxTransport = $poidsMaxTransport;
         $this->motDePasse = $motDePasse;
         $this->estAdmin = $estAdmin;
+        $this->ajoutCapsCount = $ajoutCapsCount;
     }
 
     // Getters and Setters
@@ -105,6 +107,14 @@ class Joueurs {
 
     public function setEstAdmin($estAdmin) {
         $this->estAdmin = $estAdmin;
+    }
+
+    public function getAjoutCapsCount() {
+        return $this->ajoutCapsCount;
+    }
+
+    public function setAjoutCapsCount($ajoutCapsCount) {
+        $this->ajoutCapsCount = $ajoutCapsCount;
     }
 }
 ?>

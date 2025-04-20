@@ -53,7 +53,13 @@
                         </span>
                     <?php } ?>
                 </div>
-
+                <?php if (isAuthenticated() && isAdministrator()) { ?>
+                    <div class="admin-panel-wrapper me-3">
+                        <a class="btn btn-outline-light" href="/adminPanel" title="Admin Panel">
+                            <i class="bi bi-shield-lock"></i> <!-- Icone du panneau admin -->
+                        </a>
+                    </div>
+                <?php } ?>
                 <div class="d-flex align-items-center">
                     <!-- Connexion / Création de compte -->
                     <?php if (!isAuthenticated()) { ?>

@@ -45,7 +45,7 @@ function isAuthenticated() : bool
 function isAdministrator() : bool 
 {
     sessionStart();
-    return !empty($_SESSION['user']) && $_SESSION['user']['role'] == '1';
+    return !empty($_SESSION['estAdmin']) && $_SESSION['estAdmin']== '1';
 }
 
 function addToCart($itemId, $itemsModel) {

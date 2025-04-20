@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['dexterite'] = $joueur->getDexterite();
         $_SESSION['poids'] = $remainingWeight;
         $_SESSION['poidsMaxTransport'] = $joueur->getPoidsMaxTransport();
+        $_SESSION['estAdmin'] = $joueur->getEstAdmin();
         redirect('index');
     } else {
         $errorLogin = true;
