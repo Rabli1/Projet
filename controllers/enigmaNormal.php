@@ -9,6 +9,7 @@ $activateGetQuestion = true;
 $activateSelect = true;
 $activateValidate = false;
 $question = "";
+$difficulty = "";
 $wrongAnswer = false;
 $rightAnswer = false;
 
