@@ -313,41 +313,78 @@ footer img {
   cursor: not-allowed;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .table-container {
-    width: 100%;
-  }
-
+/* Responsive styles pour mobile et petites fenêtres */
+@media (max-width: 576px) {
   .img-thumbnail {
-    max-width: 300px;
+    width: 90%;
+    height: auto;
+    padding: 5px;
+  }
+
+  .img-thumbnail img {
+    max-width: 100%;
+    max-height: 200px;
+    padding-top: 2%;
+  }
+
+  .img-thumbnail h4 {
+    font-size: 1em;
   }
 
   .btn-order {
     width: 100%;
+    font-size: 0.9em;
+    padding: 8px 16px;
   }
 
-  .player-card {
-    flex: 0 0 calc(50% - 20px);
+  .table-container {
+    width: 100%;
   }
-}
 
-@media (max-width: 576px) {
-  .img-thumbnail {
-    max-width: 250px;
+  .table {
+    font-size: 0.9em;
+  }
+
+  #search {
+    width: 90%;
   }
 
   .player-card {
     flex: 0 0 100%;
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+
+  .player-card h4 {
+    font-size: 1.2em;
+  }
+
+  .player-card p {
+    font-size: 0.9em;
+  }
+
+  .nav-scroller .nav {
+    padding-bottom: 0.5rem;
+  }
+
+  .price,
+  .quantity,
+  .weight {
+    font-size: 0.8em;
+    padding: 3px;
+  }
+
+  .checkbox-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .reduce-size {
+    font-size: 0.75em;
   }
 
   .cart-wrapper .badge {
-    font-size: 0.6rem;
-    padding: 0.2em 0.4em;
+    font-size: 0.65rem;
   }
 }
