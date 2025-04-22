@@ -141,3 +141,56 @@ body {
     border-radius: 10px;
     border: 1px solid green;
 }
+
+@media (max-width: 576px) {
+    body {
+      background-size: contain;
+      background-position: center;
+    }
+  
+    .enigma-mode {
+      width: 100%;
+      padding: 5px;
+    }
+  
+    .enigma-mode a {
+      font-size: 14px;
+      padding: 8px 0;
+    }
+  
+    .container-enigma-mode {
+      flex-direction: column;
+      gap: 20px;
+      padding: 10px;
+    }
+  
+    .enigma-bonus-center,
+    .enigma-question {
+      width: 90%;
+      padding: 10px;
+    }
+  
+    .enigma-question {
+      font-size: 0.95em;
+    }
+  
+    .dropdown-content {
+      width: 100%;
+      font-size: 0.9em;
+    }
+  
+    .reponse {
+      font-size: 0.9em;
+      padding: 8px;
+    }
+  
+    .nav-scroller .nav {
+      padding-bottom: 0.5rem;
+    }
+  
+    .boutonQuestion {
+      font-size: 0.9em;
+      padding: 8px 12px;
+    }
+  }
+  
