@@ -313,3 +313,41 @@ footer img {
   cursor: not-allowed;
 }
 
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    width: 100%;
+  }
+
+  .img-thumbnail {
+    max-width: 300px;
+  }
+
+  .btn-order {
+    width: 100%;
+  }
+
+  .player-card {
+    flex: 0 0 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) {
+  .img-thumbnail {
+    max-width: 250px;
+  }
+
+  .player-card {
+    flex: 0 0 100%;
+  }
+
+  .cart-wrapper .badge {
+    font-size: 0.6rem;
+    padding: 0.2em 0.4em;
+  }
+}
