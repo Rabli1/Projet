@@ -38,6 +38,7 @@ require 'partials/enigmaHeader.php';
             </div>
         </div>
         <br>
+        <br>
         <div class="enigma-gains">
             <h3>Récompenses</h3>
             Énigme difficile → 200 caps<br>
@@ -46,6 +47,12 @@ require 'partials/enigmaHeader.php';
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>

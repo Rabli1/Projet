@@ -2,6 +2,9 @@ body {
     background-color: rgb(0, 24, 0);
     color: rgb(2, 207, 2);
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url('../img/enigma.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .navbar-brand {
