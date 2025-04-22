@@ -117,7 +117,7 @@ footer img {
 .img-thumbnail {
   position: relative;
   width: 400px;
-  height: 700px;
+  height: 500px;
   overflow: hidden;
   margin: 10px;
   padding: 10px;
@@ -130,6 +130,31 @@ footer img {
 }
 
 .img-thumbnail img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  max-width: 250px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 5%;
+}
+
+.img-thumbnail-desc {
+  position: relative;
+  width: 400px;
+  height: 700px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.img-thumbnail-desc img {
   width: 100%;
   height: auto;
   max-height: 300px;

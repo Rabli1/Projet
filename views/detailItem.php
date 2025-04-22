@@ -8,7 +8,7 @@ require 'partials/header.php';
             <tr>
                 <td>
 
-                    <div class="img-thumbnail" style="padding-bottom: 50px;">
+                    <div class="img-thumbnail-desc" style="padding-bottom: 50px;">
                         <div class="price price-container">
                             <?= htmlspecialchars($item->getPrixItem()) ?>
                             <img class="price-container" src="public/img/caps.png" alt="caps" style="max-width: 16px">
