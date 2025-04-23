@@ -76,12 +76,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if(isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3){
                 $_SESSION['goodAnswers'] = 0;
-                $bonusCaps = 1000;
+                $_SESSION['recompense'] += 1000;
             } else {
                 $bonusCaps = 0;
             }
 
-            $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'] + $bonusCaps;
+            $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'];
             $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
 
             $_SESSION['montantCaps'] = $newCaps;
