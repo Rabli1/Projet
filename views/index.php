@@ -84,7 +84,7 @@ require 'partials/header.php';
                                             <br>
                                             <br>
                                             <button type="submit"
-                                                class="btn btn-order add-to-cart <?= !isAuthenticated() || $item->getQteStock() <= 0 ? 'btn-danger' : 'btn-primary' ?>"
+                                                class="btn btn-order add-to-cart <?= isAdministrator() || !isAuthenticated() || $item->getQteStock() <= 0 ? 'btn-danger' : 'btn-primary' ?>"
                                                 name="add_to_cart" <?= isAdministrator() || !isAuthenticated() || $item->getQteStock() <= 0 ? 'disabled' : '' ?>>
                                                 <span class="bi-cart-fill"></span> Ajouter au panier
                                             </button>
