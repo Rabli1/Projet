@@ -73,50 +73,7 @@ require 'partials/header.php';
                                         <div class="weight price-container"><?= $item->getPoidsItem() ?> lbs<img
                                                 src="public/img/weight.webp" alt="lbs" class="price-container"
                                                 style="max-width: 16px"></div>
-                                        <?php
-                                        switch ($item->getTypeItem()) {
-                                            case 'r':
-                                                $armure = $armuresModel->selectById($item->getIdItem());
-                                                if ($armure) {
-                                                    echo "<div><strong>Matière :</strong> " . $armure->getMatière() . "</div>";
-                                                    echo "<div><strong>Taille :</strong> " . $armure->getTaille() . "</div>";
-                                                }
-                                                break;
-                                            case 'a':
-                                                $arme = $armesModel->selectById($item->getIdItem());
-                                                if ($arme) {
-                                                    echo "<div><strong>Efficacité :</strong> " . $arme->getEfficacité() . "</div>";
-                                                    echo "<div><strong>Type :</strong> " . $arme->getTypeArmes() . "</div>";
-                                                    echo "<div class='reduce-size'><strong>Description :</strong> " . $arme->getDescription() . "</div>";
-                                                    echo "<div><strong>Calibre :</strong> " . $arme->getCalibre() . "</div>";
-                                                }
-                                                break;
-                                            case 'm':
-                                                $medicament = $medicamentsModel->selectById($item->getIdItem());
-                                                if ($medicament) {
-                                                    echo "<div><strong>Durée Effet :</strong> " . $medicament->getDuréeEffet() . "</div>";
-                                                    echo "<div class='reduce-size'><strong>Effet Indésirable :</strong> " . $medicament->getEffetIndésirable() . "</div>";
-                                                    echo "<div><strong>Points de Vie :</strong> " . $medicament->getPtsVie() . "</div>";
-                                                    echo "<div class='reduce-size'><strong>Effet :</strong> " . $medicament->getEffet() . "</div>";
-                                                }
-                                                break;
-                                            case 'n':
-                                                $nourriture = $nourrituresModel->selectById($item->getIdItem());
-                                                if ($nourriture) {
-                                                    echo "<div><strong>Apport Calorique :</strong> " . $nourriture->getApportCalorique() . "</div>";
-                                                    echo "<div><strong>Composant Nutritif :</strong> " . $nourriture->getComposantNutritif() . "</div>";
-                                                    echo "<div><strong>Minéral Principal :</strong> " . $nourriture->getMineralPrincipal() . "</div>";
-                                                    echo "<div><strong>Points de Vie :</strong> " . $nourriture->getPtsVie() . "</div>";
-                                                }
-                                                break;
-                                            case 'u':
-                                                $munition = $munitionsModel->selectById($item->getIdItem());
-                                                if ($munition) {
-                                                    echo "<div><strong>Calibre :</strong> " . $munition->getCalibre() . "</div>";
-                                                }
-                                                break;
-                                        }
-                                        ?>
+                                        
                                         <form method="POST">
                                             <input type="hidden" name="idItem" value="<?= $item->getIdItem() ?>">
                                             <input type="hidden" name="name" value="<?= $item->getNomItem() ?>">

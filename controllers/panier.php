@@ -64,6 +64,7 @@ if (isset($_POST['remove_item']) && !empty($_POST['id'])) {
 
 $cartItems = [];
 $totalWeight = 0;
+$totalWeightPanier = 0;
 $totalPrice = 0;
 
 if (!empty($_SESSION['cart'])) {
@@ -73,27 +74,31 @@ if (!empty($_SESSION['cart'])) {
         if ($item) {
             $item->setQuantite($quantite);
             $cartItems[] = $item;
-            $totalWeight += $item->getPoidsItem() * $quantite;
+            $totalWeightPanier += $item->getPoidsItem() * $quantite;
             $totalPrice += $item->getPrixItem() * $quantite;
         }
     }
 }
 
-$currentWeight = 0;
+
 $backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
 
 if (!empty($backpack) && is_array($backpack)) {
     foreach ($backpack as $item) {
-        $currentWeight += $item['poidsItem'] * $item['qteItems'];
+        $totalWeight += $item['poidsItem'] * $item['qteItems'];
     }
 }
 
 $poidsMaxTransport = $joueur->getPoidsMaxTransport();
-$remainingWeight = $poidsMaxTransport - $currentWeight;
+if($totalWeight < $poidsMaxTransport) {
+    $remainingWeight = $poidsMaxTransport - $totalWeight;
+} else {
+    $remainingWeight = 0;
+}
 
 $dexterityPenalty = 0;
-if ($totalWeight > $remainingWeight) {
-    $excessWeight = $totalWeight - $remainingWeight;
+if ($totalWeightPanier > $remainingWeight) {
+    $excessWeight = $totalWeightPanier - $remainingWeight;
     $dexterityPenalty = $excessWeight * 3;
 }
 
@@ -106,11 +111,23 @@ if (isset($_POST['clear_cart'])) {
 
 if (isset($_POST['buy_items'])) {
     if ($joueur->getMontantCaps() >= $totalPrice) {
-        if ($totalWeight > $remainingWeight) {
-            $excessWeight = $totalWeight - $remainingWeight;
+        $dexterityPenalty = 0;
+        if ($totalWeightPanier > $remainingWeight) {
+            $excessWeight = $totalWeightPanier - $remainingWeight;
             $dexterityPenalty = $excessWeight * 3;
-
-            $newDexterity = max(0, $joueur->getDexterite() - $dexterityPenalty);
+            
+            if($joueur->getDexterite() - $dexterityPenalty <= 0) {
+                $newDexterity = 0;
+                $_SESSION['dexterite'] = $newDexterity;
+            } 
+            else if($dexterityPenalty == 0 || $dexterityPenalty == null){
+                $_SESSION['dexterite'] = 100;
+            } 
+            else {
+                $newDexterity = $joueur->getDexterite() - $dexterityPenalty;
+                $_SESSION['dexterite'] = $newDexterity;
+            }
+            
             $joueursModel->updateDexterity($joueur->getIdJoueur(), $newDexterity);
         }
 
@@ -130,8 +147,12 @@ if (isset($_POST['buy_items'])) {
 
         $_SESSION['success_message'] = "Achat effectué avec succès !";
         $_SESSION['montantCaps'] = $newCaps;
-        $_SESSION['poids'] = $remainingWeight - $totalWeight;
-        $_SESSION['dexterite'] = $newDexterity;
+        if($poidsMaxTransport - $totalWeight - $totalWeightPanier <= 0){
+            $_SESSION['poids'] = 0;
+        } else {
+            $_SESSION['poids'] = $poidsMaxTransport - $totalWeight - $totalWeightPanier;
+        }
+        
         header('Location: ' . $_SERVER['REQUEST_URI']);
         exit;
     } else {

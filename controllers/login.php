@@ -27,21 +27,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($joueursModel->userExist($username) && password_verify($password, $joueur->getMotDePasse())) {
 
-        $currentWeight = 0;
         $backpack = $backpackModel->getItemsInBackpack($joueur->getIdJoueur());
 
+        $totalWeight = 0;
         if (!empty($backpack) && is_array($backpack)) {
             foreach ($backpack as $item) {
-                $currentWeight += $item['poidsItem'] * $item['qteItems'];
+                $totalWeight += $item['poidsItem'] * $item['qteItems'];
             }
         }
 
         $poidsMaxTransport = $joueur->getPoidsMaxTransport();
 
-        if($remainingWeight > 0)
-            $remainingWeight = $poidsMaxTransport - $currentWeight;
+        if($poidsMaxTransport - $totalWeight > 0)
+            $remainingWeight = $poidsMaxTransport - $totalWeight;
 
-        else
+        else if($poidsMaxTransport - $totalWeight <= 0)
             $remainingWeight = 0;
 
        sessionStart();
@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['dexterite'] = $joueur->getDexterite();
         $_SESSION['poids'] = $remainingWeight;
         $_SESSION['poidsMaxTransport'] = $joueur->getPoidsMaxTransport();
+        $_SESSION['estAdmin'] = $joueur->getEstAdmin();
         redirect('index');
     } else {
         $errorLogin = true;

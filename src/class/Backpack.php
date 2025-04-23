@@ -2,13 +2,13 @@
 
 class Backpack {
     private $idJoueurs;
-    private $idItem;
+    private $idItems;
     private $qteItems;
     private $poidsTotal;
 
-    public function __construct($idJoueurs, $idItem, $qteItems, $poidsTotal) {
+    public function __construct($idJoueurs, $idItems, $qteItems, $poidsTotal) {
         $this->idJoueurs = $idJoueurs;
-        $this->idItem = $idItem;
+        $this->idItem = $idItems;
         $this->qteItems = $qteItems;
         $this->poidsTotal = $poidsTotal;
     }
@@ -22,11 +22,11 @@ class Backpack {
     }
 
     public function getIdItem() {
-        return $this->idItem;
+        return $this->idItems;
     }
 
-    public function setIdItem($idItem) {
-        $this->idItem = $idItem;
+    public function setIdItem($idItems) {
+        $this->idItems = $idItems;
     }
 
     public function getQteItems() {

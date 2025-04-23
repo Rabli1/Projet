@@ -26,6 +26,23 @@ if (isAuthenticated()) {
 
     $nomJoueur = $joueur->getAlias();
     $montantCaps = $joueur->getMontantCaps();
+
+    $totalWeight = 0;
+    foreach ($backpackItems as $item) { 
+        $totalWeight += $item['poidsItem'] * $item['qteItems'];
+    }
+    $_SESSION['montantCaps'] = $montantCaps;
+    if($joueur->getPoidsMaxTransport() - $totalWeight <= 0){
+        $_SESSION['dexterite'] = 100 - (($totalWeight - $joueur->getPoidsMaxTransport()) * 3);
+        $joueursModel->updateDexterity($joueur->getIdJoueur(), $_SESSION['dexterite']);
+        $_SESSION['poids'] = 0;
+    }
+    else {
+        $_SESSION['poids'] = $joueur->getPoidsMaxTransport() - $totalWeight;
+        $_SESSION['dexterite'] = 100;
+        $joueursModel->updateDexterity($joueur->getIdJoueur(), $_SESSION['dexterite']);
+    }
+
 } else {
     header('Location: /connexion');
     exit;
@@ -40,8 +57,7 @@ if (isset($_POST['sell_item']) && !empty($_POST['idItem']) && !empty($_POST['qua
     if ($item && $item['qteItems'] >= $quantite) {
         $totalPrice = $item['prixItem'] * $quantite * 0.6;
 
-        $newQuantity = $item['qteItems'] - $quantite;
-        $backpackModel->updateItemQuantity($joueur->getIdJoueur(), $idItem, $newQuantity);
+        $backpackModel->sellItemFromBackpack($joueur->getIdJoueur(), $idItem, $item['prixItem'], $quantite);
 
         $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() + $totalPrice);
 

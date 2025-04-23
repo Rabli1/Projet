@@ -25,6 +25,7 @@
                 <?php } ?>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <?php if (isAuthenticated() && !isAdministrator()) { ?>
+                        <li><a class="nav-link" href="/enigma">Enigma</a></li>
                         <li><a class="nav-link" href="/inventaire">Inventaire</a></li>
                         <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
                     <?php } ?>
@@ -40,7 +41,7 @@
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-dumbbell"></i> <!-- Icone de la dextérité -->
-                            <?php echo $_SESSION['dexterite']; ?> / 100 dextérité
+                            <?php echo $_SESSION['dexterite'] ?> / 100 dextérité
                         </span>
                         <span class="navbar-text me-3">
                             <i class="fas fa-weight"></i> <!-- Icone du poids -->
@@ -48,7 +49,13 @@
                         </span>
                     <?php } ?>
                 </div>
-
+                <?php if (isAuthenticated() && isAdministrator()) { ?>
+                    <div class="admin-panel-wrapper me-3">
+                        <a class="btn btn-outline-light" href="/adminPanel" title="Admin Panel">
+                            <i class="bi bi-shield-lock"></i> <!-- Icone du panneau admin -->
+                        </a>
+                    </div>
+                <?php } ?>
                 <div class="d-flex align-items-center">
                     <!-- Connexion / Création de compte -->
                     <?php if (!isAuthenticated()) { ?>

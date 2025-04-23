@@ -5,7 +5,9 @@
 
 sessionStart();
 
-
+if(!isAuthenticated()) {
+    redirect('/');
+}
 
 
 

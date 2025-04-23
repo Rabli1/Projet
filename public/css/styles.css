@@ -117,7 +117,7 @@ footer img {
 .img-thumbnail {
   position: relative;
   width: 400px;
-  height: 700px;
+  height: 500px;
   overflow: hidden;
   margin: 10px;
   padding: 10px;
@@ -130,6 +130,31 @@ footer img {
 }
 
 .img-thumbnail img {
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  max-width: 250px;
+  display: block;
+  margin: 0 auto;
+  padding-top: 5%;
+}
+
+.img-thumbnail-desc {
+  position: relative;
+  width: 400px;
+  height: 700px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.img-thumbnail-desc img {
   width: 100%;
   height: auto;
   max-height: 300px;
@@ -275,31 +300,116 @@ footer img {
   font-weight: bold;
 }
 
-.enigma-mode {
-  display: flex; 
-  flex-direction: column; 
-  align-items: flex-start; 
-  gap: 10px; 
-  padding: 10px; 
-}
-
-.enigma-mode a {
-  display: inline-block; 
-  text-align: center; 
-  width: 100%; 
-  font-size: 16px; 
-  border-radius: 5px; 
-}
-
-.enigma-mode a:hover {
-  background-color: #0056b3;
-}
-
-.container-enigma-mode {
-  display: flex; 
+.players-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: center;
-  align-items: flex-start; 
-  gap: 100px; 
-  border: 1px solid #ccc; 
-  border-radius: 5px;
+}
+
+.player-card {
+  flex: 0 0 calc(33.333% - 20px);
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.player-card h4 {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.player-card p {
+  margin: 5px 0;
+  font-size: 1em;
+  justify-self: flex-start;
+}
+
+.player-card .btn {
+  margin-top: 10px;
+}
+
+.player-card .btn:disabled {
+  background-color: red;
+  color: black;
+  cursor: not-allowed;
+}
+
+/* Responsive styles pour mobile et petites fenêtres */
+@media (max-width: 576px) {
+  .img-thumbnail {
+    width: 90%;
+    height: auto;
+    padding: 5px;
+  }
+
+  .img-thumbnail img {
+    max-width: 100%;
+    max-height: 200px;
+    padding-top: 2%;
+  }
+
+  .img-thumbnail h4 {
+    font-size: 1em;
+  }
+
+  .btn-order {
+    width: 100%;
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .table-container {
+    width: 100%;
+  }
+
+  .table {
+    font-size: 0.9em;
+  }
+
+  #search {
+    width: 90%;
+  }
+
+  .player-card {
+    flex: 0 0 100%;
+    margin: 5px 0;
+    font-size: 0.9em;
+  }
+
+  .player-card h4 {
+    font-size: 1.2em;
+  }
+
+  .player-card p {
+    font-size: 0.9em;
+  }
+
+  .nav-scroller .nav {
+    padding-bottom: 0.5rem;
+  }
+
+  .price,
+  .quantity,
+  .weight {
+    font-size: 0.8em;
+    padding: 3px;
+  }
+
+  .checkbox-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .reduce-size {
+    font-size: 0.75em;
+  }
+
+  .cart-wrapper .badge {
+    font-size: 0.65rem;
+  }
 }
