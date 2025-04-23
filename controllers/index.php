@@ -92,4 +92,5 @@ if (isset($_POST['add_to_cart']) && !empty($_POST['idItem'])) {
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 }
+$_SESSION['pv'];
 require 'views/index.php';
