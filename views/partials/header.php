@@ -28,11 +28,7 @@
                         <li><a class="nav-link" href="/inventaire">Inventaire</a></li>
                         <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
                     <?php } ?>
-                    <?php if (isAuthenticated() && isAdministrator()) { ?>
-                        <li><a class="nav-link" href="/gerer-client">Gérer les utilisateurs</a></li>
-                    <?php } ?>
                 </ul>
-
                 <div class="d-flex align-items-center">
                     <?php if (isAuthenticated()) { ?>
                         <span class="navbar-text me-3">
