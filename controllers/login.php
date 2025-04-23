@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        sessionStart();
         $_SESSION['username'] = $username;
         $_SESSION['joueurs_id'] = $joueur->getIdJoueur();
+        $_SESSION['pv'] = $joueur->getPointDeVie();
         $_SESSION['montantCaps'] = $joueur->getMontantCaps();
         $_SESSION['dexterite'] = $joueur->getDexterite();
         $_SESSION['poids'] = $remainingWeight;
