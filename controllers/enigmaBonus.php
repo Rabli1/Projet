@@ -72,17 +72,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if($_SESSION['difficulty'] == "d"){
                 if (!isset($_SESSION['goodAnswers'])) {
-                    $_SESSION['goodAnswers'] = 0;
+                    $_SESSION['goodAnswers'] = 0;//initialise la variable de session si elle n'existe pas
                 }
                 $_SESSION['goodAnswers']++;
             }
 
             if(isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3){
                 $_SESSION['goodAnswers'] = 0;
-                $_SESSION['recompense'] += 1000;
-            } else {
-                $bonusCaps = 0;
-            }
+                $_SESSION['recompense'] += 1000;//donne le bonus de 1000 caps quand le joueur a reussi 3 enigmes difficiles
+            } 
 
             $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'];
             $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
