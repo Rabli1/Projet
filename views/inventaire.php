@@ -61,7 +61,7 @@ require 'partials/header.php';
             <td><?= $item['qteItems'] ?></td>
             <td>
                 <?php if ($item['typeItem'] === 'n'): ?>
-                <form method="POST" action="inventaire" style="padding-bottom: 50%;>
+                <form method="POST" action="inventaire" style="padding-bottom: 50%;">
                     <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
                     <button type="submit" name="manger" class="btn btn-success" 
                         <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>

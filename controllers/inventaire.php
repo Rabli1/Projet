@@ -75,7 +75,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['manger'])) {
 
     try {
         $item = $itemsModel->selectById($idItem);
-        if (!$item || $item->getTypeItem() !== 'n') {
+        if (!$item) {
+            throw new Exception("Cet item est vide.");
+        }
+        if ($item->getTypeItem() !== 'n') {
             throw new Exception("Cet item n'est pas une nourriture.");
         }
 
