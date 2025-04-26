@@ -93,6 +93,10 @@ require 'partials/header.php';
                     <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
                     Vendre
                 </button>
+                <button type="submit" name="jeter_item" class="btn btn-warning" 
+                    <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
+                    Jeter
+                </button>
             </form>
             </td>
         </tr>

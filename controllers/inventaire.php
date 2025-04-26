@@ -48,26 +48,35 @@ if (isAuthenticated()) {
     exit;
 }
 
-if (isset($_POST['sell_item']) && !empty($_POST['idItem']) && !empty($_POST['quantite'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idItem = intval($_POST['idItem']);
-    $quantite = intval($_POST['quantite']);
+    $quantity = intval($_POST['quantite']);
+    $idJoueur = $_SESSION['joueurs_id'];
 
-    $item = $backpackModel->getItemFromBackpack($joueur->getIdJoueur(), $idItem);
+    if (isset($_POST['sell_item'])) {
 
-    if ($item && $item['qteItems'] >= $quantite) {
-        $totalPrice = $item['prixItem'] * $quantite * 0.6;
-
-        $backpackModel->sellItemFromBackpack($joueur->getIdJoueur(), $idItem, $item['prixItem'], $quantite);
-
-        $joueursModel->updateCaps($joueur->getIdJoueur(), $joueur->getMontantCaps() + $totalPrice);
-
-        $_SESSION['success_message'] = "Vous avez vendu $quantite " . htmlspecialchars($item['nomItem']) . " pour $totalPrice caps.";
-    } else {
-        $_SESSION['error_message'] = "Erreur : Quantité invalide ou insuffisante.";
+        try {
+            $backpackModel->sellItemFromBackpack($idJoueur, $idItem, $itemPrice, $quantity);
+            $_SESSION['success_message'] = "Vous avez vendu $quantity unité(s) de cet item.";
+            header("Location: inventaire");
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['error_message'] = "Erreur lors de la vente de l'item : " . $e->getMessage();
+            header("Location: inventaire");
+            exit;
+        }
+    } elseif (isset($_POST['jeter_item'])) {
+        try {
+            $backpackModel->jeterItem($idJoueur, $idItem, $quantity);
+            $_SESSION['success_message'] = "Vous avez jeté $quantity unité(s) de cet item. Votre dextérité a augmenté de". $quantity .".";
+            header("Location: inventaire");
+            exit;
+        } catch (Exception $e) {
+            $_SESSION['error_message'] = "Erreur lors du jet de l'item : " . $e->getMessage();
+            header("Location: inventaire");
+            exit;
+        }
     }
-
-    header('Location: ' . $_SERVER['REQUEST_URI']);
-    exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['manger'])) {
@@ -122,5 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['consomme'])) {
     header('Location: /inventaire');
     exit;
 }
+
 
 require 'views/inventaire.php';

@@ -12,7 +12,7 @@ const ROUTES = [
     '/inventaire' => 'inventaire.php',
     '/detailItem' => 'detailItem.php',
     '/adminPanel' => 'adminPanel.php',
-    '/enigma' => 'enigma.php',
+    '/enigma' => 'enigma.php', 
     '/enigmaNormal' => 'enigmaNormal.php',
     '/enigmaBonus' => 'enigmaBonus.php',
 ];
