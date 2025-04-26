@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['jeter_item'])) {
         try {
             $backpackModel->jeterItem($idJoueur, $idItem, $quantity);
-            $_SESSION['success_message'] = "Vous avez jeté $quantity unité(s) de cet item. Votre dextérité a augmenté de". $quantity .".";
+            $_SESSION['success_message'] = "Vous avez jeté $quantity unité(s) de cet item." . ($_SESSION["dexterite"] >= 100 ? "" : " Votre dextérité a augmenté de " . ($quantity * 3) . ".");
             header("Location: inventaire");
             exit;
         } catch (Exception $e) {

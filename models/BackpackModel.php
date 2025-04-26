@@ -155,14 +155,6 @@ class BackpackModel
                 'playerId' => $playerId,
                 'itemId' => $itemId
             ]);
-            
-            $query = "UPDATE joueurs 
-            SET dextérité = dextérité + $quantity 
-            WHERE idJoueurs = :playerId";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->execute([
-            'playerId' => $playerId
-            ]);
 
             $this->pdo->commit();
             return true;
