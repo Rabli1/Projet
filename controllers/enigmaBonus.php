@@ -93,8 +93,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             $wrongAnswer = true;
             $_SESSION['goodAnswers'] = 0;
-            $joueursModel->updatePdv($joueur->getIdJoueur(), $joueur->getPointDeVie() - $_SESSION['hpLoss']);
-            $_SESSION['pv'] = $joueur->getPointDeVie();
+            
+            $newHp = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
+            $joueursModel->updatePdv($joueur->getIdJoueur(), $newHp);
+            $_SESSION['pointDeVie'] = $newHp;
+
         }
 
         $activateGetQuestion = true;
