@@ -81,8 +81,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $wrongAnswer = true;
             
             $newHp = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
-            $joueursModel->updatePdv($joueur->getIdJoueur(), $newHp);
-            $_SESSION['pv'] = $newHp;
+
+            if ($newHp > 0) {
+                $joueursModel->updatePdv($joueur->getIdJoueur(), $newHp);
+                $_SESSION['pv'] = $newHp;
+            } else {
+                $joueursModel->updatePdv($joueur->getIdJoueur(), 0);
+                $_SESSION['pv'] = 0;
+            }
         }
 
         $activateGetQuestion = true;
