@@ -21,6 +21,10 @@
                             <?php echo $_SESSION['username']; ?>
                         </span>
                         <span class="navbar-text me-3">
+                            <i class="fas fa-heart"></i> <!-- Icone des pv -->
+                            <?php echo $_SESSION['pv']; ?> PV
+                        </span>
+                        <span class="navbar-text me-3">
                             <i class="fas fa-coins"></i> <!-- Icone des caps -->
                             <?php echo $_SESSION['montantCaps']; ?> caps
                         </span>
