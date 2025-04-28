@@ -39,14 +39,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             case 'facile':
                 $_SESSION['difficulty'] = "f";
                 $_SESSION['recompense'] = 50;
+                $_SESSION['hpLoss'] = 3;
                 break;
             case 'moyen':
                 $_SESSION['difficulty'] = "m";
                 $_SESSION['recompense'] = 100;
+                $_SESSION['hpLoss'] = 6;
                 break;
             case 'difficile':
                 $_SESSION['difficulty'] = "d";
                 $_SESSION['recompense'] = 200;
+                $_SESSION['hpLoss'] = 10;
                 break;
         }
 
@@ -69,19 +72,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if($_SESSION['difficulty'] == "d"){
                 if (!isset($_SESSION['goodAnswers'])) {
-                    $_SESSION['goodAnswers'] = 0;
+                    $_SESSION['goodAnswers'] = 0;//initialise la variable de session si elle n'existe pas
                 }
                 $_SESSION['goodAnswers']++;
             }
 
             if(isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3){
                 $_SESSION['goodAnswers'] = 0;
-                $bonusCaps = 1000;
-            } else {
-                $bonusCaps = 0;
-            }
+                $_SESSION['recompense'] += 1000;//donne le bonus de 1000 caps quand le joueur a reussi 3 enigmes difficiles
+            } 
 
-            $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'] + $bonusCaps;
+            $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'];
             $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
 
             $_SESSION['montantCaps'] = $newCaps;
@@ -92,6 +93,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             $wrongAnswer = true;
             $_SESSION['goodAnswers'] = 0;
+            $joueursModel->updatePdv($joueur->getIdJoueur(), $joueur->getPointDeVie() - $_SESSION['hpLoss']);
+            $_SESSION['pv'] = $joueur->getPointDeVie();
         }
 
         $activateGetQuestion = true;

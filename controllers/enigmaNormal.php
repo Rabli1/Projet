@@ -46,12 +46,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         switch ($difficulty) {
             case 'f':
                 $_SESSION['recompense'] = 50;
+                $_SESSION['hpLoss'] = 3;
                 break;
             case 'm':
                 $_SESSION['recompense'] = 100;
+                $_SESSION['hpLoss'] = 6;
                 break;
             case 'd':
                 $_SESSION['recompense'] = 200;
+                $_SESSION['hpLoss'] = 10;
                 break;
         }
 
@@ -76,6 +79,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             $rightAnswer = true;
         }else{
             $wrongAnswer = true;
+            $joueursModel->updatePdv($joueur->getIdJoueur(), $joueur->getPointDeVie() - $_SESSION['hpLoss']);
+            $_SESSION['pv'] = $joueur->getPointDeVie();
         }
 
         $activateGetQuestion = true;

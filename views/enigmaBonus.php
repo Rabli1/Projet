@@ -50,13 +50,7 @@ require 'partials/enigmaHeader.php';
                 <div class="alert reponse" role="alert">
                     <i class="bi bi-hand-thumbs-up"></i>
                     Bravo ! Vous avez gagné
-                    <?php
-                    if (isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] == 0) {
-                        echo "1200 caps !";
-                    } else {
-                        echo $_SESSION['recompense'] . " caps !";
-                    }
-                    ?>
+                    <?php echo $_SESSION['recompense'] . " caps !"; ?>
                     <i class="bi bi-hand-thumbs-up"></i>
                 </div>
             <?php } ?>

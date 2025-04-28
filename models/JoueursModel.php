@@ -100,6 +100,12 @@ class JoueursModel
         $stmt->execute();
     }
 
+    public function updatePdv($joueurId, $newHp) {
+        $sql = "UPDATE joueurs SET pointDeVie = :newHp WHERE idJoueurs = :joueurId";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute(['newHp' => $newHp, 'joueurId' => $joueurId]);
+    }
+
     public function addNewJoueur($prenom, $nom, $alias, $motDePasse) {
         $sql = "INSERT INTO joueurs (prenom, nom, alias, motDePasse, ajoutCapsCount) VALUES (:prenom, :nom, :alias, :motDePasse, 0)";
         $stmt = $this->pdo->prepare($sql);

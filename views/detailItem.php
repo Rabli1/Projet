@@ -3,11 +3,10 @@ require 'partials/head.php';
 require 'partials/header.php';
 ?>
 
-    <div class="table-container" style="padding-left: 25%;">
-        <table class="table" style="width: 100%;">
+<div class="table-container" style="padding-left: 25%;">
+        <table class="table" style="width: 100%; border-color: white;">
             <tr>
                 <td>
-
                     <div class="img-thumbnail-desc" style="padding-bottom: 50px;">
                         <div class="price price-container">
                             <?= htmlspecialchars($item->getPrixItem()) ?>
@@ -75,6 +74,49 @@ require 'partials/header.php';
             </tr>
         </table>
     </div>
+    <div style="margin-top: 50px; padding-left: 20%; padding-right: 20%;">
+    <h3>Laisser une évaluation</h3>
+<form method="POST" action="" style="margin-bottom: 30px;">
+    <div style="margin-bottom: 10px;">
+        <label for="evaluation">Évaluation (1 à 5) :</label>
+        <select name="evaluation" id="evaluation" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+    <div style="margin-bottom: 10px">
+        <label for="commentaire">Commentaire :</label>
+        <textarea name="commentaire" id="commentaire" rows="4" style="width: 100%;"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" name <?= $evaluationExist ? 'Modifier' : 'Soumettre' ?>> <?= $evaluationExist ? 'Modifier' : 'Soumettre' ?></button>
+    </form>
+
+    <h3>Évaluations des joueurs</h3>
+<?php if (!empty($evaluations)): ?>
+    <?php foreach ($evaluations as $evaluation): ?>
+        <div class="evaluation" style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; position: relative;">
+            <p><strong>Joueur :</strong> <?= htmlspecialchars($evaluation['joueurAlias']) ?></p>
+            <p><strong>Évaluation :</strong> <?= htmlspecialchars($evaluation['evaluation']) ?>/5</p>
+            <p><strong>Commentaire :</strong> <?= htmlspecialchars($evaluation['commentaire']) ?></p>
+            
+            <?php if (isAdministrator() || (isset($_SESSION['joueurs_id']) && $_SESSION['joueurs_id'] == $evaluation['idJoueurs'])): ?>
+                <form method="POST" action="" style="position: absolute; top: 10px; right: 10px;">
+                    <input type="hidden" name="idItem" value="<?= $idItem ?>">
+                    <input type="hidden" name="idJoueur" value="<?= $evaluation['idJoueurs'] ?>">
+                    <button type="submit" name="delete_comment" class="btn btn-danger btn-sm" title="Supprimer">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            <?php endif; ?>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>Aucune évaluation pour cet item.</p>
+<?php endif; ?>
+</div>
 </main>
 <?php require 'partials/footer.php'; ?>
 </body>
