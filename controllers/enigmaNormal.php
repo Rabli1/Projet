@@ -82,7 +82,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $newHp = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
             $joueursModel->updatePdv($joueur->getIdJoueur(), $newHp);
-            $_SESSION['pointDeVie'] = $newHp;
+            $_SESSION['pv'] = $newHp;
         }
 
         $activateGetQuestion = true;
