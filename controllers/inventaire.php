@@ -43,6 +43,8 @@ if (isAuthenticated()) {
         $joueursModel->updateDexterity($joueur->getIdJoueur(), $_SESSION['dexterite']);
     }
 
+    $_SESSION['pv'] = $joueur->getPointDeVie();
+
 } else {
     header('Location: /connexion');
     exit;
