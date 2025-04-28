@@ -52,7 +52,6 @@ class BackpackModel
     try {
         $this->pdo->beginTransaction();
 
-        // Réduire la quantité dans le sac à dos
         $query = "UPDATE sacàdos 
                   SET qteItems = qteItems - :quantity 
                   WHERE idJoueurs = :playerId AND sacàdos.idItem = :itemId";
@@ -63,7 +62,6 @@ class BackpackModel
             'itemId' => $itemId
         ]);
 
-        // Supprimer l'item si la quantité atteint 0
         $query = "DELETE FROM sacàdos 
                   WHERE sacàdos.idJoueurs = :playerId AND sacàdos.idItem = :itemId AND qteItems <= 0";
         $stmt = $this->pdo->prepare($query);
@@ -72,7 +70,6 @@ class BackpackModel
             'itemId' => $itemId
         ]);
 
-        // Ajouter les caps au joueur
         $capsEarned = $itemPrice * 0.6 * $quantity;
         $query = "UPDATE joueurs 
                   SET montantCaps = montantCaps + :capsEarned 
@@ -83,7 +80,6 @@ class BackpackModel
             'playerId' => $playerId
         ]);
 
-        // Augmenter le stock global de l'item
         $query = "UPDATE items 
                   SET qteStock = qteStock + :quantity 
                   WHERE items.idItem = :itemId";
@@ -134,6 +130,37 @@ class BackpackModel
             $this->pdo->commit();
             return true;
         } catch (Exception $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
+    public function jeterItem($playerId, $itemId, $quantity) {
+        try {
+            $this->pdo->beginTransaction();
+    
+            $query = "UPDATE sacàdos 
+                      SET qteItems = qteItems - :quantity 
+                      WHERE idJoueurs = :playerId AND idItem = :itemId";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'quantity' => $quantity,
+                'playerId' => $playerId,
+                'itemId' => $itemId
+            ]);
+    
+            $query = "DELETE FROM sacàdos 
+                      WHERE idJoueurs = :playerId AND idItem = :itemId AND qteItems <= 0";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                'playerId' => $playerId,
+                'itemId' => $itemId
+            ]);
+
+            $this->pdo->commit();
+            return true;
+        } 
+        
+        catch (Exception $e) {
             $this->pdo->rollBack();
             throw $e;
         }

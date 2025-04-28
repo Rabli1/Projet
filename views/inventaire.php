@@ -61,7 +61,7 @@ require 'partials/header.php';
             <td><?= $item['qteItems'] ?></td>
             <td>
                 <?php if ($item['typeItem'] === 'n'): ?>
-                <form method="POST" action="inventaire" style="padding-bottom: 50%;>
+                <form method="POST" action="inventaire" style="padding-bottom: 50%;">
                     <input type="hidden" name="idItem" value="<?= $item['idItem'] ?>">
                     <button type="submit" name="manger" class="btn btn-success" 
                         <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
@@ -92,6 +92,10 @@ require 'partials/header.php';
                 <button type="submit" name="sell_item" class="btn btn-danger" 
                     <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
                     Vendre
+                </button>
+                <button type="submit" name="jeter_item" class="btn btn-warning" 
+                    <?= $item['qteItems'] <= 1 && $item['utilité'] == 1 ? 'disabled' : '' ?>>
+                    Jeter
                 </button>
             </form>
             </td>

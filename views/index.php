@@ -73,7 +73,7 @@ require 'partials/header.php';
                                         <div class="weight price-container"><?= $item->getPoidsItem() ?> lbs<img
                                                 src="public/img/weight.webp" alt="lbs" class="price-container"
                                                 style="max-width: 16px"></div>
-                                        
+
                                         <form method="POST">
                                             <input type="hidden" name="idItem" value="<?= $item->getIdItem() ?>">
                                             <input type="hidden" name="name" value="<?= $item->getNomItem() ?>">
