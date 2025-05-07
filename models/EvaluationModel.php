@@ -75,4 +75,40 @@ public function selectAllEvaluationsByIdItem(int $idItem): ?array {
             throw new PDOException($e->getMessage());
         }
     }
+
+    public function selectCountEvaluationByIdItem(int $idItem): ?int {
+        try {
+            $stmt = $this->pdo->prepare('SELECT COUNT(*) AS count FROM évaluation WHERE idItem = :idItem');
+            $stmt->execute(['idItem' => $idItem]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['count'] ?? null;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function selectCountEvaluationByEvaluation(int $idItem, int $evaluation): ?int {
+        try {
+            $stmt = $this->pdo->prepare('SELECT COUNT(*) AS count FROM évaluation WHERE idItem = :idItem AND evaluation = :evaluation');
+            $stmt->execute([
+                'idItem' => $idItem,
+                'evaluation' => $evaluation
+            ]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['count'] ?? null;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function selectAverageEvaluationByIdItem(int $idItem): ?float {
+        try {
+            $stmt = $this->pdo->prepare('SELECT AVG(evaluation) AS average FROM évaluation WHERE idItem = :idItem');
+            $stmt->execute(['idItem' => $idItem]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['average'] ?? null;
+        } catch (PDOException $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
 }

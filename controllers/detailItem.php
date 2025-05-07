@@ -33,6 +33,7 @@ if (!$item) {
 }
 
 $evaluations = $evaluationModel->selectAllEvaluationsByIdItem($idItem);
+$avgEval = $evaluationModel->selectAverageEvaluationByIdItem($idItem);
 
 $evaluationExist = false;
 if (isset($_SESSION['joueurs_id'])) {
