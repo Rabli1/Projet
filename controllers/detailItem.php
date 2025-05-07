@@ -37,17 +37,19 @@ $evaluations = $evaluationModel->selectAllEvaluationsByIdItem($idItem);
 $evaluationExist = false;
 if (isset($_SESSION['joueurs_id'])) {
     $idJoueur = $_SESSION['joueurs_id'];
-    foreach ($evaluations as $evaluation) {
-        if ($evaluation['idJoueurs'] == $idJoueur) {
-            $evaluationExist = true;
-            break;
+    if (is_array($evaluations)) { // Vérifie si $evaluations est un tableau
+        foreach ($evaluations as $evaluation) {
+            if ($evaluation['idJoueurs'] == $idJoueur) {
+                $evaluationExist = true;
+                break;
+            }
         }
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['evaluation'], $_POST['commentaire'])) {
     $evaluation = intval($_POST['evaluation']);
-    $commentaire = htmlspecialchars($_POST['commentaire']);
+    $commentaire = $_POST['commentaire'];
     $idJoueur = $_SESSION['joueurs_id']; // Assurez-vous que l'utilisateur est connecté
 
     try {
