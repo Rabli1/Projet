@@ -127,44 +127,59 @@ require 'partials/header.php';
             <div class="dropdownEval">
                 <h4>Évaluation moyenne</h4>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-                        style="width:70%">
-                        70%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pourcentEval1 ?>" aria-valuemin="0"
+                        aria-valuemax="100" style="<?php if ($eval1 == null || $eval1 == 0) {
+                            echo " width:100%; background-color: grey;";
+                        } else {
+                            echo "width:" . $pourcentEval1 . "%;";
+                        } ?>">
+                        1/5 - <?= $pourcentEval1 ?>%
                     </div>
                 </div>
-                <h6>1</h6>
-
+                <br>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                        style="width:0%">
-                        0%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pourcentEval2 ?>" aria-valuemin="0"
+                        aria-valuemax="100" style="<?php if ($eval2 == null || $eval2 == 0) {
+                            echo " width:100%; background-color: grey;";
+                        } else {
+                            echo "width:" . $pourcentEval2 . "%;";
+                        } ?>">
+                        2/5 - <?= $pourcentEval2 ?>%
                     </div>
                 </div>
-                <h6>2</h6>
-
+                <br>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"
-                        style="width:30%">
-                        30%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pourcentEval3 ?>" aria-valuemin="0"
+                        aria-valuemax="100" style="<?php if ($eval3 == null || $eval3 == 0) {
+                            echo " width:100%; background-color: grey;";
+                        } else {
+                            echo "width:" . $pourcentEval3 . "%;";
+                        } ?>">
+                        3/5 - <?= $pourcentEval3 ?>%
                     </div>
                 </div>
-                <h6>3</h6>
-
+                <br>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                        style="width:0%">
-                        0%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pourcentEval4 ?>" aria-valuemin="0"
+                        aria-valuemax="100" style="<?php if ($eval4 == null || $eval4 == 0) {
+                            echo " width:100%; background-color: grey;";
+                        } else {
+                            echo "width:" . $pourcentEval4 . "%;";
+                        } ?>">
+                        4/5 - <?= $pourcentEval4 ?>%
                     </div>
                 </div>
-                <h6>4</h6>
-
+                <br>
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"
-                        style="width:0%">
-                        0%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?= $pourcentEval5 ?>" aria-valuemin="0"
+                        aria-valuemax="100" style="<?php if ($eval5 == null || $eval5 == 0) {
+                            echo " width:100%; background-color: grey;";
+                        } else {
+                            echo "width:" . $pourcentEval5 . "%;";
+                        } ?>">
+                        5/5 - <?= $pourcentEval5 ?>%
                     </div>
                 </div>
-                <h6>5</h6>
             </div>
         </div>
     <?php endif; ?>

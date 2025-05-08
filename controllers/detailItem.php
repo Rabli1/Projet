@@ -34,6 +34,17 @@ if (!$item) {
 
 $evaluations = $evaluationModel->selectAllEvaluationsByIdItem($idItem);
 $avgEval = $evaluationModel->selectAverageEvaluationByIdItem($idItem);
+$countEval = $evaluationModel->selectCountEvaluationByIdItem($idItem);
+$eval1 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 1);
+$pourcentEval1 = round($eval1/$countEval,2) * 100;
+$eval2 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 2);
+$pourcentEval2 = round($eval2/$countEval,2) * 100;
+$eval3 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 3);
+$pourcentEval3 = round($eval3/$countEval,2) * 100;
+$eval4 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 4);
+$pourcentEval4 = round($eval4/$countEval,2) * 100;
+$eval5 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 5);
+$pourcentEval5 = round($eval5/$countEval,2) * 100;
 
 $evaluationExist = false;
 if (isset($_SESSION['joueurs_id'])) {
