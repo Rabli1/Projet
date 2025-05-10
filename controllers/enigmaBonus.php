@@ -16,7 +16,7 @@ $rightAnswer = false;
 
 sessionStart();
 
-if(!isAuthenticated()) {
+if (!isAuthenticated()) {
     redirect('/');
 }
 
@@ -32,9 +32,9 @@ try {
 $joueur = $joueursModel->getJoueurByAlias($_SESSION['username']);
 
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if(isset($_POST['getQuestion'])){
+    if (isset($_POST['getQuestion'])) {
         switch ($_POST['difficulty']) {
             case 'facile':
                 $_SESSION['difficulty'] = "f";
@@ -67,20 +67,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $wrongAnswer = false;
     }
 
-    if(isset($_POST['validate'])){
-        if(strtoupper($_POST['answer']) == strtoupper($_SESSION['answer'])){
+    if (isset($_POST['validate'])) {
+        if (strtoupper($_POST['answer']) == strtoupper($_SESSION['answer'])) {
 
-            if($_SESSION['difficulty'] == "d"){
+            if ($_SESSION['difficulty'] == "d") {
                 if (!isset($_SESSION['goodAnswers'])) {
                     $_SESSION['goodAnswers'] = 0;//initialise la variable de session si elle n'existe pas
                 }
                 $_SESSION['goodAnswers']++;
             }
 
-            if(isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3){
+            if (isset($_SESSION['goodAnswers']) && $_SESSION['goodAnswers'] >= 3) {
                 $_SESSION['goodAnswers'] = 0;
                 $_SESSION['recompense'] += 1000;//donne le bonus de 1000 caps quand le joueur a reussi 3 enigmes difficiles
-            } 
+            }
 
             $newCaps = $joueur->getMontantCaps() + $_SESSION['recompense'];
             $joueursModel->updateCaps($joueur->getIdJoueur(), $newCaps);
@@ -90,14 +90,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             unset($_POST['answer']);
             unset($_SESSION['answer']);
             $rightAnswer = true;
-        }else{
+        } else {
             $wrongAnswer = true;
             $_SESSION['goodAnswers'] = 0;
+<<<<<<< HEAD
             
             $newPdv = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
             $joueursModel->updatePdv($joueur->getIdJoueur(), $newPdv);
             
             $_SESSION['pv'] = $joueur->getPointDeVie();
+=======
+
+            $newHp = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
+
+            if ($newHp > 0) {
+                $joueursModel->updatePdv($joueur->getIdJoueur(), $newHp);
+                $_SESSION['pv'] = $newHp;
+            } else {
+                $joueursModel->updatePdv($joueur->getIdJoueur(), 0);
+                $_SESSION['pv'] = 0;
+            }
+
+>>>>>>> c1004c1e86128fd975a31b72470669517ce1d22f
         }
 
         $activateGetQuestion = true;

@@ -29,10 +29,8 @@ require 'partials/enigmaHeader.php';
                 <div class="dropdown">
                     <a href="/enigmaBonus" class="btn">Bonus</a>
                     <div class="dropdown-content">
-
                         <p>Dans ce mode, la question est aléatoire, mais la difficulté est votre choix.</p>
-                        <p>Si vous répondez à 3 questions difficiles de suites un bonus de 1000 caps vous est accordé.
-                        </p>
+                        <p>Si vous répondez à 3 questions difficiles de suites un bonus de 1000 caps vous est accordé.</p>
                     </div>
                 </div>
             </div>

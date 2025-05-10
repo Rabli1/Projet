@@ -43,7 +43,7 @@ require 'partials/enigmaHeader.php';
             <?php if ($wrongAnswer) { ?>
                 <div class="alert reponse" role="alert">
                     <i class="bi bi-exclamation-triangle"></i>
-                    Mauvaise réponse !
+                    Mauvaise réponse ! Vous avez perdu <?php echo $_SESSION['hpLoss'] ?> points de vie.
                     <i class="bi bi-exclamation-triangle"></i>
                 </div>
             <?php } ?>
