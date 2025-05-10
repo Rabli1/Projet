@@ -27,7 +27,7 @@
                     <?php if (isAuthenticated() && !isAdministrator()) { ?>
                         <li><a class="nav-link" href="/enigma">Enigma</a></li>
                         <li><a class="nav-link" href="/inventaire">Inventaire</a></li>
-                        <li><a class="nav-link" href="/gerer-pub">Gérer mon compte</a></li>
+                        <li><a class="nav-link" href="/modifProfil">Modifier mon profil</a></li>
                     <?php } ?>
                 </ul>
                 <div class="d-flex align-items-center">

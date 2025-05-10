@@ -35,21 +35,31 @@ if (!$item) {
 $evaluations = $evaluationModel->selectAllEvaluationsByIdItem($idItem);
 $avgEval = $evaluationModel->selectAverageEvaluationByIdItem($idItem);
 $countEval = $evaluationModel->selectCountEvaluationByIdItem($idItem);
-$eval1 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 1);
-$pourcentEval1 = round($eval1/$countEval,2) * 100;
-$eval2 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 2);
-$pourcentEval2 = round($eval2/$countEval,2) * 100;
-$eval3 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 3);
-$pourcentEval3 = round($eval3/$countEval,2) * 100;
-$eval4 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 4);
-$pourcentEval4 = round($eval4/$countEval,2) * 100;
-$eval5 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 5);
-$pourcentEval5 = round($eval5/$countEval,2) * 100;
+
+if ($countEval > 0) {
+    $eval1 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 1);
+    $pourcentEval1 = round($eval1 / $countEval, 2) * 100;
+
+    $eval2 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 2);
+    $pourcentEval2 = round($eval2 / $countEval, 2) * 100;
+
+    $eval3 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 3);
+    $pourcentEval3 = round($eval3 / $countEval, 2) * 100;
+
+    $eval4 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 4);
+    $pourcentEval4 = round($eval4 / $countEval, 2) * 100;
+
+    $eval5 = $evaluationModel->selectCountEvaluationByEvaluation($idItem, 5);
+    $pourcentEval5 = round($eval5 / $countEval, 2) * 100;
+} else {
+
+    $pourcentEval1 = $pourcentEval2 = $pourcentEval3 = $pourcentEval4 = $pourcentEval5 = 0;
+}
 
 $evaluationExist = false;
 if (isset($_SESSION['joueurs_id'])) {
     $idJoueur = $_SESSION['joueurs_id'];
-    if (is_array($evaluations)) { // Vérifie si $evaluations est un tableau
+    if (is_array($evaluations)) {
         foreach ($evaluations as $evaluation) {
             if ($evaluation['idJoueurs'] == $idJoueur) {
                 $evaluationExist = true;
@@ -62,7 +72,7 @@ if (isset($_SESSION['joueurs_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['evaluation'], $_POST['commentaire'])) {
     $evaluation = intval($_POST['evaluation']);
     $commentaire = $_POST['commentaire'];
-    $idJoueur = $_SESSION['joueurs_id']; // Assurez-vous que l'utilisateur est connecté
+    $idJoueur = $_SESSION['joueurs_id'];
 
     try {
         if ($evaluationExist) {

@@ -15,6 +15,7 @@ const ROUTES = [
     '/enigma' => 'enigma.php', 
     '/enigmaNormal' => 'enigmaNormal.php',
     '/enigmaBonus' => 'enigmaBonus.php',
+    '/modifProfil' => 'modifProfil.php',
 ];
 
 const DB_PARAMS = [
