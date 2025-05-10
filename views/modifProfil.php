@@ -21,7 +21,7 @@ require 'partials/header.php';
     <h2>Modifier votre profil</h2>
     <form method="POST" action="/modifProfil" style="max-width: 500px; margin: auto;">
         <div class="form-group">
-            <label for="nom">Nom :</label>
+            <label for="nom">Nom de joueur:</label>
             <input type="text" name="nom" id="nom" class="form-control" value="<?= htmlspecialchars($_SESSION['username']) ?>" required>
         </div>
         <div class="form-group mt-3">
