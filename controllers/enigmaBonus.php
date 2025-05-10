@@ -93,7 +93,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             $wrongAnswer = true;
             $_SESSION['goodAnswers'] = 0;
-            $joueursModel->updatePdv($joueur->getIdJoueur(), $joueur->getPointDeVie() - $_SESSION['hpLoss']);
+            
+            $newPdv = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
+            $joueursModel->updatePdv($joueur->getIdJoueur(), $newPdv);
+            
             $_SESSION['pv'] = $joueur->getPointDeVie();
         }
 
