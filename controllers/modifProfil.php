@@ -25,21 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $idJoueur = $_SESSION['joueurs_id'];
 
     try {
-        // Validation du nom
         if (empty($nom)) {
             throw new Exception("Le nom ne peut pas être vide.");
         }
 
-        // Vérifier si le nom existe déjà
         if ($joueursModel->nomExists($nom, $idJoueur)) {
             throw new Exception("Ce nom est déjà utilisé par un autre joueur.");
         }
 
-        // Mise à jour du nom
         $joueursModel->updateNom($idJoueur, $nom);
         $_SESSION['username'] = $nom;
 
-        // Mise à jour du mot de passe (si fourni)
         if (!empty($password)) {
             if ($password !== $confirmPassword) {
                 throw new Exception("Les mots de passe ne correspondent pas.");
