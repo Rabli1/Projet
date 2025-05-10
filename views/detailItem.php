@@ -78,6 +78,7 @@ require 'partials/header.php';
 
 <div style="margin-top: 50px; padding-left: 20%; padding-right: 20%;">
     <h3>Laisser une évaluation</h3>
+    <?php if ($hasItemInInventory): ?>
     <form method="POST" action="" style="margin-bottom: 30px;">
         <div style="margin-bottom: 10px;">
             <label for="evaluation">Évaluation (1 à 5) :</label>
@@ -96,6 +97,9 @@ require 'partials/header.php';
         <button type="submit" class="btn btn-primary" name <?= $evaluationExist ? 'Modifier' : 'Soumettre' ?>>
             <?= $evaluationExist ? 'Modifier' : 'Soumettre' ?></button>
     </form>
+    <?php else: ?>
+        <p class="text-danger">Vous devez avoir acheté cet item pour faire un commentaire</p>
+    <?php endif; ?>
 
     <h3>Évaluations des joueurs</h3>
     <?php if (!empty($evaluations)): ?>

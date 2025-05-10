@@ -240,4 +240,17 @@ class ItemsModel
             throw $e;
         }
     }
+
+    public function isItemInInventory(int $idJoueur, int $idItem): bool {
+        $stmt = $this->pdo->prepare('
+            SELECT COUNT(*) 
+            FROM sacàdos 
+            WHERE idJoueurs = :idJoueur AND idItem = :idItem
+        ');
+        $stmt->execute([
+            'idJoueur' => $idJoueur,
+            'idItem' => $idItem
+        ]);
+        return $stmt->fetchColumn() > 0;
+    }
 }

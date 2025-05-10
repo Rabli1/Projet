@@ -32,6 +32,7 @@ if (!$item) {
     exit;
 }
 
+
 $evaluations = $evaluationModel->selectAllEvaluationsByIdItem($idItem);
 $avgEval = $evaluationModel->selectAverageEvaluationByIdItem($idItem);
 $countEval = $evaluationModel->selectCountEvaluationByIdItem($idItem);
@@ -69,9 +70,19 @@ if (isset($_SESSION['joueurs_id'])) {
     }
 }
 
+$hasItemInInventory = false;
+if (isset($_SESSION['joueurs_id'])) {
+    $idJoueur = $_SESSION['joueurs_id'];
+    $hasItemInInventory = $itemsModel->isItemInInventory($idJoueur, $idItem);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['evaluation'], $_POST['commentaire'])) {
+    if (!$hasItemInInventory) {
+        die("Vous ne pouvez pas laisser un commentaire sur un item qui n'est pas dans votre inventaire.");
+    }
+
     $evaluation = intval($_POST['evaluation']);
-    $commentaire = $_POST['commentaire'];
+    $commentaire = htmlspecialchars($_POST['commentaire']);
     $idJoueur = $_SESSION['joueurs_id'];
 
     try {
