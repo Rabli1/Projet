@@ -30,6 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new Exception("Le nom ne peut pas être vide.");
         }
 
+        // Vérifier si le nom existe déjà
+        if ($joueursModel->nomExists($nom, $idJoueur)) {
+            throw new Exception("Ce nom est déjà utilisé par un autre joueur.");
+        }
+
         // Mise à jour du nom
         $joueursModel->updateNom($idJoueur, $nom);
         $_SESSION['username'] = $nom;

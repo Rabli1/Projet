@@ -157,19 +157,28 @@ class JoueursModel
     }
 
 
-public function updateNom(int $idJoueur, string $nom): void {
-    $stmt = $this->pdo->prepare('UPDATE joueurs SET alias = :nom WHERE idJoueurs = :idJoueur');
-    $stmt->execute([
-        'nom' => $nom,
-        'idJoueur' => $idJoueur
-    ]);
-}
+    public function updateNom(int $idJoueur, string $nom): void {
+        $stmt = $this->pdo->prepare('UPDATE joueurs SET alias = :nom WHERE idJoueurs = :idJoueur');
+        $stmt->execute([
+            'nom' => $nom,
+            'idJoueur' => $idJoueur
+        ]);
+    }
 
-public function updatePassword(int $idJoueur, string $hashedPassword): void {
-    $stmt = $this->pdo->prepare('UPDATE joueurs SET motDePasse = :password WHERE idJoueurs = :idJoueur');
-    $stmt->execute([
-        'password' => $hashedPassword,
-        'idJoueur' => $idJoueur
-    ]);
-}
+    public function updatePassword(int $idJoueur, string $hashedPassword): void {
+        $stmt = $this->pdo->prepare('UPDATE joueurs SET motDePasse = :password WHERE idJoueurs = :idJoueur');
+        $stmt->execute([
+            'password' => $hashedPassword,
+            'idJoueur' => $idJoueur
+        ]);
+    }
+
+    public function nomExists(string $nom, int $idJoueur): bool {
+        $stmt = $this->pdo->prepare('SELECT COUNT(*) FROM joueurs WHERE alias = :nom AND idJoueurs != :idJoueur');
+        $stmt->execute([
+            'nom' => $nom,
+            'idJoueur' => $idJoueur
+        ]);
+        return $stmt->fetchColumn() > 0;
+    }
 }
