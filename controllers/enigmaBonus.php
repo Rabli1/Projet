@@ -93,13 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $wrongAnswer = true;
             $_SESSION['goodAnswers'] = 0;
-<<<<<<< HEAD
-            
-            $newPdv = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
-            $joueursModel->updatePdv($joueur->getIdJoueur(), $newPdv);
-            
-            $_SESSION['pv'] = $joueur->getPointDeVie();
-=======
 
             $newHp = $joueur->getPointDeVie() - $_SESSION['hpLoss'];
 
@@ -111,7 +104,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['pv'] = 0;
             }
 
->>>>>>> c1004c1e86128fd975a31b72470669517ce1d22f
         }
 
         $activateGetQuestion = true;
